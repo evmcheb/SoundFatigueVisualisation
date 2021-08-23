@@ -1,3 +1,13 @@
+"""
+Simulator API
+Caleb Cheng 23/08/21
+pull sample sound data from two different distributions
+To use
+  - pip install requirements.txt
+  - cd sim_api
+  - uvicorn main:app --reload
+"""
+
 import random
 import hashlib
 import time

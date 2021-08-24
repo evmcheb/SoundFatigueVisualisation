@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import {GraphOne} from './GraphOne';
 import {AnimatedCircle} from './AnimatedCircle';
 import './App.css';
+import SimpleChart from './SimpleChart';
+import { SimpleReactVizChart } from './SimpleReactVizChart';
 interface DisplayProps {
 
 }
@@ -17,7 +19,8 @@ export const Display: React.FC<DisplayProps> = ({}) => {
             {showText ? 
             <div>
             <GraphOne/> 
-           
+            <SimpleChart/>
+            <SimpleReactVizChart/>
             </div>
             :null}
             </div>

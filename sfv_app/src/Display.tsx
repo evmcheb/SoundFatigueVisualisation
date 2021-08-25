@@ -23,9 +23,8 @@ export const Display: React.FC<DisplayProps> = ({}) => {
             <GraphOne/> 
             <SimpleChart/>
             <SimpleReactVizChart/>
-            
+
             <Example/>
-          
             </div>
             :null}
             </div>

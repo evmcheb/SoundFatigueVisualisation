@@ -6,7 +6,7 @@ import {Display} from './Display';
 function App() {
   return (
     <div className="App">
-      <div className = "top-container">
+      <div className = "top-container1">
         <Headers>
 
         </Headers>
@@ -28,6 +28,7 @@ function App() {
         <Display/>
       </div>
     </div>
+    
   );
 }
 

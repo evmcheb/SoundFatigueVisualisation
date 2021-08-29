@@ -16,7 +16,7 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.orm import sessionmaker
 
-engine = "sqlite:///./backend.db"
+engine = "sqlite:///../backend.db"
 
 engine = create_engine(engine, connect_args={"check_same_thread":False}, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

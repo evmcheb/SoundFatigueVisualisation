@@ -1,47 +1,41 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship
+from typing import List, Optional
+from sqlmodel import Field, SQLModel, Relationship
 
-from .db import Base
+from db import Base
 
-def Officer(Base):
-    __tablename__ = "officer"
-    ID = Column(Integer, primary_key=True)
-    Name = Column(String, nullable=False)
-    PassHash = Column(String, nullable=False)
-    RoleEnum = Column(Integer)
+class Officer(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    Name: str
+    PassHash: str
+    RoleEnum: int
 
-    def __repr__(self):
-        return f"<Officer({self.ID}, {self.Name}, {self.RoleEnum})>"
+class Room(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    Name: str
+    Description: str
 
-def Room(Base):
-    __tablename__ = "room"
-    ID = Column(Integer, primary_key=True)
-    Name = Column(String, nullable=False)
-    Description = Column(String)
+class Sensor(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    Name: str
+    Description: str
 
-def Sensor(Base):
-    __tablename__ = "sensor"
-    ID = Column(Integer, primary_key=True)
-    Name = Column(String)
+class RoomSensor(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    SensorID: int = Field(default=None, foreign_key="sensor.ID")
+    RoomID: int = Field(default=None, foreign_key="room.ID")
+    Samples: List["Sample"] = Relationship(back_populates="RoomSensorB")
 
-def RoomSensor(Base):
-    __tablename__ = "roomsensor"
-    ID = Column(Integer, primary_key=True)
-    SensorID = Column(Integer, ForeignKey('sensor.ID'))
-    RoomID = Column(Integer, ForeignKey('room.ID'))
+class MovementEvent(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    RoomID: int = Field(default=None, foreign_key="room.ID")
+    OfficerID: int = Field(default=None, foreign_key="officer.ID")
+    Type: int
+    Timestamp: int
 
-def MovementEvent(Base):
-    __tablename__ = "movementevent"
-    ID = Column(Integer, primary_key=True)
-    RoomID = Column(Integer,ForeignKey("room.ID"))
-    OfficerID = Column(Integer, ForeignKey("officer.ID"))
-    Type = Column(Integer, nullable = False)
-    Timestamp = Column(Integer, nullable = False)
-
-def Sample(Base):
-    __tablename__ = "sample"
-    ID = Column(Integer, primary_key=True)
-    RoomSensorID = Column(Integer, ForeignKey("roomsensor.ID"))
-    Timestamp = Column(Integer, nullable=False)
-    Duration = Column(Integer)
-    MeasurementsJSON = Column(String)
+class Sample(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    RoomSensorID: int = Field(default=None, foreign_key="roomsensor.ID")
+    Timestamp: int
+    Duration: int
+    MeasurementsJSON: str
+    RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")

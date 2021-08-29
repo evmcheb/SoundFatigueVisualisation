@@ -26,11 +26,13 @@ def sin_sensor(room_id: int, sensor_id: int):
     phase = int(hash.hexdigest()[:4], 16)
     return {"dB": 50*np.sin((2*np.pi/(60)) * time.time() + phase) + 100, "pitch": 100*np.sin(2*np.pi/(60*3) * time.time()+phase) + 1000}
 
+
 @app.get("/{room_id}/{sensor_id}/n")
 def norm_sensor(room_id: int, sensor_id: int):
     return {"dB": np.random.normal(loc=100, scale=20), "pitch": np.random.normal(loc=1000, scale=200)}
 
-koc = """Usage:
+
+doc = """Usage:
 /{room_id}/{sensor_id}/ (Default)
 - Returns {dB: , pitch: )
 - dB

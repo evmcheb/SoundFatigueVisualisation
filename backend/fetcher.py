@@ -12,7 +12,6 @@ import requests
 import time
 from threading import Thread
 
-
 """
 LevelFetcher is a generic interface for fetching data from a web server using requests
 Period
@@ -67,4 +66,3 @@ class FakeFetcher(LevelFetcher):
     def fetch(self, sensor_id, room_id):
         r = self.session.get(f"{self.url}/{room_id}/{sensor_id}/")
         return r.json()
-

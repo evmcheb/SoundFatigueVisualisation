@@ -1,0 +1,119 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Officer" (
+	"ID"	INTEGER NOT NULL,
+	"Name"	TEXT,
+	"Username"	TEXT NOT NULL,
+	"PassHash"	TEXT NOT NULL,
+	"RoleEnum"	INTEGER,
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Room" (
+	"ID"	INTEGER NOT NULL,
+	"Name"	TEXT NOT NULL,
+	"Description"	TEXT,
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Sensor" (
+	"ID"	INTEGER NOT NULL,
+	"Name"	INTEGER,
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "RoomSensor" (
+	"ID"	INTEGER NOT NULL,
+	"SensorID"	INTEGER NOT NULL,
+	"RoomID"	INTEGER NOT NULL,
+	FOREIGN KEY("RoomID") REFERENCES "Room"("ID"),
+	FOREIGN KEY("SensorID") REFERENCES "Sensor"("ID"),
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "MovementEvent" (
+	"ID"	INTEGER NOT NULL,
+	"RoomID"	INTEGER,
+	"OfficerID"	INTEGER,
+	"Type"	INTEGER NOT NULL,
+	"Timestamp"	INTEGER NOT NULL,
+	FOREIGN KEY("RoomID") REFERENCES "Room"("ID"),
+	FOREIGN KEY("OfficerID") REFERENCES "Officer"("ID"),
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Sample" (
+	"ID"	INTEGER NOT NULL,
+	"Timestamp"	INTEGER NOT NULL DEFAULT 0,
+	"Duration"	INTEGER DEFAULT 0,
+	"RoomSensorID"	INTEGER NOT NULL,
+	"MeasurementsJSON"	TEXT,
+	FOREIGN KEY("RoomSensorID") REFERENCES "RoomSensor"("ID"),
+	PRIMARY KEY("ID")
+);
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO Officer(Name, Username, PassHash, RoleEnum) VALUES(
+    "Caleb",
+    "caleb1",
+    "1234",
+    "0"
+);
+INSERT INTO Officer(Name, Username, PassHash, RoleEnum) VALUES(
+    "Darby",
+    "darby1",
+    "1234",
+    "0"
+);
+INSERT INTO Officer(Name, Username, PassHash, RoleEnum) VALUES(
+    "Aditi",
+    "aditi1",
+    "1234",
+    "1"
+);
+INSERT INTO Officer(Name, Username, PassHash, RoleEnum) VALUES(
+    "Shane",
+    "shane1",
+    "1234",
+    "2"
+);
+INSERT INTO Officer(Name, Username, PassHash, RoleEnum) VALUES(
+    "Kese",
+    "kese1",
+    "1234",
+    "1"
+);
+
+INSERT INTO Room(Name, Description) VALUES (
+    "EngineRoom1",
+    "The first engine room"
+);
+INSERT INTO Room(Name, Description) VALUES (
+    "EngineRoom2",
+    "The second engine room"
+);
+INSERT INTO Room(Name, Description) VALUES (
+    "CommonRoom",
+    "The common room"
+);
+
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS01",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS02",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS03",
+    "WiFi Sound Meter v1"
+);
+
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    0, 0
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    1, 1
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    2, 2
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    2, 1
+);

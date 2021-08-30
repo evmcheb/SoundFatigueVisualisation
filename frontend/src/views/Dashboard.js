@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
+import FetchData from "fetch/FetchData.js"
 
 // reactstrap components
 import {
@@ -40,15 +41,17 @@ function Dashboard(props) {
   };
   return (
     <>
-      <div className="content">
+       <div className="content">
+         <div>Fetched data:</div>
+        <FetchData></FetchData>
         <Row>
           <Col xs="12">
             <Card className="card-chart">
               <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h5 className="card-category">Total Shipments</h5>
-                    <CardTitle tag="h2">Performance</CardTitle>
+                    <h5 className="card-category">Decibels</h5>
+                    <CardTitle tag="h2">Room A 31st December 2015</CardTitle>
                   </Col>
                   <Col sm="6">
                     <ButtonGroup
@@ -66,7 +69,7 @@ function Dashboard(props) {
                         onClick={() => setBgChartData("data1")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Accounts
+                          Decibels
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-single-02" />
@@ -83,7 +86,7 @@ function Dashboard(props) {
                         onClick={() => setBgChartData("data2")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Purchases
+                          Pitch
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-gift-2" />
@@ -100,7 +103,7 @@ function Dashboard(props) {
                         onClick={() => setBgChartData("data3")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Sessions
+                          Decibels & Pitch
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-tap-02" />

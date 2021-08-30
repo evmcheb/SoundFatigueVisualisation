@@ -10,16 +10,17 @@ const FetchData = () => {
     }, []);
 
     const getData = () => {
-        axios.get(`${url}0`)
+        axios.get(`${url}room/1`)
+
         .then((response) => {
-            const data = response.data
+            const data = response.data[0]   
             setFetchedData(data);
         })
         .catch(error => console.error(`Error: ${error}`));
     }
     
-    console.log(fetchedData);
-    return <div>{fetchedData.day}</div>
+    console.log(fetchedData.dB);
+    return <div>{fetchedData.dB}</div>
 }
 
 export default FetchData

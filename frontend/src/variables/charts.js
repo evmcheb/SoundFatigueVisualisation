@@ -1,7 +1,3 @@
-// ##############################
-// // // Chart variables
-// #############################
-
 // chartExample1 and chartExample2 options
 let chart1_2_options = {
   maintainAspectRatio: false,

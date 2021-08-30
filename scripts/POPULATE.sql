@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS "Room" (
 CREATE TABLE IF NOT EXISTS "Sensor" (
 	"ID"	INTEGER NOT NULL,
 	"Name"	INTEGER,
+    "Description" TEXT,
 	PRIMARY KEY("ID" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "RoomSensor" (
@@ -106,16 +107,16 @@ INSERT INTO Sensor(Name, Description) VALUES (
 );
 
 INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
-    0, 0
-);
-INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
     1, 1
 );
 INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
     2, 2
 );
 INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
-    2, 1
+    3, 2
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    3, 3
 );
 
 COMMIT;

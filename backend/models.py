@@ -13,17 +13,21 @@ class Room(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     Name: str
     Description: str
+    RoomSensors: List["RoomSensor"] = Relationship(back_populates="RoomB")
 
 class Sensor(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     Name: str
     Description: str
+    RoomSensors: List["RoomSensor"] = Relationship(back_populates="SensorB")
 
 class RoomSensor(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     SensorID: int = Field(default=None, foreign_key="sensor.ID")
     RoomID: int = Field(default=None, foreign_key="room.ID")
     Samples: List["Sample"] = Relationship(back_populates="RoomSensorB")
+    RoomB: Optional[Room] = Relationship(back_populates="RoomSensors")
+    SensorB: Optional[Sensor] = Relationship(back_populates="RoomSensors")
 
 class MovementEvent(SQLModel, table=True):
     ID: int = Field(primary_key=True)

@@ -26,15 +26,16 @@ room_sensors = db.query(models.RoomSensor).all()
 while True:
     for rs in room_sensors:
         print(rs.RoomID, rs.SensorID)
-        hash = hashlib.sha1(f"{rs.RoomID}_{rs.SensorID}".encode())
+        # same sensor should return same data
+        hash = hashlib.sha1(f"{rs.SensorID}".encode())
         phase = int(hash.hexdigest()[:4], 16)
-        
+
         data = {
-            "dB":50 * np.sin((2*np.pi/60) * time.time() + phase),
-            "pitch": 100 * np.sin(2*np.pi/(60*3) + time.time() + phase)
+            "dB":round(50 * np.sin((2*np.pi/60) * int(time.time()) + phase),3),
+            "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
 
-        newSample = models.Sample(rs.ID, time.time(), 1, json.dumps(data))
+        newSample = models.Sample(rs.ID, int(time.time()), 1, json.dumps(data))
         db.add(newSample)
         db.commit()
 

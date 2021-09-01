@@ -5,6 +5,10 @@ import classNames from "classnames";
 import { Line, Bar } from "react-chartjs-2";
 import FetchData from "fetch/FetchData.js"
 
+
+// 
+//import * as ChartAnnotation from 'chartjs-plugin-annotation';
+
 // reactstrap components
 import {
   Button,
@@ -24,16 +28,18 @@ import {
   chartExample3,
   chartExample4,
 } from "variables/charts.js";
+import MyChartOne from "variables/MyChartOne";
 
 function Dashboard(props) {
-  console.log(FetchData('room/1'))
-  const [bigChartData, setbigChartData] = React.useState("data1");
+  //console.log(FetchData('room/1'))
+  (FetchData('room/1'))
+  const [bigChartData, setbigChartData,] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
   return (
     <>
-    
+      
        <div className="content">
         <Row>
           <Col xs="12">
@@ -53,11 +59,13 @@ function Dashboard(props) {
                         tag="label"
                         className={classNames("btn-simple", {
                           active: bigChartData === "data1",
+
                         })}
                         color="info"
                         id="0"
                         size="sm"
                         onClick={() => setBgChartData("data1")}
+                        
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Decibels
@@ -172,6 +180,20 @@ function Dashboard(props) {
             </Card>
           </Col>
         </Row>
+
+
+        <Col xs="12">
+        <CardBody>
+                <div className="chart-area">
+                  {/* CHANGE GRAPH HERE */}
+                  <MyChartOne/>
+                </div>
+              </CardBody>
+          </Col>
+
+
+
+
       </div>
     </>
   );

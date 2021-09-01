@@ -3,7 +3,7 @@ Simulator API
 Caleb Cheng 23/08/21
 pull sample sound data from two different distributions
 To use
-  - pip install requirements.txt
+  - pip install -r requirements.txt
   - cd sim_api
   - uvicorn sim:app --reload
 """

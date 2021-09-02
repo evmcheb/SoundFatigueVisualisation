@@ -18,26 +18,38 @@ import {
     chartExample4,
 } from "variables/charts.js";
 
-function RoomCharts() {
-    const [fetchedData, setFetchedData] = useState({});
-    const [bigChartData, setbigChartData] = React.useState("data1");
 
-    const setBgChartData = (name) => {
-        setbigChartData(name);
-    };
-    /* fetching data from the api for room/1*/
+const RoomCharts = () => {
+    const [bigChartData, setbigChartData] = useState("data1");
+    const [fetchedData, setFetchedData] = useState({});
+
     const url = `http://127.0.0.1:8000/room/1`
 
-    useEffect(() => {
-        axios.get(`${url}`)
+    const fetchData = async (url) => {
+        console.log("Fetching data")
+        return new Promise((res, rej) => {
+            axios.get(url)
+                .then((resp) => {
+                    res(resp.data[0]);
+                })
+                .catch(err => rej(err))
+        });
+    }
 
-            .then((response) => {
-                setFetchedData(response.data[0]);
-            })
-            .catch(error => console.error(`Error: ${error}`));
+    useEffect(async () => {
+        let isMounted = true;
+        const fetchedData = await fetchData(url);
+        if (isMounted) {
+            setFetchedData(fetchedData);
+        }
+        return () => isMounted = false;
     }, []);
 
-    //console.log(fetchedData);
+    const fetchNewData = () => {
+        fetchData(url).then((res) => {
+            setFetchedData(res)
+        })
+    }
 
     function timestampToHMS(timestamp) {
         var date = new Date(timestamp);
@@ -214,6 +226,11 @@ function RoomCharts() {
     };
     //console.log(fetchedData);
 
+    var sound = fetchedData.dB, xlabels = fetchedData.x;
+    var averages = [], labels = [];
+
+
+
     function soundsAvg(sound, xlabels, periods) {
         var averages = [], labels = [];
 
@@ -229,7 +246,7 @@ function RoomCharts() {
 
     };
 
-   // soundsAvg(fetchedData.dB, fetchedData.x, 9);
+    // soundsAvg(fetchedData.dB, fetchedData.x, 9);
 
     let chartExample2 = {
         data: (canvas) => {
@@ -369,7 +386,7 @@ function RoomCharts() {
                                                 color="info"
                                                 id="0"
                                                 size="sm"
-                                                onClick={() => setBgChartData("data1")}
+                                                onClick={() => setbigChartData("data1")}
                                             >
                                                 <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                                                     Decibels
@@ -386,7 +403,7 @@ function RoomCharts() {
                                                 className={classNames("btn-simple", {
                                                     active: bigChartData === "data2",
                                                 })}
-                                                onClick={() => setBgChartData("data2")}
+                                                onClick={() => setbigChartData("data2")}
                                             >
                                                 <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                                                     Pitch
@@ -403,7 +420,7 @@ function RoomCharts() {
                                                 className={classNames("btn-simple", {
                                                     active: bigChartData === "data3",
                                                 })}
-                                                onClick={() => setBgChartData("data3")}
+                                                onClick={() => setbigChartData("data3")}
                                             >
                                                 <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                                                     Decibels & Pitch
@@ -431,9 +448,9 @@ function RoomCharts() {
                     <Col lg="4">
                         <Card className="card-chart">
                             <CardHeader>
-                                <h5 className="card-category">Total Shipments</h5>
+                                <h5 className="card-category">Average Decibels</h5>
                                 <CardTitle tag="h3">
-                                    <i className="tim-icons icon-bell-55 text-info" /> 763,215
+                                    <i className="tim-icons icon-bell-55 text-info" /> -32 dB
                                 </CardTitle>
                             </CardHeader>
                             <CardBody>
@@ -452,7 +469,7 @@ function RoomCharts() {
                                 <h5 className="card-category">Minimum and Maximum</h5>
                                 <CardTitle tag="h3">
                                     <i className="tim-icons icon-bell-55 text-primary" />{" "}
-                                    {min.toFixed(1)}dB to {max.toFixed(1)}dB
+                                    {min.toFixed(1)} dB to {max.toFixed(1)} dB
                                 </CardTitle>
                             </CardHeader>
                             <CardBody>
@@ -468,9 +485,9 @@ function RoomCharts() {
                     <Col lg="4">
                         <Card className="card-chart">
                             <CardHeader>
-                                <h5 className="card-category">Completed Tasks</h5>
+                                <h5 className="card-category">Average Pitch</h5>
                                 <CardTitle tag="h3">
-                                    <i className="tim-icons icon-send text-success" /> 12,100K
+                                    <i className="tim-icons icon-bell-55 text-success" /> 1.2 Hz
                                 </CardTitle>
                             </CardHeader>
                             <CardBody>

@@ -1,3 +1,4 @@
+import FetchData from "FetchData/FetchData";
 import React from "react";
 
 // reactstrap components
@@ -15,7 +16,8 @@ import {
   Col,
 } from "reactstrap";
 
-function UserProfile() {
+function UserProfile() {  
+
   return (
     <>
       <div className="content">

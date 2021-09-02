@@ -182,7 +182,7 @@ function Dashboard(props) {
         </Row>
 
 
-        <Col xs="12">
+        <Col >
         <CardBody>
                 <div className="chart-area">
                   {/* CHANGE GRAPH HERE */}

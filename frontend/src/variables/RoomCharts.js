@@ -37,8 +37,6 @@ function RoomCharts() {
             .catch(error => console.error(`Error: ${error}`));
     }, []);
 
-    //console.log(fetchedData);
-
     function timestampToHMS(timestamp) {
         var date = new Date(timestamp);
         var hours = date.getHours();

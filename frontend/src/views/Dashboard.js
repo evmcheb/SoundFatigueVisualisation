@@ -32,21 +32,26 @@ import {
   chartExample3,
   chartExample4,
 } from "variables/charts.js";
-import FetchData from "FetchData/FetchData";
-import MainLineChart from "variables/MainLineChart";
 
+
+import MainLineChart from "variables/MainLineChart";
+//import {FetchData ,fetchedData}from "../FetchData/FetchData";
+import FetchDataTwo from "../FetchData/FetchDataTwo";
+let dbArray = <FetchDataTwo/>
+let thingy = JSON.stringify(dbArray);
 function Dashboard(props) {
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
   return (
+    
     <>
+    <div>
+    {dbArray}
+    </div>
       <div className="content">
-        <div>
-        fecthed data = 
-          <FetchData/>
-        </div>
+
         <Row>
           <Col xs="12">
             <Card className="card-chart">
@@ -103,10 +108,14 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   {/* CHANGE GRAPH HERE */}
+                  
                   <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
+                      data={chartExample1[bigChartData]}
+
+                      options={chartExample1.options}
                   />
+                  
+                  
                 </div>
               </CardBody>
             </Card>
@@ -124,8 +133,8 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample2.data}
-                    options={chartExample2.options}
+                    //data={chartExample2.data}
+                    //options={chartExample2.options}
                   />
                 </div>
               </CardBody>
@@ -143,8 +152,8 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Bar
-                    data={chartExample3.data}
-                    options={chartExample3.options}
+                    //data={chartExample3.data}
+                   // options={chartExample3.options}
                   />
                 </div>
               </CardBody>
@@ -515,7 +524,6 @@ function Dashboard(props) {
               </CardBody>
           </Col>
         </Row>
-        <MainLineChart/>
       </div>
     </>
   );

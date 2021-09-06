@@ -5,9 +5,9 @@ import axios from "axios";
 
 
 
-export default function FetchData({childToParent}) { {
-    const [bigChartData, setbigChartData] = useState("data1");
-    const [fetchedData, setFetchedData] = useState({});
+export default function FetchData() {{
+    //const [bigChartData, setbigChartData] = useState("data1");
+    const [fetchedData, setFetchedData] = useState([]);
 
     const url = `http://127.0.0.1:8000/room/1`
 
@@ -37,10 +37,9 @@ export default function FetchData({childToParent}) { {
         })
     }
 
-    const data = fetchData.db
-    const { items } = data;
-    const myObjStr = JSON.stringify(items);
-    console.log(myObjStr);
-    return <div>{(data)}</div>
+
+    return <div>{fetchedData.dB}</div>
 }
+
+
 }

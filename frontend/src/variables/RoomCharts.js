@@ -57,8 +57,7 @@ const RoomCharts = () => {
         var minutes = "0" + date.getMinutes();
         var seconds = "0" + date.getSeconds();
         // Will display time in 10:30:23 format
-        //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-        var formattedTime = timestamp;
+        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
         return formattedTime
     }
 
@@ -114,7 +113,7 @@ const RoomCharts = () => {
     };
 
     /* Setting the the data fetched to chart 1*/
-let chartExample1 = {
+    const chartExample1 = {
         data1: (canvas) => {
             let ctx = canvas.getContext("2d");
 
@@ -127,7 +126,7 @@ let chartExample1 = {
                 labels: fetchedData.x,
                 datasets: [
                     {
-                        label: "Sound Level for Room A",
+                        label: "Sound Level for Room A on 2015-12-31",
                         fill: true,
                         backgroundColor: gradientStroke,
                         borderColor: "#1f8ef1",
@@ -225,7 +224,10 @@ let chartExample1 = {
         },
         options: chart1_2_options,
     };
+    //console.log(fetchedData);
 
+    var sound = fetchedData.dB, xlabels = fetchedData.x;
+    var averages = [], labels = [];
 
 
 
@@ -359,16 +361,152 @@ let chartExample1 = {
         },
     };
 
-    
+    return (
+        <>
+            <div className="content">
+                <Row>
+                    <Col xs="12">
+                        <Card className="card-chart">
+                            <CardHeader>
+                                <Row>
+                                    <Col className="text-left" sm="6">
+                                        <h5 className="card-category">Decibels</h5>
+                                        <CardTitle tag="h2">Room A 31st December 2015</CardTitle>
+                                    </Col>
+                                    <Col sm="6">
+                                        <ButtonGroup
+                                            className="btn-group-toggle float-right"
+                                            data-toggle="buttons"
+                                        >
+                                            <Button
+                                                tag="label"
+                                                className={classNames("btn-simple", {
+                                                    active: bigChartData === "data1",
+                                                })}
+                                                color="info"
+                                                id="0"
+                                                size="sm"
+                                                onClick={() => setbigChartData("data1")}
+                                            >
+                                                <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                                                    Decibels
+                                                </span>
+                                                <span className="d-block d-sm-none">
+                                                    <i className="tim-icons icon-single-02" />
+                                                </span>
+                                            </Button>
+                                            <Button
+                                                color="info"
+                                                id="1"
+                                                size="sm"
+                                                tag="label"
+                                                className={classNames("btn-simple", {
+                                                    active: bigChartData === "data2",
+                                                })}
+                                                onClick={() => setbigChartData("data2")}
+                                            >
+                                                <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                                                    Pitch
+                                                </span>
+                                                <span className="d-block d-sm-none">
+                                                    <i className="tim-icons icon-gift-2" />
+                                                </span>
+                                            </Button>
+                                            <Button
+                                                color="info"
+                                                id="2"
+                                                size="sm"
+                                                tag="label"
+                                                className={classNames("btn-simple", {
+                                                    active: bigChartData === "data3",
+                                                })}
+                                                onClick={() => setbigChartData("data3")}
+                                            >
+                                                <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                                                    Decibels & Pitch
+                                                </span>
+                                                <span className="d-block d-sm-none">
+                                                    <i className="tim-icons icon-tap-02" />
+                                                </span>
+                                            </Button>
+                                        </ButtonGroup>
+                                    </Col>
+                                </Row>
+                            </CardHeader>
+                            <CardBody>
+                                <div className="chart-area">
+                                    <Line
+                                        data={chartExample1[bigChartData]}
+                                        options={chartExample1.options}
+                                    />
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg="4">
+                        <Card className="card-chart">
+                            <CardHeader>
+                                <h5 className="card-category">Average Decibels</h5>
+                                <CardTitle tag="h3">
+                                    <i className="tim-icons icon-bell-55 text-info" /> -32 dB
+                                </CardTitle>
+                            </CardHeader>
+                            <CardBody>
+                                <div className="chart-area">
+                                    <Line
+                                        data={chartExample2.data}
+                                        options={chartExample2.options}
+                                    />
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col lg="4">
+                        <Card className="card-chart">
+                            <CardHeader>
+                                <h5 className="card-category">Minimum and Maximum</h5>
+                                <CardTitle tag="h3">
+                                    <i className="tim-icons icon-bell-55 text-primary" />{" "}
+                                    {min.toFixed(1)} dB to {max.toFixed(1)} dB
+                                </CardTitle>
+                            </CardHeader>
+                            <CardBody>
+                                <div className="chart-area">
+                                    <Bar
+                                        data={chartExample3.data}
+                                        options={chartExample3.options}
+                                    />
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col lg="4">
+                        <Card className="card-chart">
+                            <CardHeader>
+                                <h5 className="card-category">Average Pitch</h5>
+                                <CardTitle tag="h3">
+                                    <i className="tim-icons icon-bell-55 text-success" /> 1.2 Hz
+                                </CardTitle>
+                            </CardHeader>
+                            <CardBody>
+                                <div className="chart-area">
+                                    <Line
+                                        data={chartExample4.data}
+                                        options={chartExample4.options}
+                                    />
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+            </div>
+        </>
+    )
+
+}
+
+export default RoomCharts;
 
 
-
-
-
-module.exports = {
-    chartExample1, // in src/views/Dashboard.js
-    chartExample2, // in src/views/Dashboard.js
-    chartExample3, // in src/views/Dashboard.js
-    chartExample4, // in src/views/Dashboard.js
-  }
-};

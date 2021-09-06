@@ -22,6 +22,7 @@ db = SessionLocal()
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
+people = db.query(models.Officer).all()
 
 while True:
     for rs in room_sensors:
@@ -38,10 +39,7 @@ while True:
         newSample = models.Sample(rs.ID, int(time.time()), 1, json.dumps(data))
         db.add(newSample)
         db.commit()
-
     time.sleep(1)
-
-
 
 
 from fastapi import FastAPI

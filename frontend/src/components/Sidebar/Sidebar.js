@@ -64,7 +64,7 @@ function Sidebar(props) {
           target="_blank"
           onClick={props.toggleSidebar}
         >
-          {logo.text}
+          Navigation
         </a>
       );
     } else {

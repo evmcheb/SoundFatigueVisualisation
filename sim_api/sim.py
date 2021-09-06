@@ -16,22 +16,60 @@ from typing import Optional
 from db import SessionLocal, engine
 import models
 
+
+############
+
+import random
+import time
+SECONDS_IN_A_DAY = 86400
+
+# Quiet room is 30dBA to 50dBA
+
+def sound_generator(input,count,saved_random):
+    if(input == "quietRoom"):
+        
+        loud_bang = random.randint(1, 10000)
+        print("THE LOUD BANG =",loud_bang)
+        if(saved_random == 0):
+            randomLenOfBang = random.randint(0,45)
+            # Say a 2% chance of there being a painful noise 
+            # and noise has a random generated time to last
+            # not safe for any period of time
+        if(loud_bang >= (99998) or (count >0 and count <= saved_random +1)):
+            count += 1
+            if(saved_random == 0):
+                saved_random = randomLenOfBang
+            line = round(random.uniform(120.0, 150.0),1)
+        else:
+            line = round(random.uniform(30.0, 50.0),1) 
+            count =0
+            saved_random = 0
+
+    return line,count,saved_random
+
+
+
+
+######
 models.Base.metadata.create_all(bind=engine)
 db = SessionLocal()
 
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
-
+count =0 
+saved_random = 0
 while True:
+
     for rs in room_sensors:
         print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
         hash = hashlib.sha1(f"{rs.SensorID}".encode())
         phase = int(hash.hexdigest()[:4], 16)
-
+        
+        datadb,count,saved_random = sound_generator("quietRoom",count,saved_random)
         data = {
-            "dB":round(50 * np.sin((2*np.pi/60) * int(time.time()) + phase),3),
+            "dB":datadb,
             "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
 
@@ -40,6 +78,8 @@ while True:
         db.commit()
 
     time.sleep(1)
+
+
 
 
 

@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Line, Bar } from "react-chartjs-2";
+import classNames from "classnames";
 import axios from "axios";
 
 
-const FetchData = () => {
+
+export default function FetchData({childToParent}) { {
+    const [bigChartData, setbigChartData] = useState("data1");
     const [fetchedData, setFetchedData] = useState({});
 
     const url = `http://127.0.0.1:8000/room/1`
@@ -33,8 +37,10 @@ const FetchData = () => {
         })
     }
 
-    return [fetchedData, fetchNewData];
+    const data = fetchData.db
+    const { items } = data;
+    const myObjStr = JSON.stringify(items);
+    console.log(myObjStr);
+    return <div>{(data)}</div>
 }
-
-export default FetchData;
-
+}

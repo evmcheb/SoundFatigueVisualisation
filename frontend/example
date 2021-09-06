@@ -1,0 +1,6 @@
+import {defaultOptions} from "defaultOptions";
+
+const options = {
+    ...defaultOptions, 
+    backgroundColor: 'red',
+}

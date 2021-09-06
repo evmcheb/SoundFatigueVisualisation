@@ -39,6 +39,12 @@ class MovementEvent(Base):
     Type = Column(Integer, nullable = False)
     Timestamp = Column(Integer, nullable = False)
 
+    def __init__(self, RID, OID, Type, Timestamp):
+        self.RoomID = RID
+        self.OfficerID = OID
+        self.Type = Type
+        self.Timestamp = Timestamp
+
 class Sample(Base):
     __tablename__ = "sample"
     def __init__(self, RSID, Timestamp, Duration, MeasurementsJSON):

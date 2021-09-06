@@ -72,16 +72,28 @@ function AdminNavbar(props) {
     return formattedTime
   }
 
+  console.log(data);
+
   if (nots != undefined){
 
     var notifications = [];
-    for(var i = 0; i < nots.length; i++){
+
+    if(nots.length > 0){
+      for(var i = 0; i < nots.length; i++){
+        notifications.push(
+        <NavLink tag='li'>
+          <DropdownItem className="nav-item">
+          { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
+          </DropdownItem>
+        </NavLink>)
+      }
+    }else{
       notifications.push(
-      <NavLink tag='li'>
-        <DropdownItem className="nav-item">
-         { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
-        </DropdownItem>
-      </NavLink>)
+        <NavLink tag='li'>
+          <DropdownItem className="nav-item">
+            No new notifications.
+          </DropdownItem>
+        </NavLink>)
     }
   }
 

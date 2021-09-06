@@ -3,7 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-import FetchData from "fetch/FetchData.js"
+import FetchData from "FetchData/FetchData.js";
 
 
 // 

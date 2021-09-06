@@ -21,8 +21,8 @@ app.add_middleware(
 )
 
 #Variables to trigger notification
-max_db = 49.95
-max_pitch = 99.5
+max_db = 49.9975
+max_pitch = 99.85
 
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):

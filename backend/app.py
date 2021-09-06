@@ -20,6 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+max_db = 49
+
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
     with Session(engine) as session:
@@ -32,6 +34,13 @@ def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
             data = [json.loads(x.MeasurementsJSON) for x in rs.Samples]
             rs_series["dB"] = [x['dB'] for x in data ] 
             rs_series["pitch"] = [x["pitch"] for x in data]
+            rs_series["notifications"] = []
+
+            for item in rs.Samples:
+                if json.loads(item.MeasurementsJSON)['dB'] > max_db:
+                    #Add whether notification has been seen to conditional
+                    rs_series["notifications"].append({"time": item.Timestamp, "msg": "Decibals greater than limit!"})
+
             ret.append(rs_series)
         return ret
         

@@ -41,6 +41,11 @@ const RoomCharts = () => {
         const fetchedData = await fetchData(url);
         if (isMounted) {
             setFetchedData(fetchedData);
+
+
+            console.log(fetchedData)
+
+            
         }
         return () => isMounted = false;
     }, []);

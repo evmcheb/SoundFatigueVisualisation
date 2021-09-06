@@ -46,9 +46,11 @@ class Sample(Base):
         self.Timestamp = Timestamp
         self.Duration = Duration
         self.MeasurementsJSON = MeasurementsJSON
+        #self.NotificationSeen = NotificationSeen
 
     ID = Column(Integer, primary_key=True)
     RoomSensorID = Column(Integer, ForeignKey("roomsensor.ID"))
     Timestamp = Column(Integer, nullable=False)
     Duration = Column(Integer)
     MeasurementsJSON = Column(String)
+    #NotificationSeen = Column(Boolean, default=False)

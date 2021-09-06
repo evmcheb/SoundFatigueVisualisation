@@ -21,6 +21,7 @@ import {
   NavbarToggler,
   ModalHeader,
 } from "reactstrap";
+import FetchData from "FetchData/FetchData";
 
 function AdminNavbar(props) {
   const [collapseOpen, setcollapseOpen] = React.useState(false);
@@ -54,6 +55,36 @@ function AdminNavbar(props) {
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
+
+
+
+  //For handling fetching notification data
+  var data = FetchData();
+  var nots = data[0]['notifications'];
+
+  function timestampToHMS(timestamp) {
+    var date = new Date(timestamp);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    // Will display time in 10:30:23 format
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime
+  }
+
+  if (nots != undefined){
+
+    var notifications = [];
+    for(var i = 0; i < nots.length; i++){
+      notifications.push(
+      <NavLink tag='li'>
+        <DropdownItem className="nav-item">
+         { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
+        </DropdownItem>
+      </NavLink>)
+    }
+  }
+
   return (
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
@@ -98,33 +129,15 @@ function AdminNavbar(props) {
                   <i className="tim-icons icon-sound-wave" />
                   <p className="d-lg-none">Notifications</p>
                 </DropdownToggle>
+
+
+                
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Mike John responded to your email
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      You have 5 more tasks
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Your friend Michael is in town
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Another notification
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Another one
-                    </DropdownItem>
-                  </NavLink>
+                  {notifications}
                 </DropdownMenu>
+
+
+
               </UncontrolledDropdown>
               <UncontrolledDropdown nav>
                 <DropdownToggle

@@ -1,8 +1,8 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-// react plugin used to create charts
-
+// react plugin used to create charts/
+/////
 import ScrollLineGraph from "variables/ScrollLineGraph"
 // reactstrap components
 import {
@@ -29,6 +29,9 @@ import {
 import FetchDataTwo, { avgDecibel } from "../FetchData/FetchDataTwo";
 
 import AvgValue from "../variables/AvgValue";
+
+import MyPieChart from "../variables/MyPieChart";
+
 
 
 function Dashboard(props) {
@@ -67,6 +70,9 @@ function Dashboard(props) {
                 <h5 className="card-category">Data</h5>
                 
               </CardHeader>
+              <div>
+                <MyPieChart/>
+                </div>
               <CardBody>
                 Average Decibels = {avgDecibel}
                 <div className="chart-area">

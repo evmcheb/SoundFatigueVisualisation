@@ -28,17 +28,20 @@ export default class FetchDataTwo extends React.Component {
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
             var timestamp = data[0].x[i];
-            var date = new Date(timestamp * 1000);
-            var hours = date.getHours();
-            var minutes = "0" + date.getMinutes();
+        //    var date = new Date(timestamp * 1000);
+          //  var hours = date.getHours();
+            //var minutes = "0" + date.getMinutes();
             
-            var seconds = "0" + date.getSeconds();     
-            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            lastTime = formattedTime;
+            //var seconds = "0" + date.getSeconds();     
+            //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+            //lastTime = formattedTime;
+            lastTime = timestamp;
             if(i == data[0].dB.length-100){
-                startTime = formattedTime;
+               //startTime = formattedTime;
+               startTime = timestamp;
             }
-            zoomingData.push({arg:formattedTime, y1:decibels});
+           // zoomingData.push({arg:formattedTime, y1:decibels});
+           zoomingData.push({arg:timestamp, y1:decibels});
           }
           
           this.setState({zoomingData})

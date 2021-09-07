@@ -1,7 +1,7 @@
 import React from 'react';
 //import { zoomingData } from './data.js';
 import { zoomingData,lastTime,startTime } from "../FetchData/FetchDataTwo";
-////////
+//////////
 
 import Chart, {
   ArgumentAxis,

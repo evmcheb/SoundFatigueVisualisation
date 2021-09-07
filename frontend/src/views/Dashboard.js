@@ -2,7 +2,7 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+
 import ScrollLineGraph from "variables/ScrollLineGraph"
 // reactstrap components
 import {
@@ -25,23 +25,14 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-// core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4,
-} from "variables/charts.js";
+
 import FetchDataTwo from "../FetchData/FetchDataTwo";
-import { zoomingData } from "../FetchData/FetchDataTwo";
+
 import AvgValue from "../variables/AvgValue";
 
 
 function Dashboard(props) {
-  const [bigChartData, setbigChartData] = React.useState("data1");
-  const setBgChartData = (name) => {
-    setbigChartData(name);
-  };
+  
   return (
     <>
     <div>

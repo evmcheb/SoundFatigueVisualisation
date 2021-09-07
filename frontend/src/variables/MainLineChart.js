@@ -1,7 +1,4 @@
 import React, { PureComponent } from 'react';
-import FetchData from '../FetchData/FetchData';
-import FetchDataTwo from "../FetchData/FetchDataTwo";
-import FetchDataTime from "../FetchData/FetchDataTime";
 
 
 import { render } from "react-dom";

@@ -1,4 +1,4 @@
-import FetchData from "FetchData/FetchData";
+
 import React from "react";
 
 // reactstrap components

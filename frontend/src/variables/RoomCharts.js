@@ -21,6 +21,7 @@ import {
 
 const RoomCharts = () => {
     const [bigChartData, setbigChartData] = useState("data1");
+
     const [fetchedData, setFetchedData] = useState("loading");
 
     FetchData("room/1", setFetchedData);

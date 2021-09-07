@@ -93,7 +93,7 @@ function Admin(props) {
               routes={routes}
               logo={{
                 outterLink: "http://localhost:3000/admin/dashboard",
-                text: "Sound 'n Fatigue",
+                text: "Sound 'n' Fatigue",
                 imgSrc: logo,
               }}
               toggleSidebar={toggleSidebar}

@@ -20,6 +20,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#Variables to trigger notification
+max_db = 49.9975
+max_pitch = 99.85
+
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
     with Session(engine) as session:
@@ -32,6 +36,16 @@ def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
             data = [json.loads(x.MeasurementsJSON) for x in rs.Samples]
             rs_series["dB"] = [x['dB'] for x in data ] 
             rs_series["pitch"] = [x["pitch"] for x in data]
+            rs_series["notifications"] = []
+
+            for item in rs.Samples:
+                if json.loads(item.MeasurementsJSON)['dB'] > max_db:
+                    #Add whether notification has been seen to conditional
+                    rs_series["notifications"].append({"time": item.Timestamp, "msg": "High decibal warning"})
+                
+                if json.loads(item.MeasurementsJSON)['pitch'] > max_pitch:
+                    rs_series["notifications"].append({"time": item.Timestamp, "msg": "High pitch warning"})
+
             ret.append(rs_series)
         return ret
         

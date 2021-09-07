@@ -3,7 +3,7 @@ Simulator API
 Caleb Cheng 23/08/21
 pull sample sound data from two different distributions
 To use
-  - pip install requirements.txt
+  - pip install -r requirements.txt
   - cd sim_api
   - uvicorn sim:app --reload
 """
@@ -22,6 +22,7 @@ db = SessionLocal()
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
+people = db.query(models.Officer).all()
 
 while True:
     for rs in room_sensors:
@@ -38,10 +39,7 @@ while True:
         newSample = models.Sample(rs.ID, int(time.time()), 1, json.dumps(data))
         db.add(newSample)
         db.commit()
-
     time.sleep(1)
-
-
 
 
 from fastapi import FastAPI

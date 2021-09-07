@@ -26,7 +26,7 @@ import {
 } from "reactstrap";
 
 
-import FetchDataTwo from "../FetchData/FetchDataTwo";
+import FetchDataTwo, { avgDecibel } from "../FetchData/FetchDataTwo";
 
 import AvgValue from "../variables/AvgValue";
 
@@ -68,8 +68,9 @@ function Dashboard(props) {
                 
               </CardHeader>
               <CardBody>
+                Average Decibels = {avgDecibel}
                 <div className="chart-area">
-                  <AvgValue/>
+                  
                   Max Decibles, AVG Decibles
                   Times where sound was loudest
                   And Who has been in this room on this date

@@ -3,6 +3,7 @@ import React from 'react'
 var zoomingData = [];
 var lastTime= 0;
 var startTime =0;
+var avgDecibel = 0;
 export default class FetchDataTwo extends React.Component {
 
     state = {
@@ -23,11 +24,12 @@ export default class FetchDataTwo extends React.Component {
            timeStamp: [...prevState.timeStamp, data[0].x]
         }))
         this.setState({loading:false})
-
+        var amountDecibels = 0;
         //{ arg: 10, y1: -12 },
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
             var timestamp = data[0].x[i];
+            amountDecibels += decibels;
         //    var date = new Date(timestamp * 1000);
           //  var hours = date.getHours();
             //var minutes = "0" + date.getMinutes();
@@ -42,10 +44,12 @@ export default class FetchDataTwo extends React.Component {
             }
            // zoomingData.push({arg:formattedTime, y1:decibels});
            zoomingData.push({arg:timestamp, y1:decibels});
+
           }
-          
+          avgDecibel = amountDecibels/data[0].dB.length;
           this.setState({zoomingData})
           this.setState({lastTime})
+          this.setState({avgDecibel})
         
     }
 
@@ -60,5 +64,6 @@ export default class FetchDataTwo extends React.Component {
 export{
     zoomingData,
     lastTime,
-    startTime
+    startTime,
+    avgDecibel
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 //import { zoomingData } from './data.js';
 import { zoomingData,lastTime,startTime } from "../FetchData/FetchDataTwo";
-///////////////////
+/////////////////////////////////////////
 
 import Chart, {
   ArgumentAxis,
@@ -25,7 +25,7 @@ class ScrollLineGraph extends React.Component {
     return (
       <Chart
         id="chart"
-        palette="Harmony Light"
+        palette="Material"
         dataSource={zoomingData}>
         <Series argumentField="arg" valueField="y1" />
         

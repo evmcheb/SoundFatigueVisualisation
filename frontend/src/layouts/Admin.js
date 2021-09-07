@@ -89,6 +89,7 @@ function Admin(props) {
       {({ color, changeColor }) => (
         <React.Fragment>
           <div className="wrapper">
+            {/*   TOGGLES SIDEBAR HERE */}
             <Sidebar
               routes={routes}
               logo={{
@@ -98,6 +99,7 @@ function Admin(props) {
               }}
               toggleSidebar={toggleSidebar}
             />
+           \
             <div className="main-panel" ref={mainPanelRef} data={color}>
               <AdminNavbar
                 brandText={getBrandText(location.pathname)}

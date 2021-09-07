@@ -7,6 +7,7 @@ To use
   - cd sim_api
   - uvicorn sim:app --reload
 """
+import datetime
 
 import hashlib
 import json
@@ -31,7 +32,7 @@ def sound_generator(input,count,saved_random):
         loud_bang = random.randint(1, 10000)
         print("THE LOUD BANG =",loud_bang)
         if(saved_random == 0):
-            randomLenOfBang = random.randint(0,45)
+            randomLenOfBang = random.randint(0,200)
             # Say a 2% chance of there being a painful noise 
             # and noise has a random generated time to last
             # not safe for any period of time
@@ -72,8 +73,12 @@ while True:
             "dB":datadb,
             "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
-
-        newSample = models.Sample(rs.ID, int(time.time()), 1, json.dumps(data))
+        timeStamp = int(time.time())
+       
+        newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
+        print("THE TIME STAMP",newTimeStamp)
+        
+        newSample = models.Sample(rs.ID, newTimeStamp, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
 

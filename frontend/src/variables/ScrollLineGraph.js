@@ -1,6 +1,6 @@
 import React from 'react';
 //import { zoomingData } from './data.js';
-import { zoomingData,lastTime,startTime } from "../FetchData/FetchDataTwo";
+import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour} from "../FetchData/FetchDataTwo";
 ////////////////////////////////////////././///
 
 import Chart, {
@@ -17,8 +17,6 @@ import Chart, {
 
 //
 class ScrollLineGraph extends React.Component {
-
-    
 
 
   render() {
@@ -39,6 +37,9 @@ class ScrollLineGraph extends React.Component {
         <ConstantLine value={70} color="yellow" dashStyle="longDash"/>
         <ConstantLine value={80} color="#ff726f " dashStyle="longDash"/>
         <ConstantLine value={110} color="red " dashStyle="longDash"/>
+        <ConstantLine value={avgDecibel}  width={4} color={averageDecibelColour} dashStyle="solid" >
+            <Label text= "Average" weight = {400} />
+        </ConstantLine>
         </ValueAxis>
         <ScrollBar visible={true} />
         <ZoomAndPan argumentAxis="both" />

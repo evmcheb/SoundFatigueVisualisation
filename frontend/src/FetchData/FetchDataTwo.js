@@ -5,6 +5,7 @@ var lastTime= 0;
 var startTime =0;
 var avgDecibel = 0;
 var areas =[];
+var averageDecibelColour = '';
 export default class FetchDataTwo extends React.Component {
 
     state = {
@@ -80,10 +81,27 @@ export default class FetchDataTwo extends React.Component {
 
 
           avgDecibel = amountDecibels/data[0].dB.length;
+          //For pie chart
+        if(avgDecibel <=70){
+            averageDecibelColour = "green";
+            }
+        else if(avgDecibel<=91 && avgDecibel>=71){
+            averageDecibelColour ="yellow";
+        }
+        else if(avgDecibel<=112 && avgDecibel>=92){
+            averageDecibelColour ="orange";
+        }
+        else if(avgDecibel>=113){
+            averageDecibelColour ="red";
+        }
+
+
+
           this.setState({zoomingData})
           this.setState({lastTime})
           this.setState({avgDecibel})
           this.setState({areas})
+          this.setState({averageDecibelColour})
         
     }
 
@@ -100,5 +118,6 @@ export{
     lastTime,
     startTime,
     avgDecibel,
-    areas
+    areas,
+    averageDecibelColour
 };

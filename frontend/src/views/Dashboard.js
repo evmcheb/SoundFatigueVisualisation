@@ -1,7 +1,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-// react plugin used to create charts/
+// react plugin used to create charts//
 /////
 import ScrollLineGraph from "variables/ScrollLineGraph"
 // reactstrap components
@@ -26,13 +26,15 @@ import {
 } from "reactstrap";
 
 
-import FetchDataTwo, { avgDecibel } from "../FetchData/FetchDataTwo";
+import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime} from "../FetchData/FetchDataTwo";
 
 import AvgValue from "../variables/AvgValue";
 
 import MyPieChart from "../variables/MyPieChart";
 
-
+import "../assets/css/myDashboard.css"
+import { Size } from "devextreme-react/pie-chart";
+import TimesConcernDisp from "../variables/TimesConcernDisp";
 
 function Dashboard(props) {
   
@@ -58,7 +60,7 @@ function Dashboard(props) {
               </CardHeader>
              
                 
-                  {/* CHANGE GRAPH HERE */}
+                  {/* Main graph */}
                   <ScrollLineGraph/>
                 
              
@@ -70,9 +72,37 @@ function Dashboard(props) {
                 <h5 className="card-category">Data</h5>
                 
               </CardHeader>
+
               <div>
+                <Row>
+                <div className="thePieChart" style={{padding: "25px"}}>
                 <MyPieChart/>
                 </div>
+                
+                <div style={{padding: "25px"}} >
+                  <h2>Average Decibels</h2>
+                <div className="averageDbDisplay"style={{background: averageDecibelColour}}>
+                  {avgDecibel.toFixed(2)} dB
+                </div>
+                </div>
+                <div style={{padding: "25px"}} >
+                  <h2>Maximum Decibels</h2>
+                  <div className = "maxDbDisplay"style={{fontSize: "25px"}} >
+                    {maxDecibel} db <br/>
+                    Occured at: {maxDbTime}
+                  </div>
+                </div>
+              </Row>
+              <div>
+              
+                <div>
+                  Times of concern:<br/>
+                  
+                  <TimesConcernDisp/>
+                </div>
+              
+              </div>
+              </div>
               <CardBody>
                 Average Decibels = {avgDecibel}
                 <div className="chart-area">

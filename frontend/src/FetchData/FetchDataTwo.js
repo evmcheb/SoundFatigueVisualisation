@@ -6,6 +6,9 @@ var startTime =0;
 var avgDecibel = 0;
 var areas =[];
 var averageDecibelColour = '';
+var maxDecibel = Number.MIN_VALUE;
+var maxDbTime = 0;
+var timesOfConcern = [];
 export default class FetchDataTwo extends React.Component {
 
     state = {
@@ -13,7 +16,8 @@ export default class FetchDataTwo extends React.Component {
         dbs: [],
         timeStamp: [],
         zoomingData:{args:0,y1:0},
-        areas:{risk:"None",area: 0}
+        areas:{risk:"None",area: 0},
+        timesOfConcern:{startTimeCon:0,endTimeCon:0}
     };
 
     async componentDidMount(){
@@ -29,7 +33,7 @@ export default class FetchDataTwo extends React.Component {
         this.setState({loading:false})
         var amountDecibels = 0;
 
-
+        
         //For pie chart
         var safeInt=0;
         var dangerousInt=0;
@@ -62,15 +66,143 @@ export default class FetchDataTwo extends React.Component {
             //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
             //lastTime = formattedTime;
             lastTime = timestamp;
-            if(i == data[0].dB.length-100){
+            if(i === data[0].dB.length-100){
                //startTime = formattedTime;
                startTime = timestamp;
             }
            // zoomingData.push({arg:formattedTime, y1:decibels});
             zoomingData.push({arg:timestamp, y1:decibels});
             
+
+
+            //Getting max dB value
+            if(decibels>maxDecibel){
+                maxDecibel = decibels;
+                maxDbTime = timestamp;
+            }        
+          }
+          
+          //Times of concern for 80 db+ => damage to hearing after 2 hours
+          for(var j=0; j< data[0].dB.length; j++){
+            var dB = data[0].dB[j];
+            var timestamp80 = data[0].x[j];
+            if(dB>=80){
+                var startTimeConcern = timestamp80;
+                j++;
+                var endTimeConcern =0;
+                while(data[0].dB[j]>=80){
+                    
+                    endTimeConcern = data[0].x[j];
+                    j++;
+                }
+                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 7200)){
+                timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
+                }
+            }
+          }
+          //Times of concern for 85 db+ => damage to hearing after 50 minutes
+          for(var k=0; k< data[0].dB.length; k++){
+            var dB = data[0].dB[k];
+            var timestamp85 = data[0].x[k];
+            if(dB>=85){
+                var startTimeConcern = timestamp85;
+                k++;
+                var endTimeConcern =0;
+                while(data[0].dB[j]>=85){
+                    
+                    endTimeConcern = data[0].x[k];
+                    k++;
+                }
+                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 3000)){
+                timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
+                }
+            }
+          }
+          //Times of concern for 100 db+ => damage to hearing after 15 minutes
+          for(var l=0; l< data[0].dB.length; l++){
+            var dB = data[0].dB[l];
+            var timestamp100 = data[0].x[l];
+            if(dB>=100){
+                var startTimeConcern = timestamp100;
+                k++;
+                var endTimeConcern =0;
+                while(data[0].dB[l]>=100){
+                    
+                    endTimeConcern = data[0].x[l];
+                    l++;
+                }
+                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 900)){
+                timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
+                }
+            }
+          }
+          //Times of concern for 105 db+ => damage to hearing after 5 minutes
+          for(var m=0; m< data[0].dB.length; m++){
+            var dB = data[0].dB[m];
+            var timestamp105 = data[0].x[m];
+            if(dB>=105){
+                var startTimeConcern = timestamp105;
+                k++;
+                var endTimeConcern =0;
+                while(data[0].dB[m]>=105){
+                    
+                    endTimeConcern = data[0].x[m];
+                    m++;
+                }
+                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 300)){
+                timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
+                }
+            }
+          }
+          //Times of concern for 110 db+ => damage to hearing after 2 minutes
+          for(var n=0; n< data[0].dB.length; n++){
+            var dB = data[0].dB[n];
+            var timestamp110 = data[0].x[n];
+            if(dB>=110){
+                var startTimeConcern = timestamp110;
+                n++;
+                var endTimeConcern = 0;
+                while(data[0].dB[n]>=110){
+                    
+                    endTimeConcern = data[0].x[n];
+                    n++;
+                }
+                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 120)){
+                timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
+                }
+            }
+          }
+          //Times of concern for 120 db+ => damage to hearing after any amount of time
+          for(var p=0; p< data[0].dB.length; p++){
+            var dB = data[0].dB[p];
+            var timestamp120 = data[0].x[p];
+            if(dB>=120){
+                var startTimeConcern = timestamp120;
+                p++;
+                var endTimeConcern = 0;
+                while(data[0].dB[p]>=120){
+                    
+                    endTimeConcern = data[0].x[p];
+                    p++;
+                }
+                if(endTimeConcern!=0 ){
+                timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
+                }
+                if(endTimeConcern ==0){
+                    timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:startTimeConcern});
+
+                }
+            }
           }
 
+
+            console.log(timesOfConcern)
+            //COnverting maxDbTime to hour:min:sec
+            var date = new Date(maxDbTime * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();     
+            maxDbTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
           areas.push({risk:"Safe",area:safeInt});
           areas.push({risk:"Dangerous",area:dangerousInt});
@@ -81,7 +213,7 @@ export default class FetchDataTwo extends React.Component {
 
 
           avgDecibel = amountDecibels/data[0].dB.length;
-          //For pie chart
+          //Determing what colour of average decibels
         if(avgDecibel <=70){
             averageDecibelColour = "green";
             }
@@ -102,7 +234,9 @@ export default class FetchDataTwo extends React.Component {
           this.setState({avgDecibel})
           this.setState({areas})
           this.setState({averageDecibelColour})
-        
+          this.setState({maxDecibel})
+          this.setState({maxDbTime})
+          this.setState({timesOfConcern})
     }
 
     render() {
@@ -119,5 +253,8 @@ export{
     startTime,
     avgDecibel,
     areas,
-    averageDecibelColour
+    averageDecibelColour,
+    maxDecibel,
+    maxDbTime,
+    timesOfConcern
 };

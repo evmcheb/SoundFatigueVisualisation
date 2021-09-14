@@ -1,7 +1,7 @@
 import React from 'react';
 //import { zoomingData } from './data.js';
 import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour} from "../FetchData/FetchDataTwo";
-////////////////////////////////////////././///
+////////////////////////////////////////././//////////
 
 import Chart, {
   ArgumentAxis,
@@ -15,10 +15,11 @@ import Chart, {
   ValueAxis
 } from 'devextreme-react/chart';
 
-//
+//if i want to shorten the defualt range
+//defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
-
-
+    
+    
   render() {
     return (
       <Chart
@@ -27,16 +28,59 @@ class ScrollLineGraph extends React.Component {
         dataSource={zoomingData}>
         <Series argumentField="arg" valueField="y1" />
         
-        <ArgumentAxis  defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
+        <ArgumentAxis  >
 
-         
         </ArgumentAxis>
+        {/* Setting the green to red horizontal lines */}
         <ValueAxis>
-        <ConstantLine value={0} color="green" dashStyle="longDash"/>
-        <ConstantLine value={40} color="green" dashStyle="longDash"/>
-        <ConstantLine value={70} color="yellow" dashStyle="longDash"/>
-        <ConstantLine value={80} color="#ff726f " dashStyle="longDash"/>
-        <ConstantLine value={110} color="red " dashStyle="longDash"/>
+        <ConstantLine value={10} color="green" dashStyle="longDash">
+
+        </ConstantLine>
+        <ConstantLine value={20} color="green" dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={30} color="green" dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={40} color="green" dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={50} color="green" dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={60} color="green" dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={70} color="#D4FF00" dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={80} color="#FFFF00 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={90} color="#FFD919 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={94} color="#FFB319 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={100} color="#FF8C19 " dashStyle="longDash">
+        <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={106} color="#FF6619 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={112} color="#FF4019 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={120} color="#FF1919 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={130} color="#FF0000 " dashStyle="longDash">
+            <Label visible={false} />
+        </ConstantLine>
+        <ConstantLine value={140} color="#CC0000 " dashStyle="longDash" >
+            <Label visible={false} />
+        </ConstantLine>
         <ConstantLine value={avgDecibel}  width={4} color={averageDecibelColour} dashStyle="solid" >
             <Label text= "Average" weight = {400} />
         </ConstantLine>

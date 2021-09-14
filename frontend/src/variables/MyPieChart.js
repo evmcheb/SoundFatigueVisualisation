@@ -1,11 +1,10 @@
 import React from 'react';
-//////
+//////////////
 import PieChart, {
   Series,
   Label,
   Connector,
   Size,
-  Export
 } from 'devextreme-react/pie-chart';
 //
 import { areas } from "../FetchData/FetchDataTwo";

@@ -127,7 +127,7 @@ function Dashboard(props) {
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Total Shipments</h5>
+                <h5 className="card-category">Average Decibals (All rooms)</h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-bell-55 text-info" /> 763,215
                 </CardTitle>
@@ -145,7 +145,7 @@ function Dashboard(props) {
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Daily Sales</h5>
+                <h5 className="card-category">Average Decibals Per Room </h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-delivery-fast text-primary" />{" "}
                   3,500€
@@ -164,7 +164,7 @@ function Dashboard(props) {
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Completed Tasks</h5>
+                <h5 className="card-category">Average Pitch (All rooms)</h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-send text-success" /> 12,100K
                 </CardTitle>

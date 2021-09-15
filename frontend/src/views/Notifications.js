@@ -132,6 +132,41 @@ function Notifications() {
               </CardBody>
             </Card>
           </Col>
+          <Col>
+            <Card>
+                <CardHeader>
+                  <CardTitle tag="h4">Configuration</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div>
+                    <table>
+                      <tr>
+                        <td style={{padding: "15px"}}>
+                          Notify me if decibals exceed:
+                        </td>
+                        <td>
+                            <input type="number"></input>
+                        </td>
+                        <td>
+                            <input type="button" value="set"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{padding: "15px"}}>
+                          Notify me if the pitch exceeds:
+                        </td>
+                        <td>
+                            <input type="number"></input>
+                        </td>
+                        <td>
+                            <input type="button" value="set"></input>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </CardBody>
+            </Card>
+          </Col>
           <Col md="12">
             <Card>
               <CardBody>

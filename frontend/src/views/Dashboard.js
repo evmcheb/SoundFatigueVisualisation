@@ -92,9 +92,7 @@ function Dashboard(props) {
                   </div>
                 </div>
               </Row>
-              <div>
-              <MyRangeSlider/>
-              </div>
+              
               </div>
                
                 <AccordionMoreData/>

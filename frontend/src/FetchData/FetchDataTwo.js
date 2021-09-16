@@ -213,6 +213,7 @@ export default class FetchDataTwo extends React.Component {
 
 
           avgDecibel = amountDecibels/data[0].dB.length;
+          avgDecibel = avgDecibel.toFixed(2);
           //Determing what colour of average decibels
         if(avgDecibel <=70){
             averageDecibelColour = "green";

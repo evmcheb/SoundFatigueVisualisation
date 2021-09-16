@@ -23,7 +23,7 @@ import models
 import random
 import time
 SECONDS_IN_A_DAY = 86400
-
+count =0
 # Quiet room is 30dBA to 50dBA
 
 def sound_generator(input,count,saved_random):
@@ -58,7 +58,6 @@ db = SessionLocal()
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
-count =0 
 saved_random = 0
 while True:
 
@@ -73,6 +72,7 @@ while True:
             "dB":datadb,
             "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
+
         timeStamp = int(time.time())
        
         #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))

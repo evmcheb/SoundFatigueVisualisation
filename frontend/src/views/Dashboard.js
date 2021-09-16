@@ -35,7 +35,7 @@ import MyPieChart from "../variables/MyPieChart";
 import "../assets/css/myDashboard.css"
 import { Size } from "devextreme-react/pie-chart";
 import TimesConcernDisp from "../variables/TimesConcernDisp";
-
+import AvgGauge from "../variables/AvgGauge";
 function Dashboard(props) {
   
   return (
@@ -78,11 +78,14 @@ function Dashboard(props) {
                 <div className="thePieChart" style={{padding: "25px"}}>
                 <MyPieChart/>
                 </div>
-                
+                <div>
+                  <AvgGauge/>
+                </div>
                 <div style={{padding: "25px"}} >
                   <h2>Average Decibels</h2>
                 <div className="averageDbDisplay"style={{background: averageDecibelColour}}>
-                  {avgDecibel.toFixed(2)} dB
+                  {avgDecibel} dB
+                  
                 </div>
                 </div>
                 <div style={{padding: "25px"}} >

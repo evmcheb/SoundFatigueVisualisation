@@ -14,10 +14,10 @@ class AvgGauge extends React.Component {
           <Label useRangeColors={true} />
         </Scale>
         <RangeContainer palette="bright">
-          <Range startValue={0} endValue={60} />
-          <Range startValue={60} endValue={95} />
-          <Range startValue={95} endValue={115} />
-          <Range startValue={115} endValue={160} />
+          <Range startValue={0} endValue={70} />
+          <Range startValue={70} endValue={91} />
+          <Range startValue={91} endValue={112} />
+          <Range startValue={112} endValue={160} />
         </RangeContainer>
         <Tooltip enabled={true} />
         <Title text="Average Decibels in Room" >

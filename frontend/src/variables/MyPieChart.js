@@ -5,6 +5,8 @@ import PieChart, {
   Label,
   Connector,
   Size,
+  Title,
+  Font,
 } from 'devextreme-react/pie-chart';
 //
 import { areas } from "../FetchData/FetchDataTwo";
@@ -37,7 +39,9 @@ class MyPieChart extends React.Component {
         </Series>
 
         <Size width={500} />
-        
+        <Title text="Decibel Occurenses" >
+          <Font size={28} color="white" />
+        </Title>
       </PieChart>
     );
   }

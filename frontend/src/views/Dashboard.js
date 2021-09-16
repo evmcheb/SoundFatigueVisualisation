@@ -36,6 +36,8 @@ import "../assets/css/myDashboard.css"
 import { Size } from "devextreme-react/pie-chart";
 import TimesConcernDisp from "../variables/TimesConcernDisp";
 import AvgGauge from "../variables/AvgGauge";
+import AccordionMoreData from "../variables/AccordionMoreData";
+import MyRangeSlider from "../variables/MyRangeSlider";
 function Dashboard(props) {
   
   return (
@@ -81,13 +83,7 @@ function Dashboard(props) {
                 <div>
                   <AvgGauge/>
                 </div>
-                <div style={{padding: "25px"}} >
-                  <h2>Average Decibels</h2>
-                <div className="averageDbDisplay"style={{background: averageDecibelColour}}>
-                  {avgDecibel} dB
-                  
-                </div>
-                </div>
+                
                 <div style={{padding: "25px"}} >
                   <h2>Maximum Decibels</h2>
                   <div className = "maxDbDisplay"style={{fontSize: "25px"}} >
@@ -97,25 +93,12 @@ function Dashboard(props) {
                 </div>
               </Row>
               <div>
-              
-                <div>
-                  Times of concern:<br/>
-                  
-                  <TimesConcernDisp/>
-                </div>
-              
+              <MyRangeSlider/>
               </div>
               </div>
-              <CardBody>
-                Average Decibels = {avgDecibel}
-                <div className="chart-area">
-                  
-                  Max Decibles, AVG Decibles
-                  Times where sound was loudest
-                  And Who has been in this room on this date
-                  
-                </div>
-              </CardBody>
+               
+                <AccordionMoreData/>
+              
             </Card>
           </Col>
         </Row>

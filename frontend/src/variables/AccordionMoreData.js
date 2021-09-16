@@ -11,7 +11,7 @@ import MyRangeSlider from './MyRangeSlider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),

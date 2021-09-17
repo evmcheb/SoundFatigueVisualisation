@@ -4,7 +4,7 @@ import time
 from fastapi import FastAPI
 from db import engine
 import models
-from sqlmodel import Field, SQLModel, Session, select, update
+from sqlmodel import Field, SQLModel, Session, select
 from fastapi.middleware.cors import CORSMiddleware
 
 SQLModel.metadata.create_all(engine)
@@ -20,15 +20,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#Variables to trigger notification
+max_db = 49.9975
+max_pitch = 99.85
+
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
     with Session(engine) as session:
         Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
         ret = []
-
-        max_db = Room.MaxDB
-        max_pitch = Room.MaxPitch
-
         for rs in Room.RoomSensors:
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
             rs_series["x"] = [x.Timestamp for x in rs.Samples]
@@ -39,20 +39,13 @@ def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
             rs_series["notifications"] = []
 
             for item in rs.Samples:
-                if json.loads(item.MeasurementsJSON)['dB'] > max_db and not item.NotificationSeen:
+                if json.loads(item.MeasurementsJSON)['dB'] > max_db:
                     #Add whether notification has been seen to conditional
                     rs_series["notifications"].append({"time": item.Timestamp, "msg": "High decibal warning"})
-
-                    session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(NotificationSeen=True))
                 
-                if json.loads(item.MeasurementsJSON)['pitch'] > max_pitch and not item.NotificationSeen:
+                if json.loads(item.MeasurementsJSON)['pitch'] > max_pitch:
                     rs_series["notifications"].append({"time": item.Timestamp, "msg": "High pitch warning"})
 
-                    session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(NotificationSeen=True))
-
-
-
-            session.commit()
             ret.append(rs_series)
         return ret
         

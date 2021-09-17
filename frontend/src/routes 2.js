@@ -19,13 +19,6 @@ var routes = [
     icon: "tim-icons icon-chart-pie-36",
     component: UserProfile,
     layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "tim-icons icon-bell-55",
-    component: Notifications,
-    layout: "/admin",
   }
 ];
 export default routes;

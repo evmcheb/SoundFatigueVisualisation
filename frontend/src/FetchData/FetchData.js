@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-const FetchData = () => {
+const FetchData = (type = 1) => {
     const [fetchedData, setFetchedData] = useState({});
 
-    const url = `http://127.0.0.1:8000/room/1`
+    var url = `http://127.0.0.1:8000/room/1`;
 
+    if(type === 2){
+        url = `http://127.0.0.1:8000/notification_history/1`;
+    }
+    
     const fetchData = async (url) => {
         console.log("Fetching data")
         return new Promise((res, rej) => {

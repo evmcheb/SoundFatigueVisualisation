@@ -13,6 +13,8 @@ class Room(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     Name: str
     Description: str
+    #MaxDB: int
+    #MaxPitch: int
     RoomSensors: List["RoomSensor"] = Relationship(back_populates="RoomB")
 
 class Sensor(SQLModel, table=True):

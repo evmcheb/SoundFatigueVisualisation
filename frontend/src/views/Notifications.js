@@ -145,7 +145,7 @@ function Notifications() {
                           Notify me if decibals exceed:
                         </td>
                         <td>
-                            <input type="number"></input>
+                            <input type="number" value="0"></input>
                         </td>
                         <td>
                             <input type="button" value="set"></input>
@@ -156,7 +156,7 @@ function Notifications() {
                           Notify me if the pitch exceeds:
                         </td>
                         <td>
-                            <input type="number"></input>
+                            <input type="number" value="0"></input>
                         </td>
                         <td>
                             <input type="button" value="set"></input>

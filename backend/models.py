@@ -13,8 +13,8 @@ class Room(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     Name: str
     Description: str
-    #MaxDB: int
-    #MaxPitch: int
+    MaxDB: int
+    MaxPitch: int
     RoomSensors: List["RoomSensor"] = Relationship(back_populates="RoomB")
 
 class Sensor(SQLModel, table=True):
@@ -44,5 +44,5 @@ class Sample(SQLModel, table=True):
     Timestamp: int
     Duration: int
     MeasurementsJSON: str
-    #NotificationSeen: bool = Field(default=False)
+    NotificationSeen: bool = Field(default=False)
     RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")

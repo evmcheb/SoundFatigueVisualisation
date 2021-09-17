@@ -58,8 +58,6 @@ function Heatmap(){
     //Read the data
     d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv").then( function(data) {
 
-    console.log(data);
-
     svg.selectAll()
         .data(data, function(d) {return d.group+':'+d.variable;})
         .join("rect")

@@ -60,7 +60,10 @@ function AdminNavbar(props) {
 
   //For handling fetching notification data
   var data = FetchData();
-  var nots = data[0]['notifications'];
+
+  if(data){
+    var nots = data[0]['notifications'];
+  }
 
   function timestampToHMS(timestamp) {
     var date = new Date(timestamp);

@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-const FetchData = (route, setFetchedData) => {
-    const url = `http://127.0.0.1:8000/${route}`
+const FetchData = () => {
+    const [fetchedData, setFetchedData] = useState({});
+
+    const url = `http://127.0.0.1:8000/room/1`
 
     const fetchData = async (url) => {
         console.log("Fetching data")
@@ -25,7 +27,13 @@ const FetchData = (route, setFetchedData) => {
         return () => isMounted = false;
     }, []);
 
+    const fetchNewData = () => {
+        fetchData(url).then((res) => {
+            setFetchedData(res)
+        })
+    }
+
+    return [fetchedData, fetchNewData];
 }
 
 export default FetchData;
-

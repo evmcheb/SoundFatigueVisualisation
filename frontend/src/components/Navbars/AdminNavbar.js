@@ -73,9 +73,8 @@ function AdminNavbar(props) {
     return formattedTime
   }
 
-  console.log(data);
 
-  if (nots != undefined){
+  if (nots !== undefined){
 
     var notifications = [];
 

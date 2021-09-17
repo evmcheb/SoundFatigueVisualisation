@@ -1,6 +1,8 @@
 import React from "react";
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from "react-notification-alert";
+import FetchData from "FetchData/FetchData";
+
 
 // reactstrap components
 import {
@@ -13,9 +15,57 @@ import {
   CardTitle,
   Row,
   Col,
+  CardColumns,
 } from "reactstrap";
 
+
 function Notifications() {
+
+
+  //Gather notification history
+  var data = FetchData(2);
+  console.log(data);
+
+  function timestampToHMS(timestamp) {
+    var date = new Date(timestamp);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    // Will display time in 10:30:23 format
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime
+  }
+
+  var nots = data[0]["notifications"];
+
+  console.log(nots);
+
+  var notifications = [];
+
+  if(nots !== undefined && nots.length > 0){
+    for(var i = 0; i < nots.length; i++){
+      notifications.push(
+      <UncontrolledAlert color="warning">
+        <span>
+          <b>Warning - </b>
+          { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
+        </span>
+      </UncontrolledAlert>)
+    }
+  }else{
+    notifications.push(
+      <span>
+        No notification history.
+      </span>
+    )
+
+  }
+
+
+
+
+
+
   const notificationAlertRef = React.useRef(null);
   const notify = (place) => {
     var color = Math.floor(Math.random() * 5 + 1);
@@ -62,6 +112,28 @@ function Notifications() {
         <div className="react-notification-alert-container">
           <NotificationAlert ref={notificationAlertRef} />
         </div>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Notification History</CardTitle>
+              </CardHeader>
+              <CardBody>
+                { notifications }
+              </CardBody>
+            </Card>
+          </Col>
+          <Col>
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Placeholder</CardTitle>
+              </CardHeader>
+              <CardBody>
+                This is a placeholder.
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
         <Row>
           <Col md="6">
             <Card>

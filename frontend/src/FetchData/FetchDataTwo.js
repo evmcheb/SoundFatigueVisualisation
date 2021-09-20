@@ -58,23 +58,26 @@ export default class FetchDataTwo extends React.Component {
             else if(decibels>=113){
                 unSafeInt +=1;
             }
-        //    var date = new Date(timestamp * 1000);
-          //  var hours = date.getHours();
+            //var date = new Date(timestamp * 1000);
+            //var hours = date.getHours();
             //var minutes = "0" + date.getMinutes();
             
-            //var seconds = "0" + date.getSeconds();     
+           // var seconds = "0" + date.getSeconds();     
             //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            //lastTime = formattedTime;
+            //var formattedTime = new Date(timestamp*1000).toLocaleTimeString('en-US');
+            //console.log(formattedTime)
             lastTime = timestamp;
+            //lastTime = timestamp;
             if(i === data[0].dB.length-100){
                //startTime = formattedTime;
                startTime = timestamp;
             }
-           // zoomingData.push({arg:formattedTime, y1:decibels});
+           
+
             zoomingData.push({arg:timestamp, y1:decibels});
             
 
-
+            
             //Getting max dB value
             if(decibels>maxDecibel){
                 maxDecibel = decibels;

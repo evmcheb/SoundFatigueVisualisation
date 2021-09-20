@@ -1,6 +1,7 @@
 import React from 'react';
 import { dataSource } from './data.js';
-
+import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour} from "../FetchData/FetchDataTwo";
+import {NumberBox} from 'devextreme-react/number-box';
 import Chart, {
   Series,
   Aggregation,
@@ -10,7 +11,11 @@ import Chart, {
   ValueAxis,
   Margin,
   Legend,
-  Tooltip
+  Tooltip,
+  ScrollBar,
+  ZoomAndPan,
+  Crosshair,
+ 
 } from 'devextreme-react/chart';
 
 import RangeSelector, {
@@ -23,83 +28,118 @@ import RangeSelector, {
   Behavior
 } from 'devextreme-react/range-selector';
 
-class App extends React.Component {
+class MyRangeSlider extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      visualRange: {}
+      
+      startValue: 0,
+      endValue: 0,
+      visualRange: {},
     };
 
     this.updateVisualRange = this.updateVisualRange.bind(this);
+
   }
 
   render() {
     return (
       <div id="chart-demo">
+           <div className="dx-field">
+            <div className="dx-field-label">Start value</div>
+            <div className="dx-field-value">
+              <NumberBox value={this.state.startValue} showSpinButtons={true} showClearButton={true} onValueChanged={this.updateVisualRange} />
+            </div>
+          </div>
+          <div className="dx-field">
+            <div className="dx-field-label">End value</div>
+            <div className="dx-field-value">
+              <NumberBox value={this.state.endValue}  showSpinButtons={true} onValueChanged={this.updateVisualRange} />
+            </div>
+          </div>
           <RangeSelector
-          dataSource={dataSource}
+          dataSource={zoomingData}
+          
+          start={this.updateVisualRange}
+          end={this.updateVisualRange}
           onValueChanged={this.updateVisualRange}
         >
-          <Size height={120} />
+          <Size height={100} />
           <RsChart>
             <RsValueAxis valueType="numeric" />
             <RsSeries
               type="line"
-              valueField="Open"
-              argumentField="Date"
+              valueField="y1"
+              argumentField="arg"
             >
               <RsAggregation enabled="true" />
             </RsSeries>
           </RsChart>
           <Scale
             placeholderHeight={20}
-            minorTickInterval="day"
-            tickInterval="month"
-            valueType="datetime"
-            aggregationInterval="week"
+            
+            
+            valueType="numeric"
+            
           />
           <Behavior
             snapToTicks={false}
             callValueChanged="onMoving"
           />
         </RangeSelector>
+
+        
+
+
+       
+        
+
+
+
+
         <Chart
-          id="zoomedChart"
-          dataSource={dataSource}
-          title="Google Inc. Stock Prices"
-        >
-          <Series
-            type="candleStick"
-            openValueField="Open"
-            highValueField="High"
-            lowValueField="Low"
-            closeValueField="Close"
-            argumentField="Date"
-          >
+        id="chart"
+        palette="Material"
+        dataSource={zoomingData}>
+        <Series argumentField="arg" valueField="y1" >
             <Aggregation enabled={true} />
-          </Series>
-          <ArgumentAxis
+        </Series>
+        
+        <ArgumentAxis
             visualRange={this.state.visualRange}
             valueMarginsEnabled={false}
-            argumentType="datetime"
-          >
-            <Grid visible={true} />
-            <Label visible={false} />
-          </ArgumentAxis>
-          <ValueAxis valueType="numeric" />
-          <Margin right={10} />
-          <Legend visible={false} />
-          <Tooltip enabled={true} />
-        </Chart>
+            
+          ></ArgumentAxis>
         
+        {/* Setting the green to red horizontal lines */}
+        <ValueAxis valueType="numeric" >
+        
+        </ValueAxis>
+        
+        
+        <Crosshair
+            enabled={true}>
+            <Label visible={true} />
+          </Crosshair>
+        <Legend visible={false} />
+      </Chart>
       </div>
     );
   }
 
   updateVisualRange(e) {
-    this.setState({ visualRange: e.value });
+    
+    this.setState({ 
+        startValue:Math.ceil(e.value[0]),
+        endValue:Math.ceil(e.value[1]),
+        visualRange: e.value
+    
+    });
   }
+  
+  
+
 }
 
-export default App;
+export default MyRangeSlider;

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
+import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
 import AdminLayout from "layouts/Admin.js";
 
 import "assets/scss/black-dashboard-react.scss";

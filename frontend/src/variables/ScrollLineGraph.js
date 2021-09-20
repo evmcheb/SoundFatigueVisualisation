@@ -12,7 +12,8 @@ import Chart, {
   Crosshair,
   Label,
   ConstantLine,
-  ValueAxis
+  ValueAxis,
+  Scale
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
@@ -23,6 +24,7 @@ class ScrollLineGraph extends React.Component {
   render() {
     return (
       <Chart
+        
         id="chart"
         palette="Material"
         dataSource={zoomingData}>

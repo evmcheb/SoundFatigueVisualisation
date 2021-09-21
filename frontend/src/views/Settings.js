@@ -43,7 +43,7 @@ import React, { useState } from "react";
                              <CardBody>
                                  <div className="typography-line">
                                      <h1>
-                                         <span>Input Range</span>
+                                         <span>Notify me if decibels exceed:</span>
                                          <FormGroup>
                                              <Input type="number" value={range} name="number" id="number" placeholder="0 DB" onChange={(e) => setRange(e.target.value)} />
                                          </FormGroup>

@@ -177,7 +177,7 @@ function AdminNavbar(props) {
                   <NavLink tag="li">
                     <DropdownItem className="nav-item">Profile</DropdownItem>
                   </NavLink>
-                  <NavLink tag="li">
+                  <NavLink tag="li" onClick = {() => window.location.href = "Settings"} >
                     <DropdownItem className="nav-item">Settings</DropdownItem>
                   </NavLink>
                   <DropdownItem divider tag="li" />

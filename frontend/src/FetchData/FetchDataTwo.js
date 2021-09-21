@@ -1,6 +1,6 @@
 import React from 'react'
 import TheDateBox, { passDate } from '../variables/TheDateBox';
-//
+///
 var zoomingData = [];
 var lastTime= 0;
 var startTime =0;
@@ -23,11 +23,15 @@ export default class FetchDataTwo extends React.Component {
         timesOfConcern:{startTimeCon:0,endTimeCon:0},
         
     };
-
+    
     async componentDidMount(){
 
         console.log({passDate})
-        const url = "http://127.0.0.1:8000/room/1/";
+        
+        
+        var url = "http://127.0.0.1:8000/room/1/";
+        //url = url.concat(passDate);
+        console.log(url)
         const response = await fetch(url);
         const data =  await response.json();
         this.setState(prevState => ({
@@ -253,7 +257,7 @@ export default class FetchDataTwo extends React.Component {
        return(
         <>
         <div>
-           
+          
         </div>
         </>
         )

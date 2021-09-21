@@ -1,7 +1,7 @@
 import React from 'react';
 //import { zoomingData } from './data.js';
 import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour} from "../FetchData/FetchDataTwo";
-////////////////////////////////////////././//////////
+////////////////////////////////////////././////////////
 
 import Chart, {
   ArgumentAxis,
@@ -95,6 +95,7 @@ class ScrollLineGraph extends React.Component {
           </Crosshair>
         <Legend visible={false} />
       </Chart>
+
     );
   }
 }

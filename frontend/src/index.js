@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
+
 import AdminLayout from "layouts/Admin.js";
 
 import "assets/scss/black-dashboard-react.scss";
@@ -12,11 +12,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
 
+
 ReactDOM.render(
   <ThemeContextWrapper>
     <BackgroundColorWrapper>
       <BrowserRouter>
         <Switch>
+        
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
           <Redirect from="/" to="/admin/dashboard" />
         </Switch>

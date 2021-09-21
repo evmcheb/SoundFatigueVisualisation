@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
+import FetchDataTwo from "../FetchData/FetchDataTwo";
+import { render } from "react-dom";
 
 
 
@@ -13,20 +15,25 @@ export default function TheDateBox() {
   const handleselectedDate = (date) => {
     setselectedDate({data:date});
     passDate= moment(selectedDate.data).format("DD/MM/YYYY")
+    
+      { <FetchDataTwo/>}
+   console.log("presed")
   };
 
-  
+
   
   return (
     <div className="App">
+        
       <div className="input-container">
         <div>
-          <label>Select Date For Display</label>
+          <label>Select Date To Display</label>
           <DatePicker
             selected={selectedDate.data}
             dateFormat="dd/MM/yyyy"
             onChange={handleselectedDate}
           />
+          <FetchDataTwo/>
         </div>
        
       </div>
@@ -40,6 +47,7 @@ export default function TheDateBox() {
     </div>
   );
 }
+
 
 export{
     passDate

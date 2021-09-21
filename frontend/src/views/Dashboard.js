@@ -37,7 +37,7 @@ import { Size } from "devextreme-react/pie-chart";
 import TimesConcernDisp from "../variables/TimesConcernDisp";
 import AvgGauge from "../variables/AvgGauge";
 import AccordionMoreData from "../variables/AccordionMoreData";
-import TheDateBox from "../variables/TheDateBox";
+import TheDateBox, { passDate} from "../variables/TheDateBox";
 
 
 function Dashboard(props) {
@@ -48,27 +48,26 @@ function Dashboard(props) {
 
   return (
     <>
-    <div className="datebox">
-
-      
-    </div>
+    
     <div>
       <FetchDataTwo/>
       
       </div>
       
       <div className="content">
-      <TheDateBox/>
+      
         <Row>
           
             <Card className="card-chart">
             <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h5 className="card-category">Room A</h5>
-                    <CardTitle tag="h2">Decibel Reading</CardTitle>
+                    <h4 >Room A</h4>
+                    <TheDateBox/>
+                    <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>
                   </Row>
+                  
               </CardHeader>
              
                 

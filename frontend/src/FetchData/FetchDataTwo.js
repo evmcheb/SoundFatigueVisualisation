@@ -1,4 +1,5 @@
 import React from 'react'
+import TheDateBox, { passDate } from '../variables/TheDateBox';
 //
 var zoomingData = [];
 var lastTime= 0;
@@ -9,18 +10,23 @@ var averageDecibelColour = '';
 var maxDecibel = Number.MIN_VALUE;
 var maxDbTime = 0;
 var timesOfConcern = [];
-export default class FetchDataTwo extends React.Component {
 
+export default class FetchDataTwo extends React.Component {
+    
+     
     state = {
         loading:true,
         dbs: [],
         timeStamp: [],
         zoomingData:{args:0,y1:0},
         areas:{risk:"None",area: 0},
-        timesOfConcern:{startTimeCon:0,endTimeCon:0}
+        timesOfConcern:{startTimeCon:0,endTimeCon:0},
+        
     };
 
     async componentDidMount(){
+
+        console.log({passDate})
         const url = "http://127.0.0.1:8000/room/1/";
         const response = await fetch(url);
         const data =  await response.json();
@@ -246,6 +252,9 @@ export default class FetchDataTwo extends React.Component {
     render() {
        return(
         <>
+        <div>
+           
+        </div>
         </>
         )
     }

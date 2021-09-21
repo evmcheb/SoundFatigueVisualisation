@@ -27,6 +27,7 @@ import RangeSelector, {
   Aggregation as RsAggregation,
   Behavior
 } from 'devextreme-react/range-selector';
+import TheTimePicker from './TheTimePicker.js';
 
 class MyRangeSlider extends React.Component {
 
@@ -45,7 +46,9 @@ class MyRangeSlider extends React.Component {
 
   render() {
     return (
+       
       <div id="chart-demo">
+           <TheTimePicker/>
            <div className="dx-field">
             <div className="dx-field-label">Start value</div>
             <div className="dx-field-value">

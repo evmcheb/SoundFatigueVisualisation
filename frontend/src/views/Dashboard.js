@@ -50,7 +50,7 @@ function Dashboard(props) {
     <>
     
     <div>
-      
+    <FetchDataTwo/>
     
       </div>
       

@@ -13,6 +13,8 @@ import routes from "routes.js";
 
 import logo from "assets/img/react-logo.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
+import FetchDataTwo from "../FetchData/FetchDataTwo";
+import MyRangeSlider from "../variables/MyRangeSlider";
 
 var ps;
 
@@ -85,6 +87,7 @@ function Admin(props) {
     return "Brand";
   };
   return (
+    
     <BackgroundColorContext.Consumer>
       {({ color, changeColor }) => (
         <React.Fragment>
@@ -99,7 +102,7 @@ function Admin(props) {
               }}
               toggleSidebar={toggleSidebar}
             />
-           \
+           
             <div className="main-panel" ref={mainPanelRef} data={color}>
               <AdminNavbar
                 brandText={getBrandText(location.pathname)}

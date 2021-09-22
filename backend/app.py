@@ -6,6 +6,7 @@ from db import engine
 import models
 from sqlmodel import Field, SQLModel, Session, select, update
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 SQLModel.metadata.create_all(engine)
 
@@ -63,7 +64,7 @@ def query_sensor(room_id: int, start_time: int, end_time: int):
 
 
 @app.get("/notification_history/{room_id}/")
-def query_sensor(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
+def query_nots(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
     with Session(engine) as session:
         Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
         ret = []
@@ -75,6 +76,9 @@ def query_sensor(room_id: int, start_time: int = time.time() - 5 * 60, end_time:
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
             rs_series["notifications"] = []
 
+            rs_series["max_db"] = max_db
+            rs_series["max_pitch"] = max_pitch
+
             for item in rs.Samples:
                 if json.loads(item.MeasurementsJSON)['dB'] > max_db and item.NotificationSeen:
                     rs_series["notifications"].append({"time": item.Timestamp, "msg": "High decibal warning"})
@@ -85,3 +89,22 @@ def query_sensor(room_id: int, start_time: int = time.time() - 5 * 60, end_time:
 
             ret.append(rs_series)
         return ret
+
+
+class NotificationLimits(BaseModel):
+    max_db: int
+    max_pitch: int
+
+@app.post("/set_notifications/{room_id}/")
+def query_update_nots(room_id: int, limits: NotificationLimits):
+
+    max_db = limits["max_db"]
+    max_pitch = limits["max_pitch"]
+    print(max_db, max_pitch)
+
+    with Session(engine) as session:
+
+        session.exec(update(models.Room).where(models.Room.ID == room_id).values(MaxDB=max_db, MaxPitch=max_pitch))
+        session.commit()
+        
+        return 1

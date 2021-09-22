@@ -10,6 +10,10 @@ const FetchData = (type = 1) => {
     if(type === 2){
         url = `http://127.0.0.1:8000/notification_history/1`;
     }
+
+    if(!Number.isInteger(type)){
+        url = type;
+    }
     
     const fetchData = async (url) => {
         console.log("Fetching data")

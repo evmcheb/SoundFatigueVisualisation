@@ -2,6 +2,8 @@ import React from "react";
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from "react-notification-alert";
 import FetchData from "FetchData/FetchData";
+import axios from "axios";
+
 
 
 // reactstrap components
@@ -19,12 +21,12 @@ import {
 } from "reactstrap";
 
 
+
 function Notifications() {
 
 
   //Gather notification history
   var data = FetchData(2);
-  console.log(data);
 
   function timestampToHMS(timestamp) {
     var date = new Date(timestamp);
@@ -38,7 +40,9 @@ function Notifications() {
 
   var nots = data[0]["notifications"];
 
-  console.log(nots);
+  var max_db = data[0]["max_db"];
+  var max_pitch = data[0]["max_pitch"];
+
 
   var notifications = [];
 
@@ -62,7 +66,35 @@ function Notifications() {
   }
 
 
+  function setNots(){
 
+      console.log(max_db, max_pitch);
+
+      var url = `http://127.0.0.1:8000/set_notifications/1/`;
+
+      /*fetch(url, {
+        method: "POST"
+
+      }).then(function(response){
+        console.log(response);
+      });*/
+
+      data = { 
+          MaxDB: max_db.toString(),
+          MaxPitch: max_pitch.toString()
+      }
+
+      axios.post(url, data)
+          .then(response => (console.log(response)))
+  }
+
+  function updateMaxDB(event){
+      max_db = event.target.value;
+  }
+
+  function updateMaxPitch(event){
+      max_pitch = event.target.value;
+  }
 
 
 
@@ -115,21 +147,45 @@ function Notifications() {
         <Row>
           <Col>
             <Card>
+                <CardHeader>
+                  <CardTitle tag="h4">Configuration</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div style={{display: "flex", flexDirection:"row"}}>
+                    <table>
+                      <tr>
+                        <td style={{padding: "15px"}}>
+                          Notify me if decibals exceed:
+                        </td>
+                        <td>
+                            <input onChange={updateMaxDB} type="number" defaultValue={max_db}></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{padding: "15px"}}>
+                          Notify me if the pitch exceeds:
+                        </td>
+                        <td>
+                            <input onChange={updateMaxPitch} type="number" defaultValue={max_pitch}></input>
+                        </td>
+                      </tr>
+                    </table>
+                    <div style={{padding: "15px", textAlign: "center", minHeight:"100%"}}>
+                      <button onClick={setNots} style={{minHeight: "100%", padding: "15px", backgroundColor: "rgba(0, 0, 0, 0.2)", color: "white", border: "1px solid black", borderRadius: "15%"}}>Save</button>
+                    </div>
+                  </div>
+                </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
               <CardHeader>
                 <CardTitle tag="h4">Notification History</CardTitle>
               </CardHeader>
               <CardBody>
                 { notifications }
-              </CardBody>
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Placeholder</CardTitle>
-              </CardHeader>
-              <CardBody>
-                This is a placeholder.
               </CardBody>
             </Card>
           </Col>
@@ -202,41 +258,6 @@ function Notifications() {
                   </span>
                 </UncontrolledAlert>
               </CardBody>
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">Configuration</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <div>
-                    <table>
-                      <tr>
-                        <td style={{padding: "15px"}}>
-                          Notify me if decibals exceed:
-                        </td>
-                        <td>
-                            <input type="number" value="0"></input>
-                        </td>
-                        <td>
-                            <input type="button" value="set"></input>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style={{padding: "15px"}}>
-                          Notify me if the pitch exceeds:
-                        </td>
-                        <td>
-                            <input type="number" value="0"></input>
-                        </td>
-                        <td>
-                            <input type="button" value="set"></input>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </CardBody>
             </Card>
           </Col>
           <Col md="12">

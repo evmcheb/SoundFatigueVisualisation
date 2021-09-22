@@ -40,7 +40,7 @@ def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
             rs_series["notifications"] = []
 
             for item in rs.Samples:
-                if json.loads(item.MeasurementsJSON)['dB'] > max_db and not item.NotificationSeen:
+                if json.loads(item.MeasurementsJSON)['dB'] > max_db:
                     rs_series["notifications"].append({"time": item.Timestamp, "msg": "High decibal warning"})
 
                     session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(NotificationSeen=True))

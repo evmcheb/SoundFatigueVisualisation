@@ -29,55 +29,14 @@ function MainPage() {
         <div className="content">
             
             <div>
-            <Col lg="4">
             <Row>
+            <Col lg="4">
 
 
+                
                 <Card className="card-chart">
                 <CardHeader>
-                    <h3 >Room1</h3>
-                    <CardTitle tag="h3">
-                        {/* LINK TO room visualisation here */}
-                    <i > LINK</i>
-                    </CardTitle>
-                </CardHeader>
-                <CardBody>
-                    <div className="chart-area">
-                    {/*  DISPLAY GAUGE HERE */}
-                    </div>
-                </CardBody>
-                </Card>
-                <Card className="card-chart">
-                <CardHeader>
-                    <h3 >Room1</h3>
-                    <CardTitle tag="h3">
-                        {/* LINK TO room visualisation here */}
-                    <i > LINK</i>
-                    </CardTitle>
-                </CardHeader>
-                <CardBody>
-                    <div className="chart-area">
-                    {/*  DISPLAY GAUGE HERE */}
-                    </div>
-                </CardBody>
-                </Card>
-                <Card className="card-chart">
-                <CardHeader>
-                    <h3 >Room1</h3>
-                    <CardTitle tag="h3">
-                        {/* LINK TO room visualisation here */}
-                    <i > LINK</i>
-                    </CardTitle>
-                </CardHeader>
-                <CardBody>
-                    <div className="chart-area">
-                    {/*  DISPLAY GAUGE HERE */}
-                    </div>
-                </CardBody>
-                </Card>
-                <Card className="card-chart">
-                <CardHeader>
-                    <h3 >Room1</h3>
+                    <h3 >Room 1</h3>
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
                     <i > LINK</i>
@@ -91,8 +50,263 @@ function MainPage() {
                 </Card>
 
 
-                </Row>
+                
             </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 2</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 3</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            </Row>
+            </div>
+            <div>
+            <Row>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 4</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 5</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 6</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            </Row>
+            </div>
+            <div>
+            <Row>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 7</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 8</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 9</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            </Row>
+            </div>
+            <div>
+            <Row>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 10</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 11</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            <Col lg="4">
+
+
+                
+                <Card className="card-chart">
+                <CardHeader>
+                    <h3 >Room 12</h3>
+                    <CardTitle tag="h3">
+                        {/* LINK TO room visualisation here */}
+                    <i > LINK</i>
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <div className="chart-area">
+                    {/*  DISPLAY GAUGE HERE */}
+                    </div>
+                </CardBody>
+                </Card>
+
+
+                
+            </Col>
+            </Row>
             </div>
             
         </div>

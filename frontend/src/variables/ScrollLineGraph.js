@@ -34,7 +34,7 @@ class ScrollLineGraph extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),2000)
+          }.bind(this),500)
           
           
           
@@ -52,6 +52,9 @@ class ScrollLineGraph extends React.Component {
                 console.log("cunt")
                 this.setState({data: {zoomingData}});
                  
+            }
+            if(done==-1){
+                this.componentDidMount();
             }
         return (
         

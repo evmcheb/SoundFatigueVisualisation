@@ -1,6 +1,5 @@
 import React from 'react';
-import { dataSource } from './data.js';
-import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour} from "../FetchData/FetchDataTwo";
+import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchDataTwo";
 import {NumberBox} from 'devextreme-react/number-box';
 import Chart, {
   Series,
@@ -34,7 +33,8 @@ class MyRangeSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      data: {zoomingData},
+      render:false,
       startValue: 0,
       endValue: 0,
       visualRange: {},
@@ -44,9 +44,32 @@ class MyRangeSlider extends React.Component {
 
   }
 
-  render() {
-    return (
-       
+
+  componentDidMount(){
+    
+      setTimeout(function(){
+          this.setState({render:true})
+      }.bind(this),500)
+  }
+
+     
+
+render(){
+  
+  let renderContainer = false
+  if(this.state.render) {
+      console.log({done})
+      if(done==1 && this.state.data.zoomingData==0){
+          
+          this.setState({data: {zoomingData}});
+           
+      }
+      if(done==-1){
+          this.componentDidMount();
+      }
+  return (
+    
+    <>
       <div id="chart-demo">
            <TheTimePicker/>
            <div className="dx-field">
@@ -62,7 +85,7 @@ class MyRangeSlider extends React.Component {
             </div>
           </div>
           <RangeSelector
-          dataSource={zoomingData}
+          dataSource={this.state.data.zoomingData}
           
           start={this.updateVisualRange}
           end={this.updateVisualRange}
@@ -104,7 +127,7 @@ class MyRangeSlider extends React.Component {
         <Chart
         id="chart"
         palette="Material"
-        dataSource={zoomingData}>
+        dataSource={this.state.data.zoomingData}>
         <Series argumentField="arg" valueField="y1" >
             <Aggregation enabled={true} />
         </Series>
@@ -128,8 +151,17 @@ class MyRangeSlider extends React.Component {
         <Legend visible={false} />
       </Chart>
       </div>
-    );
-  }
+        </>
+      );
+    }
+   
+     
+    return (
+        renderContainer //Render the dom elements, or, when this.state == false, nothing.
+        
+      )
+  
+}
 
   updateVisualRange(e) {
     

@@ -9,7 +9,7 @@ import PieChart, {
   Font,
 } from 'devextreme-react/pie-chart';
 //
-import FetchDataTwo, { areas } from "../FetchData/FetchDataTwo";
+import { areas,done } from "../FetchData/FetchDataTwo";
 ///
 class MyPieChart extends React.Component {
   constructor(props) {
@@ -17,11 +17,38 @@ class MyPieChart extends React.Component {
 
     this.pointClickHandler = this.pointClickHandler.bind(this);
     this.legendClickHandler = this.legendClickHandler.bind(this);
+    this.state = {
+      data: {areas},
+      render:false
+    };
   }
+  
 
-  render() {
-    return (<>
-      <FetchDataTwo/>
+  componentDidMount(){
+    
+      setTimeout(function(){
+          this.setState({render:true})
+      }.bind(this),600)
+      
+      
+      
+  }
+ 
+
+  render(){
+    
+    let renderContainer = false
+    if(this.state.render) {
+        console.log({done})
+        if(done==1 && this.state.data.areas==0){
+            
+            this.setState({data: {areas}});
+             
+        }
+        if(done==-1){
+            this.componentDidMount();
+        }
+    return (
       <PieChart
         id="pie"
         dataSource={areas}
@@ -44,9 +71,19 @@ class MyPieChart extends React.Component {
           <Font size={28} color="white" />
         </Title>
       </PieChart>
-      </>
-    );
+        );
+      }
+     
+       
+      return (
+          renderContainer //Render the dom elements, or, when this.state == false, nothing.
+          
+        )
+    
   }
+     
+        
+    
 
   pointClickHandler(e) {
     this.toggleVisibility(e.target);

@@ -20,7 +20,7 @@ class AvgGauge extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),500)
+          }.bind(this),700)
           
           
           

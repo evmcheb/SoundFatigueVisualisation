@@ -8,8 +8,9 @@ var startTime =0;
 var avgDecibel = 0;
 var areas =[];
 var averageDecibelColour = '';
-var maxDecibel = Number.MIN_VALUE;
+var maxDecibel = -Number.MIN_VALUE;
 var maxDbTime = 0;
+var maxValues = [];
 var timesOfConcern = [];
 var done = -1;
 export default class FetchDataTwo extends React.Component {
@@ -22,8 +23,8 @@ export default class FetchDataTwo extends React.Component {
         zoomingData:{args:0,y1:0},
         areas:{risk:"None",area: 0},
         timesOfConcern:{startTimeCon:0,endTimeCon:0},
-        done:-1
-        
+        done:-1,
+        maxValues:{x:0,y:0}
     };
     
     
@@ -64,6 +65,7 @@ export default class FetchDataTwo extends React.Component {
         var unSafeInt = 0;
         zoomingData = [];
         areas = [];
+        maxValues = [];
         //{ arg: 10, y1: -12 },
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
@@ -105,8 +107,10 @@ export default class FetchDataTwo extends React.Component {
             
             //Getting max dB value
             if(decibels>maxDecibel){
+              
                 maxDecibel = decibels;
                 maxDbTime = timestamp;
+               
             }        
           }
           
@@ -231,6 +235,8 @@ export default class FetchDataTwo extends React.Component {
             var minutes = "0" + date.getMinutes();
             var seconds = "0" + date.getSeconds();     
             maxDbTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+            maxValues.push({x:maxDbTime, y:maxDecibel});
+            
 
           areas.push({risk:"Safe",area:safeInt});
           areas.push({risk:"Dangerous",area:dangerousInt});
@@ -257,6 +263,8 @@ export default class FetchDataTwo extends React.Component {
         }
         done = 1;
 
+        console.log("RIGHT HERE",maxValues)
+         
 
           this.setState({zoomingData})
           this.setState({lastTime})
@@ -267,8 +275,8 @@ export default class FetchDataTwo extends React.Component {
           this.setState({maxDbTime})
           this.setState({timesOfConcern})
           this.setState({done})
+          this.setState({maxValues})
 
-          
          
           
     }
@@ -297,5 +305,6 @@ export{
     maxDecibel,
     maxDbTime,
     timesOfConcern,
-    done
+    done,
+    maxValues
 };

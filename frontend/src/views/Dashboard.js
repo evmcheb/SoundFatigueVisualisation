@@ -39,6 +39,7 @@ import AvgGauge from "../variables/AvgGauge";
 import AccordionMoreData from "../variables/AccordionMoreData";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
 
+import MaxGuage from "../variables/MaxGuage";
 
 function Dashboard(props) {
 
@@ -92,13 +93,14 @@ function Dashboard(props) {
                   <AvgGauge/>
                 </div>
                 
-                <div style={{padding: "25px"}} >
-                  <h2>Maximum Decibels</h2>
-                  <div className = "maxDbDisplay"style={{fontSize: "25px"}} >
-                    {maxDecibel} db <br/>
-                    Occured at: {maxDbTime}
-                  </div>
+                <div  >
+                <MaxGuage/>
+                 
+                 
+                  
                 </div>
+                
+                
               </Row>
               
               </div>

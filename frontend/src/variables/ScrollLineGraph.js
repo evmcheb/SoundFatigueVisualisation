@@ -44,12 +44,12 @@ class ScrollLineGraph extends React.Component {
       
 
       render(){
-        console.log("hi",this.state.data.zoomingData)
+        
         let renderContainer = false
         if(this.state.render) {
             console.log({done})
             if(done==1 && this.state.data.zoomingData==0){
-                console.log("cunt")
+                
                 this.setState({data: {zoomingData}});
                  
             }

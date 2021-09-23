@@ -93,10 +93,11 @@ function Admin(props) {
         <React.Fragment>
           <div className="wrapper">
             {/*   TOGGLES SIDEBAR HERE */}
+            
             <Sidebar
               routes={routes}
               logo={{
-                outterLink: "http://localhost:3000/admin/dashboard",
+                outterLink: "http://localhost:3000/admin/mainpage",
                 text: "Sound 'n Fatigue",
                 imgSrc: logo,
               }}

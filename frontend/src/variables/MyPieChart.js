@@ -9,7 +9,7 @@ import PieChart, {
   Font,
 } from 'devextreme-react/pie-chart';
 //
-import { areas } from "../FetchData/FetchDataTwo";
+import FetchDataTwo, { areas } from "../FetchData/FetchDataTwo";
 ///
 class MyPieChart extends React.Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class MyPieChart extends React.Component {
   }
 
   render() {
-    return (
+    return (<>
+      <FetchDataTwo/>
       <PieChart
         id="pie"
         dataSource={areas}
@@ -43,6 +44,7 @@ class MyPieChart extends React.Component {
           <Font size={28} color="white" />
         </Title>
       </PieChart>
+      </>
     );
   }
 

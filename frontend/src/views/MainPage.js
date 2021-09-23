@@ -1,6 +1,7 @@
 // Main Page displaying the cards of all rooms iwth their average data
-
+///
 import React from 'react'
+import { render } from 'react-dom';
 import {
     Button,
     ButtonGroup,
@@ -21,11 +22,17 @@ import {
     UncontrolledTooltip,
   } from "reactstrap";
 
+import FetchDataTwo, { loading } from '../FetchData/FetchDataTwo';
+import AvgGauge from '../variables/AvgGauge';
+
 
 
 function MainPage() {
+    
     return (
+        
         <>
+        
         <div className="content">
             
             <div>
@@ -37,19 +44,21 @@ function MainPage() {
                 <Card className="card-chart">
                 <CardHeader>
                     <h3 >Room 1</h3>
+                    
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
-                    <i > LINK</i>
+                       <a href ={'/Dashboard'} > Link</a>
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                    
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                    <AvgGauge/>
+                    
                 </CardBody>
                 </Card>
 
-
+                
                 
             </Col>
             <Col lg="4">

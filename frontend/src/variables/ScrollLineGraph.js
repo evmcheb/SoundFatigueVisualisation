@@ -1,8 +1,8 @@
 import React from 'react';
 //import { zoomingData } from './data.js';
-import { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour} from "../FetchData/FetchDataTwo";
-////////////////////////////////////////././////////////
-
+import FetchDataTwo, { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchDataTwo";
+////////////////////////////////////////././/////////////
+import Button from 'react-bootstrap/Button'
 import Chart, {
   ArgumentAxis,
   Series,
@@ -16,18 +16,54 @@ import Chart, {
   Scale
 } from 'devextreme-react/chart';
 
+///
 //if i want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
-    
-    
-  render() {
-    return (
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: {zoomingData},
+          render:false
+        };
+        this.handleChange = this.handleChange.bind(this);
+        
+      }
+//
+      componentDidMount(){
+        
+          setTimeout(function(){
+              this.setState({render:true})
+          }.bind(this),2000)
+          
+          
+          
+      }
+     
+
+      
+
+      render(){
+        console.log("hi",this.state.data.zoomingData)
+        let renderContainer = false
+        if(this.state.render) {
+            console.log({done})
+            if(done==1 && this.state.data.zoomingData==0){
+                console.log("cunt")
+                this.setState({data: {zoomingData}});
+                 
+            }
+        return (
+        
+        <>
+        
+        
       <Chart
         
         id="chart"
         palette="Material"
-        dataSource={zoomingData}>
+        dataSource= {this.state.data.zoomingData}
+        >
         <Series argumentField="arg" valueField="y1" />
         
         <ArgumentAxis  >
@@ -95,10 +131,35 @@ class ScrollLineGraph extends React.Component {
           </Crosshair>
         <Legend visible={false} />
       </Chart>
+      
+    <div>
+    <Button onClick={this.handleChange}>
+    </Button>
 
+        {lastTime}
+        
+    </div>
+    
+    </>
+    
     );
-  }
+    }
+   
+     
+    return (
+        renderContainer //Render the dom elements, or, when this.state == false, nothing.
+        
+      )
+  
 }
+    handleChange(e) {
+        this.setState({data: {zoomingData}});
+        console.log("yo",this.state.data)
+        
+      }
+      
+  }
+
 
 export default ScrollLineGraph;
 ////

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import TheDateBox, { passDate } from '../variables/TheDateBox';
 ///
@@ -10,9 +11,9 @@ var averageDecibelColour = '';
 var maxDecibel = Number.MIN_VALUE;
 var maxDbTime = 0;
 var timesOfConcern = [];
-
+var done = -1;
 export default class FetchDataTwo extends React.Component {
-    
+    intervalID;
      
     state = {
         loading:true,
@@ -21,19 +22,30 @@ export default class FetchDataTwo extends React.Component {
         zoomingData:{args:0,y1:0},
         areas:{risk:"None",area: 0},
         timesOfConcern:{startTimeCon:0,endTimeCon:0},
+        done:-1
         
     };
     
-    async componentDidMount(){
+    
+    componentDidMount(){
 
-        console.log({passDate})
+        this.getData();
+    }
+
+    componetWillUnmount(){
+        clearTimeout(this.intervalID);
+    }
+
+    getData = async() =>{
+
         
         
         var url = "http://127.0.0.1:8000/room/1/";
         //url = url.concat(passDate);
-        console.log(url)
+        
         const response = await fetch(url);
         const data =  await response.json();
+        this.intervalID = setTimeout(this.getData.bind(this), 30000);//refresh data every 30 seconds
         this.setState(prevState => ({
             dbs: [...prevState.dbs, data[0].dB]
         }))
@@ -41,6 +53,7 @@ export default class FetchDataTwo extends React.Component {
            timeStamp: [...prevState.timeStamp, data[0].x]
         }))
         this.setState({loading:false})
+
         var amountDecibels = 0;
 
         
@@ -49,6 +62,8 @@ export default class FetchDataTwo extends React.Component {
         var dangerousInt=0;
         var threateningInt=0;
         var unSafeInt = 0;
+        zoomingData = [];
+        areas = [];
         //{ arg: 10, y1: -12 },
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
@@ -83,7 +98,7 @@ export default class FetchDataTwo extends React.Component {
                startTime = timestamp;
             }
            
-
+            
             zoomingData.push({arg:timestamp, y1:decibels});
             
 
@@ -209,7 +224,7 @@ export default class FetchDataTwo extends React.Component {
           }
 
 
-            console.log(timesOfConcern)
+           
             //COnverting maxDbTime to hour:min:sec
             var date = new Date(maxDbTime * 1000);
             var hours = date.getHours();
@@ -240,7 +255,7 @@ export default class FetchDataTwo extends React.Component {
         else if(avgDecibel>=113){
             averageDecibelColour ="red";
         }
-
+        done = 1;
 
 
           this.setState({zoomingData})
@@ -251,16 +266,24 @@ export default class FetchDataTwo extends React.Component {
           this.setState({maxDecibel})
           this.setState({maxDbTime})
           this.setState({timesOfConcern})
+          this.setState({done})
+
+          
+         
+          
     }
 
     render() {
+       
+        
        return(
         <>
         <div>
-          
+          {lastTime}
         </div>
         </>
         )
+       
     }
 }
 
@@ -273,5 +296,6 @@ export{
     averageDecibelColour,
     maxDecibel,
     maxDbTime,
-    timesOfConcern
+    timesOfConcern,
+    done
 };

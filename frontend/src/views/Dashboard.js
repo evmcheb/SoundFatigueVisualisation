@@ -2,7 +2,7 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts//
-/////
+/////////
 import ScrollLineGraph from "variables/ScrollLineGraph"
 // reactstrap components
 import {
@@ -26,7 +26,7 @@ import {
 } from "reactstrap";
 
 
-import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime} from "../FetchData/FetchDataTwo";
+import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime, lastTime} from "../FetchData/FetchDataTwo";
 
 import AvgValue from "../variables/AvgValue";
 
@@ -41,17 +41,15 @@ import TheDateBox, { passDate} from "../variables/TheDateBox";
 
 
 function Dashboard(props) {
-  
-
-
 
 
   return (
     <>
     
     <div>
-    <FetchDataTwo/>
-    
+      {/* pass in what room was clicked?*/}
+      <FetchDataTwo/>
+     
       </div>
       
       <div className="content">
@@ -63,6 +61,7 @@ function Dashboard(props) {
                 <Row>
                   <Col className="text-left" sm="6">
                     <h4 >Room A</h4>
+                    {lastTime}
                     <TheDateBox/>
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>

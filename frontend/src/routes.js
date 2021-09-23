@@ -4,14 +4,16 @@ import Notifications from "views/Notifications.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
+import FetchDataTwo from "./FetchData/FetchDataTwo";
 import MainPage from "./views/MainPage";
 
 var routes = [
+  
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/mainpage",
+    name: "Main Room Page",
     icon: "tim-icons icon-chart-pie-36",
-    component: Dashboard,
+    component: MainPage,
     layout: "/admin",
   },
   {
@@ -22,11 +24,13 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/mainpage",
-    name: "Main Room Page",
+    path: "/dashboard",
+    name: "Dashboard",
     icon: "tim-icons icon-chart-pie-36",
-    component: MainPage,
+    component: Dashboard,
     layout: "/admin",
-  }
+  },
+  
+  
 ];
 export default routes;

@@ -6,6 +6,7 @@ class AvgGauge extends React.Component {
 
   render() {
     return (
+        
       <CircularGauge
         id="gauge"
         value={avgDecibel}

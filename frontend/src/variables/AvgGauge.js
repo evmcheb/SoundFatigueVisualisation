@@ -1,15 +1,52 @@
 import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
-import { avgDecibel,averageDecibelColour,maxDecibel} from "../FetchData/FetchDataTwo";
+import { avgDecibel,averageDecibelColour,maxDecibel,done} from "../FetchData/FetchDataTwo";
 
 class AvgGauge extends React.Component {
 
-  render() {
+  
+   
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: {avgDecibel},
+          render:false
+        };
+        
+        
+      }
+
+      componentDidMount(){
+        
+          setTimeout(function(){
+              this.setState({render:true})
+          }.bind(this),500)
+          
+          
+          
+      }
+     
+
+      render(){
+        
+        let renderContainer = false
+        if(this.state.render) {
+            console.log({done})
+            if(done==1 && this.state.data.avgDecibel==0){
+                
+                this.setState({data: {avgDecibel}});
+                 
+            }
+            if(done==-1){
+                this.componentDidMount();
+            }
+
     return (
         
       <CircularGauge
         id="gauge"
-        value={avgDecibel}
+        value={this.state.data.avgDecibel}
+        
       >
         <Scale startValue={0} endValue={maxDecibel} tickInterval={10}>
           <Label useRangeColors={true} />
@@ -27,7 +64,17 @@ class AvgGauge extends React.Component {
         <Export enabled={false} />
       </CircularGauge>
     );
-  }
+}
+
+ 
+return (
+    renderContainer //Render the dom elements, or, when this.state == false, nothing.
+    
+  )
+
+}
+
+  
 }
 
 export default AvgGauge;

@@ -20,6 +20,12 @@ import Chart, {
 //if i want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
+
+
+    intervalID;
+  
+    
+   
     constructor(props) {
         super(props);
         this.state = {
@@ -40,7 +46,10 @@ class ScrollLineGraph extends React.Component {
           
       }
      
+    
 
+    
+    
       
 
       render(){
@@ -60,7 +69,13 @@ class ScrollLineGraph extends React.Component {
         
         <>
         
+       
+    <span><Button onClick={this.handleChange}> Update Graph 
+    </Button></span>
+
+      
         
+   
       <Chart
         
         id="chart"
@@ -135,14 +150,7 @@ class ScrollLineGraph extends React.Component {
         <Legend visible={false} />
       </Chart>
       
-    <div>
-    <Button onClick={this.handleChange}>
-    </Button>
-
-        {lastTime}
-        
-    </div>
-    
+   
     </>
     
     );

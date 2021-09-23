@@ -22,9 +22,6 @@ import Chart, {
 class ScrollLineGraph extends React.Component {
 
 
-    intervalID;
-  
-    
    
     constructor(props) {
         super(props);
@@ -35,7 +32,7 @@ class ScrollLineGraph extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         
       }
-//
+
       componentDidMount(){
         
           setTimeout(function(){
@@ -46,11 +43,6 @@ class ScrollLineGraph extends React.Component {
           
       }
      
-    
-
-    
-    
-      
 
       render(){
         
@@ -70,7 +62,7 @@ class ScrollLineGraph extends React.Component {
         <>
         
        
-    <span><Button onClick={this.handleChange}> Update Graph 
+    <span><Button onClick={this.handleChange} style={{padding: "10px"}}> Update Graph 
     </Button></span>
 
       

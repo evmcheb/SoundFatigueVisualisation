@@ -62,7 +62,7 @@ function Dashboard(props) {
                 <Row>
                   <Col className="text-left" sm="6">
                     <h4 >Room A</h4>
-                    {lastTime}
+                    
                     <TheDateBox/>
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>

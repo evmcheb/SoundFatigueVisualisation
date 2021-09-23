@@ -1,7 +1,45 @@
 import React from 'react'
-import { timesOfConcern } from '../FetchData/FetchDataTwo'
+import { timesOfConcern ,done} from '../FetchData/FetchDataTwo'
 import { Dropdown} from 'react-bootstrap';
-function TimesConcernDisp() {
+
+class TimesConcernDisp extends React.Component {
+
+
+   
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: {timesOfConcern},
+          render:false
+        };
+       
+        
+      }
+
+      componentDidMount(){
+        
+          setTimeout(function(){
+              this.setState({render:true})
+          }.bind(this),500)
+          
+          
+          
+      }
+     
+
+      render(){
+        
+        let renderContainer = false
+        if(this.state.render) {
+            console.log({done})
+            if(done==1 && this.state.data.timesOfConcern==0){
+                
+                this.setState({data: {timesOfConcern}});
+                 
+            }
+            if(done==-1){
+                this.componentDidMount();
+            }
     return (
         
         <div>
@@ -14,7 +52,7 @@ function TimesConcernDisp() {
                 <Dropdown.Item href="#/action-1">Example</Dropdown.Item>
  
             
-            {timesOfConcern.map((itemDetail,index)=>{
+            {this.state.data.timesOfConcern.map((itemDetail,index)=>{
                 return(
                     <Dropdown.Item>
                     {itemDetail.startTimeCon} - {itemDetail.endTimeCon}
@@ -24,7 +62,20 @@ function TimesConcernDisp() {
             </Dropdown.Menu>
             </Dropdown>
         </div>
-    )
+);
 }
 
-export default TimesConcernDisp
+ 
+return (
+    renderContainer //Render the dom elements, or, when this.state == false, nothing.
+    
+  )
+
+}
+
+  
+}
+
+
+export default TimesConcernDisp;
+

@@ -32,7 +32,7 @@ function MainPage() {
     return (
         
         <>
-        
+        <FetchDataTwo/>
         <div className="content">
             
             <div>

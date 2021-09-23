@@ -1,5 +1,5 @@
 import React from 'react'
-import { timesOfConcern ,done} from '../FetchData/FetchDataTwo'
+import { timesOfConcern ,done, isOkay} from '../FetchData/FetchDataTwo'
 import { Dropdown} from 'react-bootstrap';
 
 class TimesConcernDisp extends React.Component {
@@ -31,15 +31,17 @@ class TimesConcernDisp extends React.Component {
         
         let renderContainer = false
         if(this.state.render) {
-            console.log({done})
-            if(done==1 && this.state.data.timesOfConcern==0){
+            
+            if(isOkay ==1 && done==1 && this.state.data.timesOfConcern==0){
                 
                 this.setState({data: {timesOfConcern}});
                  
             }
-            if(done==-1){
+            
+            if(done==-1 ){
                 this.componentDidMount();
             }
+
     return (
         
         <div>

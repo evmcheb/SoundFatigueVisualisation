@@ -29,8 +29,9 @@ count =0
 def sound_generator(input,count,saved_random):
     if(input == "quietRoom"):
         
-        
+        #prob of loud bang
         loud_bang = random.randint(1, 10000)
+        print("the loud bang ",loud_bang)
         if(saved_random == 0):
             randomLenOfBang = random.randint(0,300)
             # Say a 0.1% chance of there being a painful noise 
@@ -40,7 +41,18 @@ def sound_generator(input,count,saved_random):
             count += 1
             if(saved_random == 0):
                 saved_random = randomLenOfBang
-            line = round(random.uniform(50.0, 150.0),1)
+            
+            random_prob = random.randint(1, 100)
+            # 5% to be above 120
+            if(random_prob>=95):
+                db_value = random.randint(120,150)
+            # 10% to be above 120
+            elif(random_prob>=85 and random_prob<95):
+                db_value = random.randint(100,120)
+            else:
+                db_value = random.randint(50,100)
+                
+            line = round(db_value,1)
         else:
             line = round(random.uniform(30.0, 50.0),1) 
             count =0

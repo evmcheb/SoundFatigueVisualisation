@@ -13,6 +13,8 @@ var maxDbTime = 0;
 var maxValues = [];
 var timesOfConcern = [];
 var done = -1;
+var isOkay = -1;
+var worker = [];
 export default class FetchDataTwo extends React.Component {
     intervalID;
      
@@ -20,11 +22,14 @@ export default class FetchDataTwo extends React.Component {
         loading:true,
         dbs: [],
         timeStamp: [],
-        zoomingData:{args:0,y1:0},
+        zoomingData:{args:0,y1:0,},
         areas:{risk:"None",area: 0},
-        timesOfConcern:{startTimeCon:0,endTimeCon:0},
+        worker:{worderId:-1,checkIn:0,checkOut:0},
+        timesOfConcern:{startTimeCon:0,endTimeCon:0,worker:0},
+
         done:-1,
-        maxValues:{x:0,y:0}
+        maxValues:{x:0,y:0},
+        isOkay:-1
     };
     
     
@@ -66,6 +71,7 @@ export default class FetchDataTwo extends React.Component {
         zoomingData = [];
         areas = [];
         maxValues = [];
+        
         //{ arg: 10, y1: -12 },
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
@@ -101,6 +107,9 @@ export default class FetchDataTwo extends React.Component {
             }
            
             
+
+
+
             zoomingData.push({arg:timestamp, y1:decibels});
             
 
@@ -226,6 +235,9 @@ export default class FetchDataTwo extends React.Component {
                 }
             }
           }
+          if(timesOfConcern.length>0){
+              isOkay =1;
+          }
 
 
            
@@ -263,9 +275,10 @@ export default class FetchDataTwo extends React.Component {
         }
         done = 1;
 
-        console.log("RIGHT HERE",maxValues)
-         
-
+        
+        worker.push({workerId:1,checkIn:1632428957,checkOut:1632429709})
+        zoomingData.push({timeSheet:worker});
+        console.log("RIGHT HERE",zoomingData)
           this.setState({zoomingData})
           this.setState({lastTime})
           this.setState({avgDecibel})
@@ -276,6 +289,7 @@ export default class FetchDataTwo extends React.Component {
           this.setState({timesOfConcern})
           this.setState({done})
           this.setState({maxValues})
+          this.setState({isOkay})
 
          
           
@@ -306,5 +320,6 @@ export{
     maxDbTime,
     timesOfConcern,
     done,
-    maxValues
+    maxValues,
+    isOkay
 };

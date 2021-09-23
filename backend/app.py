@@ -35,7 +35,7 @@ def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
             rs_series["x"] = [x.Timestamp for x in rs.Samples]
             #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
             data = [json.loads(x.MeasurementsJSON) for x in rs.Samples]
-            rs_series["dB"] = [x['dB'] for x in data ] 
+            rs_series["dB"] = [abs(x['dB']) for x in data ] 
             rs_series["pitch"] = [x["pitch"] for x in data]
             rs_series["notifications"] = []
 

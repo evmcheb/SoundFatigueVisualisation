@@ -4,6 +4,7 @@ import Notifications from "views/Notifications.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
+import MainPage from "./views/MainPage";
 
 var routes = [
   {
@@ -25,6 +26,13 @@ var routes = [
     name: "Notifications",
     icon: "tim-icons icon-bell-55",
     component: Notifications,
+    layout: "/admin",
+  },
+  {
+    path: "/mainpage",
+    name: "Main Room Page",
+    icon: "tim-icons icon-chart-pie-36",
+    component: MainPage,
     layout: "/admin",
   }
 ];

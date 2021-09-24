@@ -28,6 +28,7 @@ function Notifications() {
   //Gather notification history
   var data = FetchData(2);
 
+  
   function timestampToHMS(timestamp) {
     var date = new Date(timestamp);
     var hours = date.getHours();
@@ -67,8 +68,6 @@ function Notifications() {
 
 
   function setNots(){
-
-      console.log(max_db, max_pitch);
 
       var url = `http://127.0.0.1:8000/set_notifications/1/`;
 

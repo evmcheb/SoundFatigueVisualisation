@@ -46,3 +46,8 @@ class Sample(SQLModel, table=True):
     MeasurementsJSON: str
     NotificationSeen: bool = Field(default=False)
     RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")
+
+class User(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    FName: str
+    SName: str

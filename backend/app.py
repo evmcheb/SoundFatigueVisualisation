@@ -108,3 +108,20 @@ def query_update_nots(room_id: int, limits: NotificationLimits):
         session.commit()
         
         return 1
+
+
+@app.get("/users/")
+def query_users():
+    with Session(engine) as session:
+
+        ret = []
+        rs_series = {}
+        rs_series["users"] = []
+
+        for u in session.query(models.User).all():
+            newuser = {"ID": u.ID, "FName": u.FName, "SName": u.SName}
+            rs_series["users"].append(newuser)
+
+        ret.append(rs_series)
+
+        return ret

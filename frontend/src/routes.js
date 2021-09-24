@@ -3,10 +3,17 @@ import Icons from "views/Icons.js";
 import Notifications from "views/Notifications.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
-import UserProfile from "views/UserProfile.js";
+import Users from "views/Users.js";
 import MainPage from "./views/MainPage";
 
 var routes = [
+  {
+    path: "/mainpage",
+    name: "Main Room Page",
+    icon: "tim-icons icon-chart-pie-36",
+    component: MainPage,
+    layout: "/admin",
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -15,10 +22,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/userprofile",
-    name: "UserProfile",
-    icon: "tim-icons icon-chart-pie-36",
-    component: UserProfile,
+    path: "/users",
+    name: "Users",
+    icon: "tim-icons icon-single-02",
+    component: Users,
     layout: "/admin",
   },
   {
@@ -28,12 +35,5 @@ var routes = [
     component: Notifications,
     layout: "/admin",
   },
-  {
-    path: "/mainpage",
-    name: "Main Room Page",
-    icon: "tim-icons icon-chart-pie-36",
-    component: MainPage,
-    layout: "/admin",
-  }
 ];
 export default routes;

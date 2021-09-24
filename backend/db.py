@@ -2,7 +2,6 @@
 db.py
 Caleb Cheng
 24/08/2021
-
 The purpose of db.py is to provide a generic interface to allow 
 reading/writing to storage using an ORM wrapper.
 This means that any sort of database type (SQLite, Postgre, MySQL) 
@@ -18,7 +17,6 @@ from sqlalchemy.orm import sessionmaker
 
 engine = "sqlite:///../backend.db"
 
-# echo = True
-engine = create_engine(engine, connect_args={"check_same_thread":False})
+engine = create_engine(engine, connect_args={"check_same_thread":False}, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

@@ -3,7 +3,7 @@ Simulator API
 Caleb Cheng 23/08/21
 pull sample sound data from two different distributions
 To use
-  - pip install -r requirements.txt
+  - pip install requirements.txt
   - cd sim_api
   - uvicorn sim:app --reload
 """
@@ -29,9 +29,8 @@ count =0
 def sound_generator(input,count,saved_random):
     if(input == "quietRoom"):
         
-        #prob of loud bang
+        
         loud_bang = random.randint(1, 10000)
-        print("the loud bang ",loud_bang)
         if(saved_random == 0):
             randomLenOfBang = random.randint(0,300)
             # Say a 0.1% chance of there being a painful noise 
@@ -41,18 +40,7 @@ def sound_generator(input,count,saved_random):
             count += 1
             if(saved_random == 0):
                 saved_random = randomLenOfBang
-            
-            random_prob = random.randint(1, 100)
-            # 5% to be above 120
-            if(random_prob>=95):
-                db_value = random.randint(120,150)
-            # 10% to be above 120
-            elif(random_prob>=85 and random_prob<95):
-                db_value = random.randint(100,120)
-            else:
-                db_value = random.randint(50,100)
-                
-            line = round(db_value,1)
+            line = round(random.uniform(50.0, 150.0),1)
         else:
             line = round(random.uniform(30.0, 50.0),1) 
             count =0
@@ -70,12 +58,7 @@ db = SessionLocal()
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
-<<<<<<< HEAD
-people = db.query(models.Officer).all()
-
-=======
 saved_random = 0
->>>>>>> 1dcf2f93aaecc85fa102c70b24765c0eb7073172
 while True:
 
     for rs in room_sensors:
@@ -98,16 +81,14 @@ while True:
         newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
+
     time.sleep(1)
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> 1dcf2f93aaecc85fa102c70b24765c0eb7073172
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from datetime import datetime
@@ -163,7 +144,6 @@ doc = """Usage:
     - Period of 3 minute
     - centered around 1000Hz
     - amplitude of 100Hz
-
 /{room_id}/{sensor_id}/n
 - Returns {dB: , pitch: )
 - dB
@@ -174,7 +154,6 @@ doc = """Usage:
     - Normal distribution
     - centered around 1000Hz
     - s.d. of 200Hz
-
 - dB in decibels
 - pitch in Hz
 """

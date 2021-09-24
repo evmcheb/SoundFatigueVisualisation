@@ -41,6 +41,11 @@ const RoomCharts = () => {
         const fetchedData = await fetchData(url);
         if (isMounted) {
             setFetchedData(fetchedData);
+
+
+            console.log(fetchedData)
+
+            
         }
         return () => isMounted = false;
     }, []);
@@ -50,7 +55,6 @@ const RoomCharts = () => {
             setFetchedData(res)
         })
     }
-
     function timestampToHMS(timestamp) {
         var date = new Date(timestamp);
         var hours = date.getHours();

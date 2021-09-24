@@ -1,6 +1,10 @@
 import React from "react";
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from "react-notification-alert";
+import FetchData from "FetchData/FetchData";
+import axios from "axios";
+
+
 
 // reactstrap components
 import {
@@ -13,9 +17,86 @@ import {
   CardTitle,
   Row,
   Col,
+  CardColumns,
 } from "reactstrap";
 
+
+
 function Notifications() {
+
+
+  //Gather notification history
+  var data = FetchData(2);
+
+  
+  function timestampToHMS(timestamp) {
+    var date = new Date(timestamp);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    // Will display time in 10:30:23 format
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime
+  }
+
+  var nots = data[0]["notifications"];
+
+  var max_db = data[0]["max_db"];
+  var max_pitch = data[0]["max_pitch"];
+
+
+  var notifications = [];
+
+  if(nots !== undefined && nots.length > 0){
+    for(var i = 0; i < nots.length; i++){
+      notifications.push(
+      <UncontrolledAlert color="warning">
+        <span>
+          <b>Warning - </b>
+          { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
+        </span>
+      </UncontrolledAlert>)
+    }
+  }else{
+    notifications.push(
+      <span>
+        No notification history.
+      </span>
+    )
+
+  }
+
+
+  function setNots(){
+
+      var url = `http://127.0.0.1:8000/set_notifications/1/`;
+
+      /*fetch(url, {
+        method: "POST"
+
+      }).then(function(response){
+        console.log(response);
+      });*/
+
+      data = { 
+          MaxDB: max_db.toString(),
+          MaxPitch: max_pitch.toString()
+      }
+
+      axios.post(url, data)
+          .then(response => (console.log(response)))
+  }
+
+  function updateMaxDB(event){
+      max_db = event.target.value;
+  }
+
+  function updateMaxPitch(event){
+      max_pitch = event.target.value;
+  }
+
+
+
   const notificationAlertRef = React.useRef(null);
   const notify = (place) => {
     var color = Math.floor(Math.random() * 5 + 1);
@@ -62,6 +143,52 @@ function Notifications() {
         <div className="react-notification-alert-container">
           <NotificationAlert ref={notificationAlertRef} />
         </div>
+        <Row>
+          <Col>
+            <Card>
+                <CardHeader>
+                  <CardTitle tag="h4">Configuration</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <div style={{display: "flex", flexDirection:"row"}}>
+                    <table>
+                      <tr>
+                        <td style={{padding: "15px"}}>
+                          Notify me if decibals exceed:
+                        </td>
+                        <td>
+                            <input onChange={updateMaxDB} type="number" defaultValue={max_db}></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{padding: "15px"}}>
+                          Notify me if the pitch exceeds:
+                        </td>
+                        <td>
+                            <input onChange={updateMaxPitch} type="number" defaultValue={max_pitch}></input>
+                        </td>
+                      </tr>
+                    </table>
+                    <div style={{padding: "15px", textAlign: "center", minHeight:"100%"}}>
+                      <button onClick={setNots} style={{minHeight: "100%", padding: "15px", backgroundColor: "rgba(0, 0, 0, 0.2)", color: "white", border: "1px solid black", borderRadius: "15%"}}>Save</button>
+                    </div>
+                  </div>
+                </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Notification History</CardTitle>
+              </CardHeader>
+              <CardBody>
+                { notifications }
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
         <Row>
           <Col md="6">
             <Card>

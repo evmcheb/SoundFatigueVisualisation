@@ -1,5 +1,6 @@
 
 import React from "react";
+import FetchData from "FetchData/FetchData";
 
 // reactstrap components
 import {
@@ -16,16 +17,58 @@ import {
   Col,
 } from "reactstrap";
 
-function UserProfile() {  
+function Users() { 
+  
+  var u = FetchData(`http://127.0.0.1:8000/users/`);
+
+  var users = u[0]["users"];
+
+  var userElements = [];
+
+  if(users !== undefined && users.length > 0){
+    for(var i = 0; i < users.length; i++){
+      userElements.push(
+        <Row>
+        <Col className="pr-md-1" md="1">
+          <div>
+            {users[i]["ID"]}
+          </div>
+        </Col>
+        <Col className="px-md-1" md="4">
+          <div>
+            {users[i]["FName"]}
+          </div>
+        </Col>
+        <Col className="pl-md-1" md="4">
+          <div>
+            {users[i]["SName"]}
+          </div>
+        </Col>
+        <Col className="pl-md-1" md="1">
+          <Button type="submit">
+            Edit
+          </Button>
+        </Col>
+      </Row>
+      )
+    }
+  }else{
+    userElements.push(
+      <span>
+        No users found.
+      </span>
+    )
+
+  }
 
   return (
     <>
       <div className="content">
         <Row>
-          <Col md="8">
+          <Col>
             <Card>
               <CardHeader>
-                <h5 className="title">Edit Profile</h5>
+                <h5 className="title">Create New User</h5>
               </CardHeader>
               <CardBody>
                 <Form>
@@ -34,7 +77,7 @@ function UserProfile() {
                       <FormGroup>
                         <label>Company (disabled)</label>
                         <Input
-                          defaultValue="Creative Code Inc."
+                          defaultValue="Royal Australian Navy"
                           disabled
                           placeholder="Company"
                           type="text"
@@ -123,13 +166,12 @@ function UserProfile() {
                     </Col>
                   </Row>
                   <Row>
-                    <Col md="8">
+                    <Col md="12">
                       <FormGroup>
-                        <label>About Me</label>
+                        <label>About Employee</label>
                         <Input
                           cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
+                          defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec arcu cursus, placerat magna vel, eleifend eros. Cras commodo risus at magna vestibulum, id tristique ipsum lobortis. Nullam ac magna ex. Suspendisse et condimentum sem. Nam blandit nisi ut lacus tempor scelerisque. Ut placerat sem quis orci bibendum blandit. Sed vel ante malesuada, faucibus est ac, ultrices nulla."
                           placeholder="Here can be your description"
                           rows="4"
                           type="textarea"
@@ -141,49 +183,32 @@ function UserProfile() {
               </CardBody>
               <CardFooter>
                 <Button className="btn-fill" color="primary" type="submit">
-                  Save
+                  Create User
                 </Button>
               </CardFooter>
             </Card>
           </Col>
-          <Col md="4">
-            <Card className="card-user">
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <h5 className="title">Existing Users</h5>
+              </CardHeader>
               <CardBody>
-                <CardText />
-                <div className="author">
-                  <div className="block block-one" />
-                  <div className="block block-two" />
-                  <div className="block block-three" />
-                  <div className="block block-four" />
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="avatar"
-                      src={require("assets/img/emilyz.jpg").default}
-                    />
-                    <h5 className="title">Mike Andrew</h5>
-                  </a>
-                  <p className="description">Ceo/Co-Founder</p>
-                </div>
-                <div className="card-description">
-                  Do not be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
-                </div>
+              <Row>
+                <Col className="pr-md-1" md="2">
+                  <label>ID</label>
+                </Col>
+                <Col className="px-md-1" md="5">
+                  <label>First Name</label>
+                </Col>
+                <Col className="pl-md-1" md="5">
+                  <label>Surname</label>
+                </Col>
+              </Row>
+                { userElements }
               </CardBody>
-              <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
-                  </Button>
-                </div>
-              </CardFooter>
             </Card>
           </Col>
         </Row>
@@ -192,4 +217,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default Users;

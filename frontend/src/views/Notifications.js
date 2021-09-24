@@ -147,7 +147,10 @@ function Notifications() {
           <Col>
             <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Configuration</CardTitle>
+                  <CardTitle tag="h4">
+                    <i className="tim-icons icon-settings" data-notify="icon" style={{padding: "15px"}}/>
+                    Configuration
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div style={{display: "flex", flexDirection:"row"}}>

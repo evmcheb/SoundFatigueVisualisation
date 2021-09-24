@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
+
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
 
@@ -64,7 +65,7 @@ function Sidebar(props) {
           target="_blank"
           onClick={props.toggleSidebar}
         >
-          {logo.text}
+          Navigation
         </a>
       );
     } else {

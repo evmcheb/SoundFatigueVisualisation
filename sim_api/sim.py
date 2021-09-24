@@ -58,12 +58,8 @@ db = SessionLocal()
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
-<<<<<<< HEAD
 people = db.query(models.Officer).all()
 
-=======
-saved_random = 0
->>>>>>> 1dcf2f93aaecc85fa102c70b24765c0eb7073172
 while True:
 
     for rs in room_sensors:
@@ -89,13 +85,6 @@ while True:
     time.sleep(1)
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 1dcf2f93aaecc85fa102c70b24765c0eb7073172
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from datetime import datetime

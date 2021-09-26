@@ -28,8 +28,6 @@ count =0
 
 def sound_generator(input,count,saved_random):
     if(input == "quietRoom"):
-        
-        
         loud_bang = random.randint(1, 10000)
         if(saved_random == 0):
             randomLenOfBang = random.randint(0,300)

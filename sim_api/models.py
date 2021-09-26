@@ -33,10 +33,14 @@ class RoomSensor(Base):
 
 class MovementEvent(Base):
     __tablename__ = "movementevent"
+    def __init__(self, rid, oid, time):
+        self.RoomID = rid
+        self.OfficerID = oid
+        self.Timestamp = time
+
     ID = Column(Integer, primary_key=True)
     RoomID = Column(Integer,ForeignKey("room.ID"))
     OfficerID = Column(Integer, ForeignKey("officer.ID"))
-    Type = Column(Integer, nullable = False)
     Timestamp = Column(Integer, nullable = False)
 
 class Sample(Base):

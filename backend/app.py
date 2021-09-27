@@ -1,3 +1,4 @@
+from models import MovementEvent
 from typing import Optional
 import json
 import time
@@ -49,14 +50,48 @@ def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
 '''
 This function should return the amount of sound exposed to a single officer
 Over a specific time period. 
+WIP
 '''
 @app.get("/officer/{officer_id}/")
-def query_officer(officer_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
+def query_officer(officer_id: int, start_time: int = time.time() - 5*60, end_time: int = time.time()):
     with Session(engine) as session:
         Officer = session.exec(select(models.Officer).where(models.Officer.ID == officer_id)).one()
-        print(Officer)
-        MovementEvents = session.exec(select(models.MovementEvent).where(models.MovementEvent.OfficerID == officer_id)).all()
-        print(MovementEvents)
+        MovementEvents = session.exec(select(models.MovementEvent).where(
+            models.MovementEvent.OfficerID == officer_id,
+            start_time < models.MovementEvent.Timestamp,
+            end_time > models.MovementEvent.Timestamp
+            )).all()
+
+        if len(MovementEvents) < 1:
+            return []
+
+        # Calculate intersection of MovementEvents and Samples in that room
+        cur_room = MovementEvents[0].RoomID
+        enter_time = MovementEvents[0].Timestamp
+        ret = []
+        for e in MovementEvents:
+            if e.RoomID != cur_room:
+                # we have changed room, so calculate sound exposure in cur_room
+                # since enter_time til now
+                # get the AVERAGE sound/pitch because there are multiple sensors in the room
+                RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == cur_room)).all()
+                for rs in RoomSensors:
+                    rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
+                    valid_samples = session.exec(select(models.Sample).where(
+                        models.Sample.RoomSensorID == rs.ID,
+                        enter_time < models.Sample.Timestamp,
+                        e.Timestamp > models.Sample.Timestamp
+                    )).all()
+                    rs_series["x"] = [x.Timestamp for x in valid_samples]
+                    #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
+                    data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+                    rs_series["dB"] = [x['dB'] for x in data]
+                    rs_series["pitch"] = [x["pitch"] for x in data]
+                    ret.append(rs_series)
+
+        
+
+
         return MovementEvents
         # return MovementEvents
         

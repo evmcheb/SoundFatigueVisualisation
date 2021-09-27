@@ -33,7 +33,6 @@ class MovementEvent(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     RoomID: int = Field(default=None, foreign_key="room.ID")
     OfficerID: int = Field(default=None, foreign_key="officer.ID")
-    Type: int
     Timestamp: int
 
 class Sample(SQLModel, table=True):

@@ -17,6 +17,6 @@ from sqlalchemy.orm import sessionmaker
 
 engine = "sqlite:///../backend.db"
 
-engine = create_engine(engine, connect_args={"check_same_thread":False}, echo=True)
+engine = create_engine(engine, connect_args={"check_same_thread":False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

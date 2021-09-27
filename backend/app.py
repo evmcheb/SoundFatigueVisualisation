@@ -27,13 +27,19 @@ over a specific time period.
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
     with Session(engine) as session:
-        Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
+        RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
+        #Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
         ret = []
-        for rs in Room.RoomSensors:
+        for rs in RoomSensors:
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
-            rs_series["x"] = [x.Timestamp for x in rs.Samples]
+            valid_samples = session.exec(select(models.Sample).where(
+                models.Sample.RoomSensorID == rs.ID,
+                start_time < models.Sample.Timestamp,
+                end_time > models.Sample.Timestamp
+            )).all()
+            rs_series["x"] = [x.Timestamp for x in valid_samples]
             #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
-            data = [json.loads(x.MeasurementsJSON) for x in rs.Samples]
+            data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
             rs_series["dB"] = [x['dB'] for x in data]
             rs_series["pitch"] = [x["pitch"] for x in data]
             ret.append(rs_series)

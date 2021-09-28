@@ -33,17 +33,15 @@ class RoomSensor(Base):
 
 class MovementEvent(Base):
     __tablename__ = "movementevent"
+    def __init__(self, rid, oid, time):
+        self.RoomID = rid
+        self.OfficerID = oid
+        self.Timestamp = time
+
     ID = Column(Integer, primary_key=True)
     RoomID = Column(Integer,ForeignKey("room.ID"))
     OfficerID = Column(Integer, ForeignKey("officer.ID"))
-    Type = Column(Integer, nullable = False)
     Timestamp = Column(Integer, nullable = False)
-
-    def __init__(self, RID, OID, Type, Timestamp):
-        self.RoomID = RID
-        self.OfficerID = OID
-        self.Type = Type
-        self.Timestamp = Timestamp
 
 class Sample(Base):
     __tablename__ = "sample"
@@ -52,11 +50,9 @@ class Sample(Base):
         self.Timestamp = Timestamp
         self.Duration = Duration
         self.MeasurementsJSON = MeasurementsJSON
-        #self.NotificationSeen = NotificationSeen
 
     ID = Column(Integer, primary_key=True)
     RoomSensorID = Column(Integer, ForeignKey("roomsensor.ID"))
     Timestamp = Column(Integer, nullable=False)
     Duration = Column(Integer)
     MeasurementsJSON = Column(String)
-    #NotificationSeen = Column(Boolean, default=False)

@@ -3,7 +3,7 @@ Simulator API
 Caleb Cheng 23/08/21
 pull sample sound data from two different distributions
 To use
-  - pip install -r requirements.txt
+  - pip install requirements.txt
   - cd sim_api
   - uvicorn sim:app --reload
 """
@@ -28,8 +28,6 @@ count =0
 
 def sound_generator(input,count,saved_random):
     if(input == "quietRoom"):
-        
-        
         loud_bang = random.randint(1, 10000)
         if(saved_random == 0):
             randomLenOfBang = random.randint(0,300)
@@ -58,10 +56,8 @@ db = SessionLocal()
 # Every second, for each RoomSensorId, fetch some random data.
 
 room_sensors = db.query(models.RoomSensor).all()
-people = db.query(models.Officer).all()
-
+saved_random = 0
 while True:
-
     for rs in room_sensors:
         print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
@@ -82,7 +78,12 @@ while True:
         newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
+
     time.sleep(1)
+
+
+
+
 
 
 from fastapi import FastAPI
@@ -140,7 +141,6 @@ doc = """Usage:
     - Period of 3 minute
     - centered around 1000Hz
     - amplitude of 100Hz
-
 /{room_id}/{sensor_id}/n
 - Returns {dB: , pitch: )
 - dB
@@ -151,7 +151,6 @@ doc = """Usage:
     - Normal distribution
     - centered around 1000Hz
     - s.d. of 200Hz
-
 - dB in decibels
 - pitch in Hz
 """

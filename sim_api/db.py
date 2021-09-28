@@ -2,7 +2,6 @@
 db.py
 Caleb Cheng
 24/08/2021
-
 The purpose of db.py is to provide a generic interface to allow 
 reading/writing to storage using an ORM wrapper.
 This means that any sort of database type (SQLite, Postgre, MySQL) 

@@ -1,7 +1,7 @@
 from typing import Optional
 import json
 import time
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from db import engine
 import models
 from sqlmodel import Field, SQLModel, Session, select, update
@@ -91,23 +91,19 @@ def query_nots(room_id: int, start_time: int = time.time() - 5 * 60, end_time: i
         return ret
 
 
-class NotificationLimits(BaseModel):
-    max_db: int
-    max_pitch: int
-
 @app.post("/set_notifications/{room_id}/")
-def query_update_nots(room_id: int, limits: NotificationLimits):
+async def query_update_nots(room_id: int, request: Request):
+    data = await request.body()
 
-    max_db = limits["max_db"]
-    max_pitch = limits["max_pitch"]
-    print(max_db, max_pitch)
+    json_data = json.loads(data)
+
+    max_db = json_data["MaxDB"]
+    max_pitch = json_data["MaxPitch"]
 
     with Session(engine) as session:
 
         session.exec(update(models.Room).where(models.Room.ID == room_id).values(MaxDB=max_db, MaxPitch=max_pitch))
         session.commit()
-        
-        return 1
 
 
 @app.get("/users/")

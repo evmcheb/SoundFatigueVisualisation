@@ -71,20 +71,13 @@ function Notifications() {
 
       var url = `http://127.0.0.1:8000/set_notifications/1/`;
 
-      /*fetch(url, {
-        method: "POST"
-
-      }).then(function(response){
-        console.log(response);
-      });*/
-
       data = { 
           MaxDB: max_db.toString(),
           MaxPitch: max_pitch.toString()
       }
 
       axios.post(url, data)
-          .then(response => (console.log(response)))
+          .then(response => (console.log('Notification settings saved.')))
   }
 
   function updateMaxDB(event){

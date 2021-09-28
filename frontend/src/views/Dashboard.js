@@ -58,7 +58,7 @@ function Dashboard(props) {
     <div>
       {/* pass in what room was clicked?*/}
      
-      <FetchDataTwo/>
+      <FetchDataTwo room= {props.match.params.id}/>
      
       </div>
       

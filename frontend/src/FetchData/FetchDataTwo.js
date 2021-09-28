@@ -15,6 +15,7 @@ var timesOfConcern = [];
 var done = -1;
 var isOkay = -1;
 var worker = [];
+
 export default class FetchDataTwo extends React.Component {
     intervalID;
      
@@ -29,7 +30,8 @@ export default class FetchDataTwo extends React.Component {
 
         done:-1,
         maxValues:{x:0,y:0},
-        isOkay:-1
+        isOkay:-1,
+        
     };
     
     
@@ -44,11 +46,13 @@ export default class FetchDataTwo extends React.Component {
 
     getData = async() =>{
 
-        console.log("Getting data")
+        console.log("Getting data ",this.props.room)
         
-        var url = "http://127.0.0.1:8000/room/3/";
+        var url = "http://127.0.0.1:8000/room/";
         //url = url.concat(passDate);
-        console.log(url)
+        url = url.concat(this.props.room);
+        url = url.concat("/");
+        console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
         this.intervalID = setTimeout(this.getData.bind(this), 10000);//refresh data every 10 seconds
@@ -59,7 +63,8 @@ export default class FetchDataTwo extends React.Component {
            timeStamp: [...prevState.timeStamp, data[0].x]
         }))
         this.setState({loading:false})
-
+        this.setState({room:this.props.room})
+        
         var amountDecibels = 0;
 
         console.log(data);
@@ -303,6 +308,9 @@ export default class FetchDataTwo extends React.Component {
         <>
         <div>
           {lastTime}
+            <p>
+          showing data for room  :{this.props.room}
+          </p>
         </div>
         </>
         )

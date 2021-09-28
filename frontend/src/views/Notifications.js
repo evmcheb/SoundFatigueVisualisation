@@ -69,6 +69,11 @@ function Notifications() {
 
   function setNots(){
 
+      if(max_db == undefined || max_pitch == undefined){
+        alert("Invalid value!");
+        return;
+      }
+
       var url = `http://127.0.0.1:8000/set_notifications/1/`;
 
       data = { 

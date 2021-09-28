@@ -43,5 +43,6 @@ class Sample(SQLModel, table=True):
     Timestamp: int
     Duration: int
     MeasurementsJSON: str
+    Notification: bool
     NotificationSeen: bool
     RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")

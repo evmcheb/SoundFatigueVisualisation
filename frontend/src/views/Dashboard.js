@@ -48,11 +48,33 @@ import AccordionMoreData from "../variables/AccordionMoreData";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
 
 import MaxGuage from "../variables/MaxGuage";
-
+import { Dropdown} from 'react-bootstrap';
 function Dashboard(props) {
 
+  //If sidebar link was clicked and no room is selected
+  //make user select room to display
+  if(props.match.params.id.endsWith('id')){
+      return ( 
+      <>
+      <div className="content">
+        <Dropdown >
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Display Room:
+            </Dropdown.Toggle>
 
+            <Dropdown.Menu style={{overflowY: "scroll"  ,height: "300px",width:"30%"}}>
+            <Dropdown.Item href="1">Room 1</Dropdown.Item>
+            <Dropdown.Item href="2">Room 2</Dropdown.Item>
+            <Dropdown.Item href="3">Room 3</Dropdown.Item>
+        </Dropdown.Menu>
+        </Dropdown>
+        
+    </div>
+    </>)
+  }
+  else{
   return (
+    
     <>
     
     <div>
@@ -128,7 +150,10 @@ function Dashboard(props) {
         
       </div>
     </>
+  
   );
-}
+  }
+  }
+
 
 export default Dashboard;

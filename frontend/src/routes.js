@@ -24,7 +24,7 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/dashboard/:id",
+    path: "/Dashboard/:id",
     name: "Dashboard",
     icon: "tim-icons icon-components",
     component: Dashboard,

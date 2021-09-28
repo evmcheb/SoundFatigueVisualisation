@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS "Room" (
     "MaxDB" INTEGER,
 	PRIMARY KEY("ID" AUTOINCREMENT)
 );
+
 CREATE TABLE IF NOT EXISTS "Sensor" (
 	"ID"	INTEGER NOT NULL,
 	"Name"	INTEGER,
@@ -94,6 +95,19 @@ INSERT INTO Room(Name, Description) VALUES (
     "The common room"
 );
 
+INSERT INTO Room(Name, Description) VALUES (
+    "Kitchen",
+    "The Kitchen"
+);
+INSERT INTO Room(Name, Description) VALUES (
+    "Cabin1",
+    "Cabin"
+);
+INSERT INTO Room(Name, Description) VALUES (
+    "Cabin2",
+    "Cabin"
+);
+
 INSERT INTO Sensor(Name, Description) VALUES (
     "SNS01",
     "WiFi Sound Meter v1"
@@ -104,6 +118,18 @@ INSERT INTO Sensor(Name, Description) VALUES (
 );
 INSERT INTO Sensor(Name, Description) VALUES (
     "SNS03",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS04",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS05",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS06",
     "WiFi Sound Meter v1"
 );
 
@@ -118,6 +144,16 @@ INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
 );
 INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
     3, 3
+);
+
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    4, 4
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    5, 5
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    6, 6
 );
 
 COMMIT;

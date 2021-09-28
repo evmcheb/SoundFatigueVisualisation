@@ -57,6 +57,7 @@ function Dashboard(props) {
     
     <div>
       {/* pass in what room was clicked?*/}
+     
       <FetchDataTwo/>
      
       </div>
@@ -69,7 +70,7 @@ function Dashboard(props) {
             <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h4 >Room A</h4>
+                    <h4 >Room {props.match.params.id}</h4>
                     
                     <TheDateBox/>
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
@@ -98,6 +99,7 @@ function Dashboard(props) {
                 <MyPieChart/>
                 </div>
                 <div>
+                  
                   <AvgGauge/>
                 </div>
                 
@@ -107,6 +109,11 @@ function Dashboard(props) {
                  
                   
                 </div>
+                
+                <div>
+            {maxDecibel} 
+              </div>
+                
                 
                 
               </Row>

@@ -44,11 +44,11 @@ export default class FetchDataTwo extends React.Component {
 
     getData = async() =>{
 
+        console.log("Getting data")
         
-        
-        var url = "http://127.0.0.1:8000/room/1/";
+        var url = "http://127.0.0.1:8000/room/3/";
         //url = url.concat(passDate);
-        
+        console.log(url)
         const response = await fetch(url);
         const data =  await response.json();
         this.intervalID = setTimeout(this.getData.bind(this), 10000);//refresh data every 10 seconds

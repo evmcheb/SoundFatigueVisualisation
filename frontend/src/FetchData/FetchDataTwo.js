@@ -62,6 +62,7 @@ export default class FetchDataTwo extends React.Component {
 
         var amountDecibels = 0;
 
+        console.log(data);
         
         //For pie chart
         var safeInt=0;

@@ -79,7 +79,7 @@ function AdminNavbar(props) {
     var notifications = [];
 
     if(nots.length > 0){
-      for(var i = 0; i < nots.length; i++){
+      for(var i = nots.length-1; i > 0; i--){
         notifications.push(
         <NavLink tag='li'>
           <DropdownItem className="nav-item">

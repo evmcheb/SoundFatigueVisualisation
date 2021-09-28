@@ -26,10 +26,14 @@ This function should return the amount of sound in a room
 over a specific time period. 
 '''
 @app.get("/room/{room_id}/")
-def query_room(room_id: int, start_time: int = time.time() - 5 * 60, end_time: int = time.time()):
+def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
     with Session(engine) as session:
+        if not start_time:
+            start_time = time.time() - 5*60
+        if not end_time:
+            end_time = time.time()
+
         RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
-        #Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
         ret = []
         for rs in RoomSensors:
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}

@@ -58,7 +58,6 @@ db = SessionLocal()
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
 while True:
-
     for rs in room_sensors:
         print(rs.RoomID, rs.SensorID)
         # same sensor should return same data

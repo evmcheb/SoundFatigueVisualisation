@@ -8,3 +8,4 @@ frontend/node_modules/*
 package-lock.json
 .vscode
 .eslintcache
+backend.db

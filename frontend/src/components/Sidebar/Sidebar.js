@@ -46,6 +46,7 @@ function Sidebar(props) {
   let logoText = null;
   if (logo !== undefined) {
     if (logo.outterLink !== undefined) {
+      /*
       logoImg = (
         <a
           href={logo.outterLink}
@@ -58,6 +59,7 @@ function Sidebar(props) {
           </div>
         </a>
       );
+      */
       logoText = (
         <a
           href={logo.outterLink}

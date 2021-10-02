@@ -69,14 +69,12 @@ function Notifications() {
 
   function setNots(){
 
+      if(max_db == undefined || max_pitch == undefined){
+        alert("Invalid value!");
+        return;
+      }
+
       var url = `http://127.0.0.1:8000/set_notifications/1/`;
-
-      /*fetch(url, {
-        method: "POST"
-
-      }).then(function(response){
-        console.log(response);
-      });*/
 
       data = { 
           MaxDB: max_db.toString(),
@@ -84,7 +82,7 @@ function Notifications() {
       }
 
       axios.post(url, data)
-          .then(response => (console.log(response)))
+          .then(response => (console.log('Notification settings saved.')))
   }
 
   function updateMaxDB(event){

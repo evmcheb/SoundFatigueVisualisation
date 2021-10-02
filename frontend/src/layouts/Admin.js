@@ -13,8 +13,8 @@ import routes from "routes.js";
 
 import logo from "assets/img/react-logo.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
-import FetchDataTwo from "../FetchData/FetchDataTwo";
-import MyRangeSlider from "../variables/MyRangeSlider";
+
+
 
 var ps;
 
@@ -78,14 +78,7 @@ function Admin(props) {
       }
     });
   };
-  const getBrandText = (path) => {
-    for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
-        return routes[i].name;
-      }
-    }
-    return "Brand";
-  };
+  
   return (
     
     <BackgroundColorContext.Consumer>
@@ -106,7 +99,7 @@ function Admin(props) {
            
             <div className="main-panel" ref={mainPanelRef} data={color}>
               <AdminNavbar
-                brandText={getBrandText(location.pathname)}
+                
                 toggleSidebar={toggleSidebar}
                 sidebarOpened={sidebarOpened}
               />

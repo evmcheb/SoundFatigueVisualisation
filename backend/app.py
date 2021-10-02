@@ -57,8 +57,12 @@ Over a specific time period.
 WIP
 '''
 @app.get("/officer/{officer_id}/")
-def query_officer(officer_id: int, start_time: int = time.time() - 5*60, end_time: int = time.time()):
+def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
     with Session(engine) as session:
+        if not start_time:
+            start_time = time.time() - 5*60
+        if not end_time:
+            end_time = time.time()
         Officer = session.exec(select(models.Officer).where(models.Officer.ID == officer_id)).one()
         MovementEvents = session.exec(select(models.MovementEvent).where(
             models.MovementEvent.OfficerID == officer_id,
@@ -93,11 +97,7 @@ def query_officer(officer_id: int, start_time: int = time.time() - 5*60, end_tim
                     rs_series["pitch"] = [x["pitch"] for x in data]
                     ret.append(rs_series)
 
-        
-
-
         return MovementEvents
-        # return MovementEvents
         
  
 @app.get("/sensor/{sensor_id}/")
@@ -105,3 +105,5 @@ def query_sensor(room_id: int, start_time: int, end_time: int):
     with Session(engine) as session:
         roomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
         return [x.Samples for x in roomSensors]
+
+

@@ -41,7 +41,6 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
         max_db = Room.MaxDB
         max_pitch = Room.MaxPitch
 
-
         for rs in RoomSensors:
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
             valid_samples = session.exec(select(models.Sample).where(
@@ -84,32 +83,48 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
             return []
 
         # Calculate intersection of MovementEvents and Samples in that room
-        cur_room = MovementEvents[0].RoomID
-        enter_time = MovementEvents[0].Timestamp
-        ret = []
+        timestamps = []
+        dbs = []
+        pitches = []
+        e = MovementEvents[0]
         for e in MovementEvents:
-            if e.RoomID != cur_room:
-                # we have changed room, so calculate sound exposure in cur_room
-                # since enter_time til now
-                # get the AVERAGE sound/pitch because there are multiple sensors in the room
-                # assumption - data comes in every second
-                RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == cur_room)).all()
-                avg_pitch = [0 * ()]
-                avg_db = []
-                for rs in RoomSensors:
-                    valid_samples = session.exec(select(models.Sample).where(
-                        models.Sample.RoomSensorID == rs.ID,
-                        enter_time < models.Sample.Timestamp,
-                        e.Timestamp > models.Sample.Timestamp
-                    )).all()
-                    data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                    db = [x['dB'] for x in data]
-                    db = [x['pitch'] for x in data]
-                    list(map(add, avg_pitch, data['db']))
+            # we have changed room, so calculate sound exposure in cur_room
+            # since enter_time til now
+            # get the AVERAGE sound/pitch because there are multiple sensors in the room
+            # assumption - data comes in every second
+            RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == e.RoomID)).all()
+            for rs in RoomSensors:
+                valid_samples = session.exec(select(models.Sample).where(
+                    models.Sample.RoomSensorID == rs.ID,
+                    start_time <= models.Sample.Timestamp,
+                    e.Timestamp >= models.Sample.Timestamp
+                )).all()
+                timestamps.extend([x.Timestamp for x in valid_samples])
+                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+                dbs.extend([x['dB'] for x in data])
+                pitches.extend([x['pitch'] for x in data])
 
-        
-        return MovementEvents
-        # return MovementEvents
+            start_time = e.Timestamp
+
+        # remove duplicates by taking averages
+        for i, t in enumerate(timestamps):
+            dups = [idx+i for idx, t1 in enumerate(timestamps[i+1:]) if t1 == t]
+            if not dups:
+                continue
+            db_dups = []
+            pitch_dups = []
+            for dup in dups:
+                db_dups.append(dbs[dup])
+                pitch_dups.append(pitches[dup])
+                del dbs[dup]
+                del pitches[dup]
+                del timestamps[dup]
+            dbs[i] = sum(db_dups)/len(db_dups)
+            pitches[i] = sum(pitch_dups)/len(pitch_dups)
+        print(len(timestamps), len(dbs), len(pitches))
+            
+        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, 'x':timestamps, "dB":dbs, "pitches":pitches}
+        return rs_series
 
 
 @app.post("/set_notifications/{room_id}/")

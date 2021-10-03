@@ -47,8 +47,6 @@ def sound_generator(input,count,saved_random):
     return line,count,saved_random
 
 
-
-
 ######
 models.Base.metadata.create_all(bind=engine)
 db = SessionLocal()

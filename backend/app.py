@@ -7,6 +7,7 @@ from db import engine
 import models
 from sqlmodel import Field, SQLModel, Session, select, update
 from fastapi.middleware.cors import CORSMiddleware
+from operator import add
 
 SQLModel.metadata.create_all(engine)
 
@@ -55,22 +56,6 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
             rs_series["pitch"] = [x["pitch"] for x in data]
             ret.append(rs_series)
 
-            rs_series["notifications"] = []
-
-
-            for item in rs.Samples:
-                if json.loads(item.MeasurementsJSON)['dB'] > max_db and not item.Notification:
-                    session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(Notification=True))
-
-                    if not item.NotificationSeen:
-                        rs_series["notifications"].append({"time": item.Timestamp, "msg": "High decibal warning"})
-                
-                if json.loads(item.MeasurementsJSON)['pitch'] > max_pitch and not item.Notification:
-                    session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(Notification=True))
-
-                    if not item.NotificationSeen:
-                        rs_series["notifications"].append({"time": item.Timestamp, "msg": "High pitch warning"})
-
             session.commit()
         
         return ret
@@ -107,20 +92,20 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
                 # we have changed room, so calculate sound exposure in cur_room
                 # since enter_time til now
                 # get the AVERAGE sound/pitch because there are multiple sensors in the room
+                # assumption - data comes in every second
                 RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == cur_room)).all()
+                avg_pitch = [0 * ()]
+                avg_db = []
                 for rs in RoomSensors:
-                    rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
                     valid_samples = session.exec(select(models.Sample).where(
                         models.Sample.RoomSensorID == rs.ID,
                         enter_time < models.Sample.Timestamp,
                         e.Timestamp > models.Sample.Timestamp
                     )).all()
-                    rs_series["x"] = [x.Timestamp for x in valid_samples]
-                    #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
                     data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                    rs_series["dB"] = [x['dB'] for x in data]
-                    rs_series["pitch"] = [x["pitch"] for x in data]
-                    ret.append(rs_series)
+                    db = [x['dB'] for x in data]
+                    db = [x['pitch'] for x in data]
+                    list(map(add, avg_pitch, data['db']))
 
         
         return MovementEvents
@@ -137,10 +122,33 @@ async def query_update_nots(room_id: int, request: Request):
     max_pitch = json_data["MaxPitch"]
 
     with Session(engine) as session:
-
         session.exec(update(models.Room).where(models.Room.ID == room_id).values(MaxDB=max_db, MaxPitch=max_pitch))
         session.commit()
-        
+    
+# this show retrive a list of notifications that have not been marked as seen
+@app.get("/notifications/")
+def notification_queue(room_id: Optional[int]):
+    with Session(engine) as session:
+        if room_id:
+            notifications = session.exec(select(models.Notification).where(
+                models.Notification.RoomID == room_id,
+                models.Notification.Seen == False
+            )).all()
+            return notifications
+        else:
+            notifications = session.exec(select(models.Notification).where(
+                models.Notification.Seen == False
+            )).all()
+            return notifications
+
+@app.post("/seen_notification/")
+async def mark_as_seen(room_id: int, request: Request):
+    data = await request.body()
+    json_data = json.loads(data)
+    rid = int(json_data["ID"])
+    with Session(engine) as session:
+        session.exec(update(models.Notification).where(models.Notification.ID == room_id).values(Seen=True))
+        session.commit()
  
 @app.get("/sensor/{sensor_id}/")
 def query_sensor(room_id: int, start_time: int, end_time: int):

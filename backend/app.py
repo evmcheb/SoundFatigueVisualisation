@@ -28,10 +28,12 @@ over a specific time period.
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
     with Session(engine) as session:
-        if not start_time:
-            start_time = time.time() - 5*60
-        if not end_time:
-            end_time = time.time()
+        #if not start_time:
+        #    start_time = time.time() - 5*60
+        #if not end_time:
+        #    end_time = time.time()
+        #start_time < models.Sample.Timestamp,
+               # end_time > models.Sample.Timestamp
 
         RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
         ret = []
@@ -45,8 +47,8 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
             valid_samples = session.exec(select(models.Sample).where(
                 models.Sample.RoomSensorID == rs.ID,
-                start_time < models.Sample.Timestamp,
-                end_time > models.Sample.Timestamp
+                models.Sample.Timestamp,
+                models.Sample.Timestamp
             )).all()
             rs_series["x"] = [x.Timestamp for x in valid_samples]
             #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]

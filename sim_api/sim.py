@@ -79,6 +79,12 @@ while True:
 
     time.sleep(1)
 
+
+def populate_backdates():
+    startOf2021TimeStamp = 1609430401
+    
+
+'''
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from datetime import datetime
@@ -147,7 +153,7 @@ doc = """Usage:
 - dB in decibels
 - pitch in Hz
 """
-
+'''
 @app.get("/", response_class=PlainTextResponse)
 def main():
     return doc

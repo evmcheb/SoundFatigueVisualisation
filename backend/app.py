@@ -9,6 +9,9 @@ from sqlmodel import Field, SQLModel, Session, select, update
 from fastapi.middleware.cors import CORSMiddleware
 from operator import add
 
+from datetime import date
+import datetime
+import ciso8601
 SQLModel.metadata.create_all(engine)
 
 app = FastAPI()
@@ -22,6 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+SECONDS_IN_A_DAY = 86400
 '''
 This function should return the amount of sound in a room
 over a specific time period. 
@@ -29,8 +33,13 @@ over a specific time period.
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
     with Session(engine) as session:
+        current_day = date.today()
+        d1 = current_day.strftime("%d/%m/%Y")
+        ts = datetime.datetime.strptime(d1, "%d/%m/%Y").timestamp()
         if not start_time:
-            start_time = time.time() - 5*60
+            # Show 
+            start_time = ts
+            #start_time = time.time() - 5*60
         if not end_time:
             end_time = time.time()
 
@@ -59,6 +68,48 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
         
         return ret
 
+'''
+This function should return the amount of sound in a room
+for the specified date
+'''
+@app.get("/room/{room_id}/{input_date}")
+def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
+    with Session(engine) as session:
+        
+        
+        ts = datetime.datetime.strptime(input_date, "%d-%m-%Y").timestamp()
+        if not start_time:
+            # Show 
+            start_time = ts
+            #start_time = time.time() - 5*60
+        if not end_time:
+            end_time = ts + SECONDS_IN_A_DAY
+            
+
+        RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
+        ret = []
+
+        Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
+        max_db = Room.MaxDB
+        max_pitch = Room.MaxPitch
+
+        for rs in RoomSensors:
+            rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
+            valid_samples = session.exec(select(models.Sample).where(
+                models.Sample.RoomSensorID == rs.ID,
+                start_time < models.Sample.Timestamp,
+                end_time > models.Sample.Timestamp
+            )).all()
+            rs_series["x"] = [x.Timestamp for x in valid_samples]
+            #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
+            data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+            rs_series["dB"] = [x['dB'] for x in data]
+            rs_series["pitch"] = [x["pitch"] for x in data]
+            ret.append(rs_series)
+
+            session.commit()
+        
+        return ret
 
 '''
 This function should return the amount of sound exposed to a single officer

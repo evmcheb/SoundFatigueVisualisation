@@ -4,7 +4,7 @@ import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 import FetchData from "FetchData/FetchData.js";
-
+import {Link} from 'react-router-dom'
 
 // 
 //import * as ChartAnnotation from 'chartjs-plugin-annotation';
@@ -95,6 +95,12 @@ function Dashboard(props) {
                     <h4 >Room {props.match.params.id}</h4>
                     
                     <TheDateBox/>
+                    
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href='3';
+                      }} type="button" className="btn btn-info">View This Dates Data</button>
+                    
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>
                   </Row>

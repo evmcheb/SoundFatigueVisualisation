@@ -3,18 +3,18 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import FetchDataTwo from "../FetchData/FetchDataTwo";
-
+import Button from 'react-bootstrap/Button'
 
 
 
 var passDate = null;
 export default function TheDateBox() {
   const [selectedDate, setselectedDate] = useState({data:new Date()});
-  passDate = moment(selectedDate.data).format("DD/MM/YYYY");
+  passDate = moment(selectedDate.data).format("DD-MM-YYYY");
 
   const handleselectedDate = (date) => {
     setselectedDate({data:date});
-    passDate= moment(selectedDate.data).format("DD/MM/YYYY")
+    passDate= moment(selectedDate.data).format("DD-MM-YYYY")
     
       
    console.log("presed")
@@ -32,6 +32,7 @@ export default function TheDateBox() {
             selected={selectedDate.data}
             dateFormat="dd/MM/yyyy"
             onChange={handleselectedDate}
+            maxDate = {moment().toDate()}
           />
           
         </div>
@@ -45,6 +46,7 @@ export default function TheDateBox() {
           </p>
         </div>
       )}
+
     </div>
   );
 }

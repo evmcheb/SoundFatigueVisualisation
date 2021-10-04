@@ -157,7 +157,7 @@ class ScrollLineGraph extends React.Component {
 }
     handleChange(e) {
         this.setState({data: {zoomingData}});
-        console.log("yo",this.state.data)
+        
         
       }
       

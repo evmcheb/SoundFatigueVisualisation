@@ -46,11 +46,13 @@ export default class FetchDataTwo extends React.Component {
 
     getData = async() =>{
 
-        console.log("Getting data ",this.props.room)
+        console.log("Getting data ",this.props.room,"for date",this.props.date)
         
         var url = "http://127.0.0.1:8000/room/";
         //url = url.concat(passDate);
         url = url.concat(this.props.room);
+        url = url.concat("/");
+        url = url.concat(this.props.date);
         url = url.concat("/");
         console.log("the url",url)
         const response = await fetch(url);

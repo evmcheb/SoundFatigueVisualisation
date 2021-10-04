@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import FetchDataTwo from "../FetchData/FetchDataTwo";
 import Button from 'react-bootstrap/Button'
 
-
+import {Link } from "react-router-dom";
 
 var passDate = null;
 export default function TheDateBox() {
@@ -16,9 +16,11 @@ export default function TheDateBox() {
     setselectedDate({data:date});
     passDate= moment(selectedDate.data).format("DD-MM-YYYY")
     
-      
+    
    console.log("presed")
   };
+
+
 
 
   
@@ -44,6 +46,11 @@ export default function TheDateBox() {
             Viewing data for {moment(selectedDate.data).format("LL")} 
             
           </p>
+          <Link to= {"1~" + passDate}><button type="button" className="btn btn-info"  >
+                            View New date
+                            </button>
+                            </Link>
+          
         </div>
       )}
 

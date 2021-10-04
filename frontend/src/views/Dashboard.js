@@ -46,17 +46,18 @@ import TimesConcernDisp from "../variables/TimesConcernDisp";
 import AvgGauge from "../variables/AvgGauge";
 import AccordionMoreData from "../variables/AccordionMoreData";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
-
+import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
 import { Dropdown} from 'react-bootstrap';
 function Dashboard(props) {
 
   //If sidebar link was clicked and no room is selected
   //make user select room to display
-  if(props.match.params.id.endsWith('id')){
+  if(props.match.params.date.endsWith('date') || props.match.params.id.endsWith('id')){
       return ( 
       <>
       <div className="content">
+        <MainPage/>
         <Dropdown >
             <Dropdown.Toggle variant="success" id="dropdown-basic">
                 Display Room:
@@ -80,7 +81,7 @@ function Dashboard(props) {
     <div>
       {/* pass in what room was clicked?*/}
      
-      <FetchDataTwo room= {props.match.params.id}/>
+      <FetchDataTwo room= {props.match.params.id} date = {props.match.params.date}/>
      
       </div>
       
@@ -96,10 +97,6 @@ function Dashboard(props) {
                     
                     <TheDateBox/>
                     
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href='3';
-                      }} type="button" className="btn btn-info">View This Dates Data</button>
                     
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>

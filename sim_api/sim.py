@@ -55,9 +55,11 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
+
+populateFrom = 1633017660 #= 1/10/2021 00:01
 while True:
     for rs in room_sensors:
-        print(rs.RoomID, rs.SensorID)
+        #print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
         hash = hashlib.sha1(f"{rs.SensorID}".encode())
         phase = int(hash.hexdigest()[:4], 16)
@@ -67,21 +69,24 @@ while True:
             "dB":datadb,
             "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
-
+        
         timeStamp = int(time.time())
-       
+        if(populateFrom != timeStamp):
+            timeStampPopulate = populateFrom
+            populateFrom +=1
+
+        else:
+            timeStampPopulate = timeStamp
         #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
         #print("THE TIME STAMP",newTimeStamp)
-        
-        newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
+        #print(timeStampPopulate)
+        newSample = models.Sample(rs.ID, timeStampPopulate, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
+    if(timeStampPopulate == timeStamp):
+        print("readhed")
+        time.sleep(1)
 
-    time.sleep(1)
-
-
-def populate_backdates():
-    startOf2021TimeStamp = 1609430401
     
 
 '''

@@ -1,6 +1,6 @@
 import React from 'react'
 import { timesOfConcern ,done, isOkay} from '../FetchData/FetchDataTwo'
-import { Dropdown} from 'react-bootstrap';
+import { Dropdown, Card } from 'react-bootstrap';
 
 class TimesConcernDisp extends React.Component {
 
@@ -43,7 +43,8 @@ class TimesConcernDisp extends React.Component {
             }
 
     return (
-        
+        <Card>
+
         <div>
             <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -64,6 +65,7 @@ class TimesConcernDisp extends React.Component {
             </Dropdown.Menu>
             </Dropdown>
         </div>
+    </Card>
 );
 }
 

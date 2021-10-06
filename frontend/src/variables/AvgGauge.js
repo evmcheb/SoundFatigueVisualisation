@@ -59,7 +59,7 @@ class AvgGauge extends React.Component {
         </RangeContainer>
         <Tooltip enabled={true} />
         <Title text="Average Decibels in Room" >
-          <Font size={28} color="white" />
+          <Font size={28} color="gray" />
         </Title>
         <Export enabled={false} />
       </CircularGauge>

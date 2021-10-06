@@ -76,8 +76,11 @@ for the specified date
 def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
     with Session(engine) as session:
         
+        ####For time string
+        
         
         ts = datetime.datetime.strptime(input_date, "%d-%m-%Y").timestamp()
+        
         if not start_time:
             # Show 
             start_time = ts
@@ -100,7 +103,7 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
                 start_time < models.Sample.Timestamp,
                 end_time > models.Sample.Timestamp
             )).all()
-            rs_series["x"] = [x.Timestamp for x in valid_samples]
+            rs_series["x"] = [time.strftime('%H:%m:%S',time.gmtime(x.Timestamp)) for x in valid_samples]
             #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
             data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
             rs_series["dB"] = [x['dB'] for x in data]

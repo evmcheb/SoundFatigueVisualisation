@@ -71,20 +71,23 @@ while True:
         }
         
         timeStamp = int(time.time())
+
+        populateFrom = timeStamp
+
         if(populateFrom != timeStamp):
             timeStampPopulate = populateFrom
             populateFrom +=1
 
         else:
             timeStampPopulate = timeStamp
-        #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
-        #print("THE TIME STAMP",newTimeStamp)
+       # newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStampPopulate))
+       # print("THE TIME STAMP",newTimeStamp)
         #print(timeStampPopulate)
         newSample = models.Sample(rs.ID, timeStampPopulate, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
     if(timeStampPopulate == timeStamp):
-        print("readhed")
+        print("reached")
         time.sleep(1)
 
     

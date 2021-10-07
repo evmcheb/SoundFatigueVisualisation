@@ -141,12 +141,11 @@ class ScrollLineGraph extends React.Component {
         </ConstantLine>
         </ValueAxis>
         <ScrollBar visible={true} />
-        <ZoomAndPan argumentAxis="both" 
-/>
+        <ZoomAndPan argumentAxis="both" />
         <Crosshair
             
             enabled={false}>
-            <Label visible={true} />
+            <Label visible={false} />
           </Crosshair>
           <Legend visible={false} />
       </Chart>

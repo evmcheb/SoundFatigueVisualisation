@@ -32,7 +32,7 @@ import {
 
 import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime, lastTime} from "../FetchData/FetchDataTwo";
 
-import AvgValue from "../variables/AvgValue";
+
 
 import MyPieChart from "../variables/MyPieChart";
 
@@ -107,7 +107,7 @@ function Dashboard(props) {
              
                 
                   {/* Main graph */}
-                  <ScrollLineGraph/>
+                  <ScrollLineGraph />
                 
              
             </Card>

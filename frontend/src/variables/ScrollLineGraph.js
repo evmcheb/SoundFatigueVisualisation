@@ -30,7 +30,7 @@ class ScrollLineGraph extends React.Component {
           data: {zoomingData},
           render:false
         };
-        
+       
         
       }
 
@@ -40,7 +40,7 @@ class ScrollLineGraph extends React.Component {
               this.setState({render:true})
           }.bind(this),500)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 1500);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 3000);
           
       }
      
@@ -63,9 +63,7 @@ class ScrollLineGraph extends React.Component {
         
         <>
         
-       
-   
-
+    
       
         
    
@@ -143,7 +141,8 @@ class ScrollLineGraph extends React.Component {
         </ConstantLine>
         </ValueAxis>
         <ScrollBar visible={true} />
-        <ZoomAndPan argumentAxis="both" />
+        <ZoomAndPan argumentAxis="both" 
+/>
         <Crosshair
             
             enabled={false}>

@@ -78,6 +78,21 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
         
         ####For time string
         
+        if(str(input_date[0])=='0'):
+            
+            input_date_string = str(input_date[1:])
+        else:
+            input_date_string = str(input_date)
+        
+        ts = datetime.datetime.strptime(input_date, "%d-%m-%Y").timestamp()
+        
+        if not start_time:
+            # Show 
+            start_time = ts
+            #start_time = time.time() - 5*60
+        if not end_time:
+            end_time = ts + SECONDS_IN_A_DAY
+            
 
         RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
         ret = []
@@ -90,16 +105,22 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
             rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
             valid_samples = session.exec(select(models.Sample).where(
                 models.Sample.RoomSensorID == rs.ID,
-                 models.Sample.Timestamp,
-                 models.Sample.Timestamp
+                models.Sample.Timestamp,
+                models.Sample.Timestamp
             )).all()
-            #x.Timestamp[10:]
             #time.strftime("%H:%M:%S", time.gmtime(timeStampPopulate))
             #rs_series["x"] = [time.strftime('%H:%M:%S',time.gmtime(x.Timestamp)) for x in valid_samples]
-            rs_series["x"] = [x.Timestamp[10:] for x in rs.Samples if x.Timestamp[0:9]==str(input_date)]
-            data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-            rs_series["dB"] = [x['dB'] for x in data]
-            rs_series["pitch"] = [x["pitch"] for x in data]
+            
+            rs_series["x"] = [x.Timestamp[10:] for x in rs.Samples if x.Timestamp[0:9]==input_date_string]
+            print(len(rs_series['x']))
+            if(len(rs_series['x']) !=0):
+                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+                rs_series["dB"] = [x['dB'] for x in data]
+                rs_series["pitch"] = [x["pitch"] for x in data]
+            else:
+                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+                rs_series["dB"] = []
+                rs_series["pitch"] = []
             ret.append(rs_series)
 
             session.commit()

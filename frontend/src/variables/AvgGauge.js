@@ -22,7 +22,7 @@ class AvgGauge extends React.Component {
               this.setState({render:true})
           }.bind(this),700)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 1500);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 3050);
 
           
       }

@@ -34,11 +34,19 @@ def sound_generator(input,count,saved_random):
             # Say a 0.1% chance of there being a painful noise 
             # and noise has a random generated time to last
             # not safe for any period of time
-        if(loud_bang >= (9990) or (count >0 and count <= saved_random +1)):
+        if(loud_bang >= (9994) or (count >0 and count <= saved_random +1)):
             count += 1
             if(saved_random == 0):
                 saved_random = randomLenOfBang
-            line = round(random.uniform(50.0, 150.0),1)
+            randomValue = random.random()
+            if(randomValue<0.3):
+                line = round(random.uniform(90, 110),1)
+            elif(randomValue<0.6):
+                line = round(random.uniform(50, 90),1)
+            elif(randomValue<0.9):
+                line = round(random.uniform(110, 130),1)
+            else:
+                line = round(random.uniform(110, 150),1)
         else:
             line = round(random.uniform(30.0, 50.0),1) 
             count =0

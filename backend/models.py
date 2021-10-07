@@ -46,3 +46,11 @@ class Sample(SQLModel, table=True):
     Notification: bool
     NotificationSeen: bool
     RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")
+
+class Notification(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    msg: str
+    StartTime: int
+    EndTime: int
+    peak: int
+    RoomID: int = Field(default=None, foreign_key="sample.ID")

@@ -5,30 +5,30 @@ import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import FetchDataTwo from "./FetchData/FetchDataTwo";
 import Users from "views/Users.js";
-import MainPage from "./views/MainPage";
+import MainPage from "views/MainPage";
 import Settings from "views/Settings";
 
 var routes = [
 
     {
         path: "/mainpage",
-        name: "Main Room Page",
+        name: "Dashboard",
         icon: "tim-icons icon-chart-pie-36",
         component: MainPage,
         layout: "/admin",
+    },
+    {
+      path: "/Dashboard/:id",
+      name: "Room Analytics",
+      icon: "tim-icons icon-components",
+      component: Dashboard,
+      layout: "/admin",
     },
     {
         path: "/users",
         name: "Users",
         icon: "tim-icons icon-single-02",
         component: Users,
-        layout: "/admin",
-    },
-    {
-        path: "/Dashboard/:id",
-        name: "Dashboard",
-        icon: "tim-icons icon-components",
-        component: Dashboard,
         layout: "/admin",
     },
     {

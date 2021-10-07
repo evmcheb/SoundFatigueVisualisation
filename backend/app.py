@@ -83,10 +83,12 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
         
         if not start_time:
             # Show 
-            start_time = ts
+            #start_time = ts
+            start_time = "00:00:00"
             #start_time = time.time() - 5*60
         if not end_time:
-            end_time = ts + SECONDS_IN_A_DAY
+            #end_time = ts + SECONDS_IN_A_DAY
+            end_time = "24:59:59"
             
 
         RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
@@ -103,8 +105,9 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
                 start_time < models.Sample.Timestamp,
                 end_time > models.Sample.Timestamp
             )).all()
-            rs_series["x"] = [time.strftime('%H:%m:%S',time.gmtime(x.Timestamp)) for x in valid_samples]
-            #rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
+            #time.strftime("%H:%M:%S", time.gmtime(timeStampPopulate))
+            #rs_series["x"] = [time.strftime('%H:%M:%S',time.gmtime(x.Timestamp)) for x in valid_samples]
+            rs_series["x"] = [x.Timestamp for x in rs.Samples if start_time <= x.Timestamp <= end_time]
             data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
             rs_series["dB"] = [x['dB'] for x in data]
             rs_series["pitch"] = [x["pitch"] for x in data]

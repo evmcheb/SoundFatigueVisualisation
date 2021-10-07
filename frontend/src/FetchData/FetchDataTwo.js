@@ -57,7 +57,7 @@ export default class FetchDataTwo extends React.Component {
         console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
-        this.intervalID = setTimeout(this.getData.bind(this), 10000);//refresh data every 10 seconds
+        this.intervalID = setTimeout(this.getData.bind(this), 5000);//refresh data every 5 seconds
         
         this.setState(prevState => ({
             dbs: [...prevState.dbs, data[0].dB]
@@ -102,28 +102,20 @@ export default class FetchDataTwo extends React.Component {
             else if(decibels>=113){
                 unSafeInt +=1;
             }
-            //var date = new Date(timestamp * 1000);
-            //var hours = date.getHours();
-            //var minutes = "0" + date.getMinutes();
-            
-           // var seconds = "0" + date.getSeconds();     
-            //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            //var formattedTime = new Date(timestamp*1000).toLocaleTimeString('en-US');
-            //console.log(formattedTime)
+
             lastTime = timestamp;
             //lastTime = timestamp;
             if(i === data[0].dB.length-100){
                //startTime = formattedTime;
                startTime = timestamp;
             }
-           
-            
+            //var date = new Date(timestamp * 1000);
+            //var hours = date.getHours();
+            //var minutes = "0" + date.getMinutes();
+            //var seconds = "0" + date.getSeconds();     
 
-
-
+            //timestam = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
             zoomingData.push({arg:timestamp, y1:decibels});
-            
-
             
             //Getting max dB value
             if(decibels>maxDecibel){

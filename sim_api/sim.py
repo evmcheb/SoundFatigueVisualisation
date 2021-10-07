@@ -56,7 +56,7 @@ db = SessionLocal()
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
 
-populateFrom = 1633017660 #= 1/10/2021 00:01
+populateFrom = 1633536060 #= 1/10/2021 00:01
 while True:
     for rs in room_sensors:
         #print(rs.RoomID, rs.SensorID)
@@ -71,7 +71,10 @@ while True:
         }
         
         timeStamp = int(time.time())
-
+        timeString = ""
+        now = datetime.datetime.now()
+        timeString = str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
+        print(timeString)
         populateFrom = timeStamp
 
         if(populateFrom != timeStamp):
@@ -80,10 +83,10 @@ while True:
 
         else:
             timeStampPopulate = timeStamp
-       # newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStampPopulate))
+  
        # print("THE TIME STAMP",newTimeStamp)
         #print(timeStampPopulate)
-        newSample = models.Sample(rs.ID, timeStampPopulate, 1, json.dumps(data))
+        newSample = models.Sample(rs.ID, timeString, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
     if(timeStampPopulate == timeStamp):

@@ -47,6 +47,8 @@ import MaxGuage from "../variables/MaxGuage";
 import { Dropdown} from 'react-bootstrap';
 function Dashboard(props) {
   
+
+
   var dateToDisplay = props.match.params.date
   var roomViewing = props.room
   var[day,month,year] = dateToDisplay.split('-')
@@ -96,7 +98,7 @@ function Dashboard(props) {
                     
                     <TheDateBox room= {props.match.params.id} date = {props.match.params.date}/>
                     
-                    
+  
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>
                   </Row>

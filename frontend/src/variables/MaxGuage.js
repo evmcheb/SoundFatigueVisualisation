@@ -9,7 +9,7 @@ class MaxGuage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: {maxValues},
+          data: {maxDecibel},
           render:false
         };
         
@@ -22,7 +22,8 @@ class MaxGuage extends React.Component {
               this.setState({render:true})
           }.bind(this),700)
           
-          
+          this.interval = setInterval(() => this.setState({data: {maxDecibel}}), 1500);
+
           
       }
      
@@ -33,9 +34,9 @@ class MaxGuage extends React.Component {
      
         if(this.state.render) {
             console.log({done})
-            if(done==1 && this.state.data.maxValues==0){
+            if(done==1 && this.state.data.maxDecibel==0){
                 
-                this.setState({data: {maxValues}});
+                this.setState({data: {maxDecibel}});
                 console.log(this.state.data)
             }
             if(done==-1){
@@ -47,10 +48,10 @@ class MaxGuage extends React.Component {
         
       <CircularGauge
         id="gauge"
-        value={this.state.data.maxValues.y}
+        value={this.state.data.maxDecibel}
         
       >
-        <Scale startValue={0} endValue={maxDecibel} tickInterval={10}>
+        <Scale startValue={0} endValue={maxDecibel+20} tickInterval={10}>
           <Label useRangeColors={true} />
         </Scale>
         <RangeContainer palette="bright">

@@ -30,7 +30,7 @@ class ScrollLineGraph extends React.Component {
           data: {zoomingData},
           render:false
         };
-        this.handleChange = this.handleChange.bind(this);
+        
         
       }
 
@@ -64,8 +64,7 @@ class ScrollLineGraph extends React.Component {
         <>
         
        
-    <span><Button onClick={this.handleChange} style={{padding: "10px"}}> Update Graph 
-    </Button></span>
+   
 
       
         
@@ -144,8 +143,7 @@ class ScrollLineGraph extends React.Component {
         </ConstantLine>
         </ValueAxis>
         <ScrollBar visible={true} />
-        <ZoomAndPan argumentAxis="both" 
- />
+        <ZoomAndPan argumentAxis="both" />
         <Crosshair
             
             enabled={false}>
@@ -167,9 +165,7 @@ class ScrollLineGraph extends React.Component {
       )
   
 }
-    handleChange(e) {
-        this.setState({data: {zoomingData}});
-      }
+    
       
   }
 

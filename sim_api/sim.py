@@ -71,10 +71,12 @@ while True:
         }
         
         timeStamp = int(time.time())
+        # Hour:Minute:Seconds string format
         timeString = ""
         now = datetime.datetime.now()
-        timeString = str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
+        timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
         print(timeString)
+
         populateFrom = timeStamp
 
         if(populateFrom != timeStamp):

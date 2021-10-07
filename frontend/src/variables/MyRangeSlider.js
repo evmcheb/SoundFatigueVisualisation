@@ -50,6 +50,9 @@ class MyRangeSlider extends React.Component {
       setTimeout(function(){
           this.setState({render:true})
       }.bind(this),500)
+
+      this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 3000);
+
   }
 
      
@@ -93,7 +96,7 @@ render(){
         >
           <Size height={100} />
           <RsChart>
-            <RsValueAxis valueType="numeric" />
+            
             <RsSeries
               type="line"
               valueField="y1"
@@ -106,7 +109,7 @@ render(){
             placeholderHeight={20}
             
             
-            valueType="numeric"
+            
             
           />
           <Behavior

@@ -101,7 +101,7 @@ while True:
         db.commit()
     #if(timeStampPopulate == timeStamp):
     #    print("reached")
-    #    time.sleep(1)
+        time.sleep(1)
 
     
 

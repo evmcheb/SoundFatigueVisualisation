@@ -34,19 +34,25 @@ def sound_generator(input,count,saved_random):
             # Say a 0.1% chance of there being a painful noise 
             # and noise has a random generated time to last
             # not safe for any period of time
-        if(loud_bang >= (9990) or (count >0 and count <= saved_random +1)):
+        if(loud_bang >= (9996) or (count >0 and count <= saved_random +1)):
             count += 1
             if(saved_random == 0):
                 saved_random = randomLenOfBang
-            line = round(random.uniform(50.0, 150.0),1)
+            randomValue = random.random()
+            if(randomValue<0.3):
+                line = round(random.uniform(90, 110),1)
+            elif(randomValue<0.6):
+                line = round(random.uniform(50, 90),1)
+            elif(randomValue<0.9):
+                line = round(random.uniform(110, 130),1)
+            else:
+                line = round(random.uniform(110, 150),1)
         else:
             line = round(random.uniform(30.0, 50.0),1) 
             count =0
             saved_random = 0
 
     return line,count,saved_random
-
-
 
 
 ######
@@ -57,9 +63,11 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
+
+populateFrom = 1633536060 #= 1/10/2021 00:01
 while True:
     for rs in room_sensors:
-        print(rs.RoomID, rs.SensorID)
+        #print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
         hash = hashlib.sha1(f"{rs.SensorID}".encode())
         phase = int(hash.hexdigest()[:4], 16)
@@ -69,18 +77,35 @@ while True:
             "dB":datadb,
             "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
-
-        timeStamp = int(time.time())
-       
-        #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
-        #print("THE TIME STAMP",newTimeStamp)
         
-        newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
+        timeStamp = int(time.time())
+        # Hour:Minute:Seconds string format
+        timeString = ""
+        now = datetime.datetime.now()
+        timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
+        print(timeString)
+
+        populateFrom = timeStamp
+
+        if(populateFrom != timeStamp):
+            timeStampPopulate = populateFrom
+            populateFrom +=1
+
+        else:
+            timeStampPopulate = timeStamp
+  
+       # print("THE TIME STAMP",newTimeStamp)
+        #print(timeStampPopulate)
+        newSample = models.Sample(rs.ID, timeString, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
+    if(timeStampPopulate == timeStamp):
+        print("reached")
+        time.sleep(1)
 
-    time.sleep(1)
+    
 
+'''
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from datetime import datetime
@@ -149,7 +174,7 @@ doc = """Usage:
 - dB in decibels
 - pitch in Hz
 """
-
+'''
 @app.get("/", response_class=PlainTextResponse)
 def main():
     return doc

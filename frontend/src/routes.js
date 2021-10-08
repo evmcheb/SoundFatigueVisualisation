@@ -18,7 +18,7 @@ var routes = [
         layout: "/admin",
     },
     {
-      path: "/Dashboard/:id",
+      path: "/Dashboard/:id~:date",
       name: "Room Analytics",
       icon: "tim-icons icon-components",
       component: Dashboard,

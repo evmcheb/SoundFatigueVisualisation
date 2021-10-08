@@ -11,11 +11,10 @@ db = SessionLocal()
 people = db.query(models.Officer).all()
 rooms = db.query(models.Room).all()
 
-
 class RoomSprite(pg.sprite.Sprite):
-    def __init__(self, x, y, me):
+    def __init__(self, x, y, size, me):
         super().__init__()
-        self.size = 200
+        self.size = size
         self.image = pg.Surface([self.size, self.size])
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -80,10 +79,10 @@ def main():
     officer_sprites = []
 
     for i, room in enumerate(rooms):
-        room_sprites.append(RoomSprite(200*i, 0, room))
+        room_sprites.append(RoomSprite(150*(i%3), (i//3)*150, 100, room))
 
     for i, officer in enumerate(people):
-        officer_sprites.append(OfficerSprite(0 + 100*i, 250, officer))
+        officer_sprites.append(OfficerSprite(0 + 100*i, 350, officer))
 
     officer_dragging = {officer:False for officer in officer_sprites}
 

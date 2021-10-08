@@ -4,13 +4,9 @@ import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 import FetchData from "FetchData/FetchData.js";
+import {Link} from 'react-router-dom'
 
-
-// 
-//import * as ChartAnnotation from 'chartjs-plugin-annotation';
-
-// react plugin used to create charts//
-/////////
+import moment from "moment";
 import ScrollLineGraph from "variables/ScrollLineGraph"
 // reactstrap components
 import {
@@ -36,7 +32,7 @@ import {
 
 import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime, lastTime} from "../FetchData/FetchDataTwo";
 
-import AvgValue from "../variables/AvgValue";
+
 
 import MyPieChart from "../variables/MyPieChart";
 
@@ -46,17 +42,23 @@ import TimesConcernDisp from "../variables/TimesConcernDisp";
 import AvgGauge from "../variables/AvgGauge";
 import AccordionMoreData from "../variables/AccordionMoreData";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
-
+import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
 import { Dropdown} from 'react-bootstrap';
 function Dashboard(props) {
+  
 
+
+  var dateToDisplay = props.match.params.date
+  var roomViewing = props.room
+  var[day,month,year] = dateToDisplay.split('-')
   //If sidebar link was clicked and no room is selected
   //make user select room to display
-  if(props.match.params.id.endsWith('id')){
+  if(props.match.params.date.endsWith('date') || props.match.params.id.endsWith('id')){
       return ( 
       <>
       <div className="content">
+        <MainPage/>
         <Dropdown >
             <Dropdown.Toggle variant="success" id="dropdown-basic">
                 Display Room:
@@ -81,7 +83,7 @@ function Dashboard(props) {
     <div>
       {/* pass in what room was clicked?*/}
      
-      <FetchDataTwo room= {props.match.params.id}/>
+      <FetchDataTwo room= {props.match.params.id} date = {props.match.params.date}/>
      
       </div>
       
@@ -93,9 +95,11 @@ function Dashboard(props) {
             <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h4 >Room {props.match.params.id}</h4>
+                    <h4 >Viewing Room {props.match.params.id} For  {moment(`${month}/${day}/${year}`).format("LL")} </h4>
                     
-                    <TheDateBox/>
+                    <TheDateBox room= {props.match.params.id} date = {props.match.params.date}/>
+                    
+  
                     <CardTitle tag="h2">Decibel Reading </CardTitle>
                   </Col>
                   </Row>
@@ -104,7 +108,7 @@ function Dashboard(props) {
              
                 
                   {/* Main graph */}
-                  <ScrollLineGraph/>
+                  <ScrollLineGraph />
                 
              
             </Card>

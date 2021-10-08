@@ -13,20 +13,27 @@ import Chart, {
   Label,
   ConstantLine,
   ValueAxis,
-  Scale
+  Scale,
+  LoadingIndicator,
+  Aggregation,Point,CommonSeriesSettings
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
+<<<<<<< HEAD
 
+=======
+    
+   
+>>>>>>> 6f97598f5bcf3660c2336c63b349f13b9b069dcb
     constructor(props) {
         super(props);
         this.state = {
           data: {zoomingData},
           render:false
         };
-        this.handleChange = this.handleChange.bind(this);
+       
         
       }
 
@@ -36,13 +43,14 @@ class ScrollLineGraph extends React.Component {
               this.setState({render:true})
           }.bind(this),500)
           
-          
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 3000);
           
       }
      
 
       render(){
-        
+        console.log("HMM",this.props.zoomingData)
+
         let renderContainer = false
         if(this.state.render) {
             console.log({done})
@@ -58,10 +66,7 @@ class ScrollLineGraph extends React.Component {
         
         <>
         
-       
-    <span><Button onClick={this.handleChange} style={{padding: "10px"}}> Update Graph 
-    </Button></span>
-
+    
       
         
    
@@ -70,14 +75,23 @@ class ScrollLineGraph extends React.Component {
         id="chart"
         palette="Material"
         dataSource= {this.state.data.zoomingData}
-        >
-        <Series argumentField="arg" valueField="y1" />
         
-        <ArgumentAxis  >
-
-        </ArgumentAxis>
+        
+        >
+        <Series  valueField="y1"  type="line" >
+            <Aggregation enabled={true} />
+            <Point visible={false}></Point>
+        </Series>
+        
+        <ArgumentAxis
+            valueMarginsEnabled={ true}
+            argumentType="time"
+            aggregationInterval={120}/>
+            <Label format="shortTime" />
+       
         {/* Setting the green to red horizontal lines */}
         <ValueAxis>
+        <LoadingIndicator enabled={true} />
         <ConstantLine value={10} color="green" dashStyle="longDash">
 
         </ConstantLine>
@@ -133,10 +147,11 @@ class ScrollLineGraph extends React.Component {
         <ScrollBar visible={true} />
         <ZoomAndPan argumentAxis="both" />
         <Crosshair
-            enabled={true}>
-            <Label visible={true} />
+            
+            enabled={false}>
+            <Label visible={false} />
           </Crosshair>
-        <Legend visible={false} />
+          <Legend visible={false} />
       </Chart>
       
    
@@ -152,11 +167,7 @@ class ScrollLineGraph extends React.Component {
       )
   
 }
-    handleChange(e) {
-        this.setState({data: {zoomingData}});
-        console.log("yo",this.state.data)
-        
-      }
+    
       
   }
 

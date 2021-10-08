@@ -46,16 +46,18 @@ export default class FetchDataTwo extends React.Component {
 
     getData = async() =>{
 
-        console.log("Getting data ",this.props.room)
+        console.log("Getting data ",this.props.room,"for date",this.props.date)
         
         var url = "http://127.0.0.1:8000/room/";
         //url = url.concat(passDate);
         url = url.concat(this.props.room);
         url = url.concat("/");
+        url = url.concat(this.props.date);
+        url = url.concat("/");
         console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
-        this.intervalID = setTimeout(this.getData.bind(this), 10000);//refresh data every 10 seconds
+        this.intervalID = setTimeout(this.getData.bind(this), 15000);//refresh data every 15 seconds
         
         this.setState(prevState => ({
             dbs: [...prevState.dbs, data[0].dB]
@@ -100,28 +102,20 @@ export default class FetchDataTwo extends React.Component {
             else if(decibels>=113){
                 unSafeInt +=1;
             }
-            //var date = new Date(timestamp * 1000);
-            //var hours = date.getHours();
-            //var minutes = "0" + date.getMinutes();
-            
-           // var seconds = "0" + date.getSeconds();     
-            //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            //var formattedTime = new Date(timestamp*1000).toLocaleTimeString('en-US');
-            //console.log(formattedTime)
+
             lastTime = timestamp;
             //lastTime = timestamp;
             if(i === data[0].dB.length-100){
                //startTime = formattedTime;
                startTime = timestamp;
             }
-           
-            
+            //var date = new Date(timestamp * 1000);
+            //var hours = date.getHours();
+            //var minutes = "0" + date.getMinutes();
+            //var seconds = "0" + date.getSeconds();     
 
-
-
+            //timestam = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
             zoomingData.push({arg:timestamp, y1:decibels});
-            
-
             
             //Getting max dB value
             if(decibels>maxDecibel){

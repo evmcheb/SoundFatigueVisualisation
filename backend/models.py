@@ -37,12 +37,19 @@ class MovementEvent(SQLModel, table=True):
     OfficerID: int = Field(default=None, foreign_key="officer.ID")
     Timestamp: int
 
+class Notification(SQLModel, table=True):
+    ID: int = Field(primary_key=True)
+    RoomID: int = Field(default=None, foreign_key="room.ID")
+    Timestamp: int
+    Seen: int
+
 class Sample(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     RoomSensorID: int = Field(default=None, foreign_key="roomsensor.ID")
     Timestamp: int
     Duration: int
     MeasurementsJSON: str
+<<<<<<< HEAD
     Notification: bool
     NotificationSeen: bool
     RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")
@@ -54,3 +61,6 @@ class Notification(SQLModel, table=True):
     EndTime: int
     peak: int
     RoomID: int = Field(default=None, foreign_key="sample.ID")
+=======
+    RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")
+>>>>>>> 6f97598f5bcf3660c2336c63b349f13b9b069dcb

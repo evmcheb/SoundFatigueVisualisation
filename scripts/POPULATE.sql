@@ -40,14 +40,21 @@ CREATE TABLE IF NOT EXISTS "MovementEvent" (
 	PRIMARY KEY("ID" AUTOINCREMENT)
 );
 
+CREATE TABLE IF NOT EXISTS "Notification" (
+    "ID" INTEGER NOT NULL,
+    "RoomID" INTEGER NOT NULL,
+    "Timestamp" INTEGER NOT NULL,
+    "Seen" INTEGER,
+	FOREIGN KEY("RoomID") REFERENCES "Room"("ID"),
+	PRIMARY KEY("ID" AUTOINCREMENT)
+);
+
 CREATE TABLE IF NOT EXISTS "Sample" (
 	"ID"	INTEGER NOT NULL,
 	"Timestamp"	INTEGER NOT NULL DEFAULT 0,
 	"Duration"	INTEGER DEFAULT 0,
 	"RoomSensorID"	INTEGER NOT NULL,
 	"MeasurementsJSON"	TEXT,
-    "Notification" INTEGER,
-    "NotificationSeen" INTEGER,
 	FOREIGN KEY("RoomSensorID") REFERENCES "RoomSensor"("ID"),
 	PRIMARY KEY("ID")
 );

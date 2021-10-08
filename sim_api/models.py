@@ -20,6 +20,18 @@ class Room(Base):
     Name = Column(String, nullable=False)
     Description = Column(String)
 
+
+class Notification(Base):
+    __tablename__ = "notification"
+    def __init__(self, rid, timestamp):
+        self.RoomID = rid
+        self.Timestamp = timestamp
+        self.Seen = False
+    ID = Column(Integer, primary_key=True)
+    RoomID = Column(Integer,ForeignKey("room.ID"))
+    Timestamp = Column(Integer)
+    Seen = Column(Integer)
+
 class Sensor(Base):
     __tablename__ = "sensor"
     ID = Column(Integer, primary_key=True)

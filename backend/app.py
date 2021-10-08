@@ -291,6 +291,9 @@ def query_notification():
         #Get timestamp of the latest sample last checked for notifications
         last_sample = session.exec(select(models.Sample).where(models.Sample.Notification == 1).order_by(models.Sample.Timestamp.desc())).first()
 
+        if last_sample == None:
+            last_sample = session.exec(select(models.Sample)).first()
+
         samples = session.exec(select(models.Sample).where(models.Sample.Timestamp > last_sample.Timestamp).order_by(models.Sample.Timestamp.asc())).all()
 
 
@@ -308,16 +311,16 @@ def query_notification():
             room = session.exec(select(models.Room).join(models.RoomSensor, models.RoomSensor.RoomID == models.Room.ID).join(models.Sample, models.Sample.RoomSensorID == models.RoomSensor.ID).where(models.Sample.RoomSensorID == item.RoomSensorID)).first()
 
             if time_db == 0 or time_pitch == 0:
-                        time_db = item.Timestamp
-                        time_pitch = item.Timestamp
+                        time_db = timeToUNIX(item.Timestamp)
+                        time_pitch = timeToUNIX(item.Timestamp)
 
-            if started_db and json.loads(item.MeasurementsJSON)['dB'] < max_db and (item.Timestamp - time_db) > 300 and not item.NotificationSeen:
-                series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
+            if started_db and json.loads(item.MeasurementsJSON)['dB'] < room.MaxDB and (timeToUNIX(item.Timestamp) - time_db) > 300 and not item.NotificationSeen:
+                series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
 
                 nt = models.Notification()
                 nt.msg = "High decibal warning"
                 nt.StartTime = time_db
-                nt.EndTime = item.Timestamp
+                nt.EndTime = timeToUNIX(item.Timestamp)
                 nt.RoomID = room.ID
                 nt.peak = peak_db
 
@@ -330,17 +333,17 @@ def query_notification():
                 peak_db = 0
 
             if json.loads(item.MeasurementsJSON)['dB'] > room.MaxDB and not started_db:
-                time_db = item.Timestamp
+                time_db = timeToUNIX(item.Timestamp)
                 started_db = True
                 peak_db = json.loads(item.MeasurementsJSON)['dB']
 
-            if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < max_pitch and (item.Timestamp - time_pitch) > 300 and not item.NotificationSeen:
-                series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
+            if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < room.MaxPitch and (timeToUNIX(item.Timestamp) - time_pitch) > 300 and not item.NotificationSeen:
+                series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
 
                 nt = models.Notification()
                 nt.msg = "High pitch warning"
                 nt.StartTime = time_pitch
-                nt.EndTime = item.Timestamp
+                nt.EndTime = timeToUNIX(item.Timestamp)
                 nt.RoomID = room.ID
                 nt.peak = peak_pitch
 
@@ -353,7 +356,7 @@ def query_notification():
                 peak_pitch = 0
                                 
             if json.loads(item.MeasurementsJSON)['pitch'] > room.MaxPitch and not started_pitch:
-                time_pitch = item.Timestamp
+                time_pitch = timeToUNIX(item.Timestamp)
                 started_pitch = True
                 peak_pitch = json.loads(item.MeasurementsJSON)['pitch']
             
@@ -373,14 +376,9 @@ def query_notification():
     return ret
 
 
-@app.get("/test/")
-def query_test():
-    with Session(engine) as session:
-        samples = session.exec(select(models.Sample)).all()
-
-        first_sample = samples[0]
-
-        print(first_sample.Timestamp)
+def timeToUNIX(t):
+        unixtime = time.mktime(datetime.datetime.strptime(t, "%d-%m-%Y-%H:%M:%S").timetuple())
+        return unixtime
 
 
 

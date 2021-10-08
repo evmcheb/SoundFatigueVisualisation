@@ -108,10 +108,10 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
                 now = str(datetime.fromtimestamp(int(x.Timestamp)))
                # timeStringArr.append(str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second))
                 timeStringArr.append(now)
-            print(now)
+            
             splitting = input_date_string.split("-")
             new_case_date = splitting[2] + "-" + splitting[1]+"-"+splitting[0]
-            print(new_case_date)
+            
             #print(timeStringArr)
             rs_series["x"] = [x for x in timeStringArr if x[0:10]== new_case_date]
             #rs_series["x"] = [x.Timestamp for x in valid_samples]

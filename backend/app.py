@@ -11,6 +11,7 @@ from operator import add
 import datetime
 SQLModel.metadata.create_all(engine)
 
+from datetime import datetime
 app = FastAPI()
 origins = ["*"]
 
@@ -74,14 +75,16 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
         else:
             input_date_string = str(input_date)
         
-        ts = datetime.datetime.strptime(input_date, "%d-%m-%Y").timestamp()
+       # ts = datetime.datetime.strptime(input_date, "%d-%m-%Y").timestamp()
         
         if not start_time:
             # Show 
-            start_time = ts
+            start_time = 0
+           # start_time = ts
             #start_time = time.time() - 5*60
         if not end_time:
-            end_time = ts + SECONDS_IN_A_DAY
+            end_time = 0
+            #end_time = ts + SECONDS_IN_A_DAY
             
 
         RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
@@ -100,10 +103,12 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
             )).all()
             #time.strftime("%H:%M:%S", time.gmtime(timeStampPopulate))
             #rs_series["x"] = [time.strftime('%H:%M:%S',time.gmtime(x.Timestamp)) for x in valid_samples]
+            timeStringArr = []
             for x in rs.Samples:
-                print(x.Timestamp)
-
-            rs_series["x"] = [x.Timestamp[10:] for x in rs.Samples if x.Timestamp[0:9]== input_date_string]
+                now = datetime.fromtimestamp(int(x.Timestamp))
+                timeStringArr.append(str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second))
+            print(timeStringArr)
+            rs_series["x"] = [x[10:] for x in timeStringArr if x[0:9]== input_date_string]
             #rs_series["x"] = [x.Timestamp for x in valid_samples]
             print(len(rs_series['x']))
             if(len(rs_series['x']) !=0):

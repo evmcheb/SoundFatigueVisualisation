@@ -77,12 +77,12 @@ while True:
         }
 
         timeStamp = int(time.time())
-        now = datetime.datetime.now()
-        timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
+       # now = datetime.datetime.now()
+        #timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
         #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
         #print("THE TIME STAMP",newTimeStamp)
         
-        newSample = models.Sample(rs.ID, timeString, 1, json.dumps(data))
+        newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
 

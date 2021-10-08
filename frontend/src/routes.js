@@ -5,37 +5,45 @@ import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import FetchDataTwo from "./FetchData/FetchDataTwo";
 import Users from "views/Users.js";
-import MainPage from "./views/MainPage";
+import MainPage from "views/MainPage";
+import Settings from "views/Settings";
 
 var routes = [
-  
-  {
-    path: "/mainpage",
-    name: "Main Room Page",
-    icon: "tim-icons icon-chart-pie-36",
-    component: MainPage,
-    layout: "/admin",
-  },
-  {
-    path: "/users",
-    name: "Users",
-    icon: "tim-icons icon-single-02",
-    component: Users,
-    layout: "/admin",
-  },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "tim-icons icon-components",
-    component: Dashboard,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "tim-icons icon-bell-55",
-    component: Notifications,
-    layout: "/admin",
-  },
+
+    {
+        path: "/mainpage",
+        name: "Dashboard",
+        icon: "tim-icons icon-chart-pie-36",
+        component: MainPage,
+        layout: "/admin",
+    },
+    {
+      path: "/Dashboard/:id",
+      name: "Room Analytics",
+      icon: "tim-icons icon-components",
+      component: Dashboard,
+      layout: "/admin",
+    },
+    {
+        path: "/users",
+        name: "Users",
+        icon: "tim-icons icon-single-02",
+        component: Users,
+        layout: "/admin",
+    },
+    {
+        path: "/notifications",
+        name: "Notifications",
+        icon: "tim-icons icon-bell-55",
+        component: Notifications,
+        layout: "/admin",
+    },
+    {
+        path: "/settings",
+        name: "settings",
+        icon: "tim-icons icon-align-center",
+        component: Settings,
+        layout: "/admin",
+    },
 ];
 export default routes;

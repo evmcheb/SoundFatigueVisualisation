@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS "Room" (
     "MaxDB" INTEGER,
 	PRIMARY KEY("ID" AUTOINCREMENT)
 );
+
 CREATE TABLE IF NOT EXISTS "Sensor" (
 	"ID"	INTEGER NOT NULL,
 	"Name"	INTEGER,
@@ -38,12 +39,15 @@ CREATE TABLE IF NOT EXISTS "MovementEvent" (
 	FOREIGN KEY("OfficerID") REFERENCES "Officer"("ID"),
 	PRIMARY KEY("ID" AUTOINCREMENT)
 );
+
 CREATE TABLE IF NOT EXISTS "Sample" (
 	"ID"	INTEGER NOT NULL,
 	"Timestamp"	INTEGER NOT NULL DEFAULT 0,
 	"Duration"	INTEGER DEFAULT 0,
 	"RoomSensorID"	INTEGER NOT NULL,
 	"MeasurementsJSON"	TEXT,
+    "Notification" INTEGER,
+    "NotificationSeen" INTEGER,
 	FOREIGN KEY("RoomSensorID") REFERENCES "RoomSensor"("ID"),
 	PRIMARY KEY("ID")
 );
@@ -81,17 +85,42 @@ INSERT INTO Officer(Name, Username, PassHash, RoleEnum) VALUES(
     "1"
 );
 
-INSERT INTO Room(Name, Description) VALUES (
+INSERT INTO Room(Name, Description, MaxDB, MaxPitch) VALUES (
     "EngineRoom1",
-    "The first engine room"
+    "The first engine room",
+    "100",
+    "100"
 );
-INSERT INTO Room(Name, Description) VALUES (
+INSERT INTO Room(Name, Description, MaxDB, MaxPitch) VALUES (
     "EngineRoom2",
-    "The second engine room"
+    "The second engine room",
+    "100",
+    "100"
 );
-INSERT INTO Room(Name, Description) VALUES (
+INSERT INTO Room(Name, Description, MaxDB, MaxPitch) VALUES (
     "CommonRoom",
-    "The common room"
+    "The common room",
+    "100",
+    "100"
+);
+
+INSERT INTO Room(Name, Description, MaxDB, MaxPitch) VALUES (
+    "Kitchen",
+    "The Kitchen",
+    "100",
+    "100"
+);
+INSERT INTO Room(Name, Description, MaxDB, MaxPitch) VALUES (
+    "Cabin1",
+    "Cabin",
+    "100",
+    "100"
+);
+INSERT INTO Room(Name, Description, MaxDB, MaxPitch) VALUES (
+    "Cabin2",
+    "Cabin",
+    "100",
+    "100"
 );
 
 INSERT INTO Sensor(Name, Description) VALUES (
@@ -106,6 +135,18 @@ INSERT INTO Sensor(Name, Description) VALUES (
     "SNS03",
     "WiFi Sound Meter v1"
 );
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS04",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS05",
+    "WiFi Sound Meter v1"
+);
+INSERT INTO Sensor(Name, Description) VALUES (
+    "SNS06",
+    "WiFi Sound Meter v1"
+);
 
 INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
     1, 1
@@ -118,6 +159,16 @@ INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
 );
 INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
     3, 3
+);
+
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    4, 4
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    5, 5
+);
+INSERT INTO RoomSensor(SensorID, RoomID) VALUES (
+    6, 6
 );
 
 COMMIT;

@@ -28,13 +28,19 @@ import AvgGauge from '../variables/AvgGauge';
 
 
 function MainPage() {
-    
+   
+       
+        function goToRoom(roomId){
+            
+        }
+        
+      
     return (
         
         <>
-        <FetchDataTwo/>
+       
         <div className="content">
-            
+        
             <div>
             <Row>
             <Col lg="4">
@@ -47,13 +53,14 @@ function MainPage() {
                     
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
-                       <a href ={'/Dashboard'} > Link</a>
+                       <a href="Dashboard/1"> Link</a>
+                       
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
                     
-                    {/*  DISPLAY GAUGE HERE */}
-                    <AvgGauge/>
+                    {/*  DISPLAY Average or something here */}
+                    
                     
                 </CardBody>
                 </Card>
@@ -70,13 +77,15 @@ function MainPage() {
                     <h3 >Room 2</h3>
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
-                    <i > LINK</i>
+                       <a href="Dashboard/2"> Link</a>
+                       
+                       
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                   
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                    
                 </CardBody>
                 </Card>
 
@@ -92,13 +101,15 @@ function MainPage() {
                     <h3 >Room 3</h3>
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
-                    <i > LINK</i>
+                       <a href="Dashboard/3"> Link</a>
+                       
+                       
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                    
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                  
                 </CardBody>
                 </Card>
 
@@ -122,9 +133,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                   
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                  
                 </CardBody>
                 </Card>
 
@@ -144,9 +155,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                    
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                  
                 </CardBody>
                 </Card>
 
@@ -166,9 +177,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                    
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                  
                 </CardBody>
                 </Card>
 
@@ -192,9 +203,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                  
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                   
                 </CardBody>
                 </Card>
 
@@ -214,9 +225,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                   
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                
                 </CardBody>
                 </Card>
 
@@ -236,9 +247,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                    
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+                  
                 </CardBody>
                 </Card>
 
@@ -262,9 +273,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                 
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+            
                 </CardBody>
                 </Card>
 
@@ -284,9 +295,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+                
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+          
                 </CardBody>
                 </Card>
 
@@ -306,9 +317,9 @@ function MainPage() {
                     </CardTitle>
                 </CardHeader>
                 <CardBody>
-                    <div className="chart-area">
+              
                     {/*  DISPLAY GAUGE HERE */}
-                    </div>
+               
                 </CardBody>
                 </Card>
 

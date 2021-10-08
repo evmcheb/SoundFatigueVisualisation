@@ -81,11 +81,6 @@ while True:
 
     time.sleep(1)
 
-
-
-
-
-
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from datetime import datetime

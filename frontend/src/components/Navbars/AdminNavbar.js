@@ -60,30 +60,21 @@ function AdminNavbar(props) {
 
 
   //For handling fetching notification data
-  var data = FetchData();
+  var data = FetchData(`http://127.0.0.1:8000/notifications/`);
   var nots = data[0]['notifications'];
-
-  function timestampToHMS(timestamp) {
-    var date = new Date(timestamp);
-    var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    // Will display time in 10:30:23 format
-    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    return formattedTime
-  }
-
+  var notifications = [];
 
   if (nots !== undefined){
 
-    var notifications = [];
-
     if(nots.length > 0){
       for(var i = nots.length-1; i > 0; i--){
+
+        var start_time = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(nots[i]['start_time']*1000);
+        
         notifications.push(
         <NavLink tag='li'>
           <DropdownItem className="nav-item">
-          { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
+          { nots[i]['msg'] } at { start_time }!
           </DropdownItem>
         </NavLink>)
       }
@@ -95,6 +86,13 @@ function AdminNavbar(props) {
           </DropdownItem>
         </NavLink>)
     }
+  }else{
+    notifications.push(
+      <NavLink tag='li'>
+        <DropdownItem className="nav-item">
+          No new notifications.
+        </DropdownItem>
+      </NavLink>)
   }
 
   return (
@@ -145,12 +143,6 @@ function AdminNavbar(props) {
 
                 
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink to='/notifications' tag='li'>
-                    <DropdownItem className="nav-item">
-                      <i class="fa fa-cog" style={{paddingRight: "15px"}}></i>
-                      Configure
-                    </DropdownItem>
-                  </NavLink>
                   {notifications}
                 </DropdownMenu>
 
@@ -177,7 +169,7 @@ function AdminNavbar(props) {
                   <NavLink tag="li">
                     <DropdownItem className="nav-item">Profile</DropdownItem>
                   </NavLink>
-                  <NavLink tag="li">
+                  <NavLink tag="li" onClick = {() => window.location.href = "Settings"} >
                     <DropdownItem className="nav-item">Settings</DropdownItem>
                   </NavLink>
                   <DropdownItem divider tag="li" />

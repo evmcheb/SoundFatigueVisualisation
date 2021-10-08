@@ -43,6 +43,7 @@ class MaxGuage extends React.Component {
             }
 
     return (
+      <>
         
       <CircularGauge
         id="gauge"
@@ -66,6 +67,7 @@ class MaxGuage extends React.Component {
         
         <Export enabled={false} />
       </CircularGauge>
+      </>
     );
 }
 

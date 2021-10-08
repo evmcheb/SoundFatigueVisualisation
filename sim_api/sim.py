@@ -67,7 +67,7 @@ populateFrom = 1633638370
 while True:
     print(populateFrom)
     for rs in room_sensors:
-        print(rs.RoomID, rs.SensorID)
+        #print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
         hash = hashlib.sha1(f"{rs.SensorID}".encode())
         phase = int(hash.hexdigest()[:4], 16)
@@ -96,6 +96,7 @@ while True:
     else:
         populateFrom+=1
 
+'''
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from datetime import datetime
@@ -164,7 +165,7 @@ doc = """Usage:
 - dB in decibels
 - pitch in Hz
 """
-
+'''
 @app.get("/", response_class=PlainTextResponse)
 def main():
     return doc

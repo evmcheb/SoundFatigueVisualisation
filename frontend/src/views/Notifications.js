@@ -3,6 +3,8 @@ import React from "react";
 import NotificationAlert from "react-notification-alert";
 import FetchData from "FetchData/FetchData";
 import axios from "axios";
+import { Dropdown} from 'react-bootstrap';
+
 
 
 
@@ -28,43 +30,57 @@ function Notifications() {
   //Gather notification history
   var data = FetchData(2);
 
-  
-  function timestampToHMS(timestamp) {
-    var date = new Date(timestamp);
-    var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    // Will display time in 10:30:23 format
-    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    return formattedTime
-  }
-
   var nots = data[0]["notifications"];
+  var rs = data[0]["rooms"];
 
-  var max_db = data[0]["max_db"];
-  var max_pitch = data[0]["max_pitch"];
+  var max_db = 140;
+  var max_pitch = 120;
+  var room_id = 1;
 
 
   var notifications = [];
+  var rooms = [];
+
 
   if(nots !== undefined && nots.length > 0){
     for(var i = 0; i < nots.length; i++){
+
+      var start_time = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(nots[i]['start_time']*1000);
+      var end_time = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(nots[i]['end_time']*1000);
+      var end_date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(nots[i]['end_time']*1000);
+
       notifications.push(
       <UncontrolledAlert color="warning">
         <span>
           <b>Warning - </b>
-          { nots[i]['msg'] } at { timestampToHMS(nots[i]['time']) }!
+          { nots[i]['msg'] } from { start_time } to { end_time } in {nots[i]['room']} peaking at {nots[i]['peak']} on { end_date }!
         </span>
       </UncontrolledAlert>)
     }
+
   }else{
     notifications.push(
       <span>
         No notification history.
       </span>
     )
-
   }
+
+  if(rs !== undefined && rs.length > 0){
+    for(var i = 0; i < rs.length; i++){
+      rooms.push(
+        <option value={rs[i]["ID"]}>{rs[i]["name"]}</option>
+      )
+    }
+  }else{
+    rooms.push(
+      <span>
+        No rooms found.
+      </span>
+    )
+  }
+
+
 
 
   function setNots(){
@@ -74,11 +90,12 @@ function Notifications() {
         return;
       }
 
-      var url = `http://127.0.0.1:8000/set_notifications/1/`;
+      var url = `http://127.0.0.1:8000/set_notifications/`;
 
       data = { 
           MaxDB: max_db.toString(),
-          MaxPitch: max_pitch.toString()
+          MaxPitch: max_pitch.toString(),
+          RoomID: room_id.toString()
       }
 
       axios.post(url, data)
@@ -91,6 +108,10 @@ function Notifications() {
 
   function updateMaxPitch(event){
       max_pitch = event.target.value;
+  }
+
+  function handleRoomChange(value){
+      room_id = value;
   }
 
 
@@ -151,8 +172,8 @@ function Notifications() {
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <div style={{display: "flex", flexDirection:"row"}}>
-                    <table>
+                  <div style={{display: "flex", flexDirection:"row", alignItems: "center"}}>
+                    <table style={{marginRight: "30px"}}>
                       <tr>
                         <td style={{padding: "15px"}}>
                           Notify me if decibals exceed:
@@ -160,6 +181,7 @@ function Notifications() {
                         <td>
                             <input onChange={updateMaxDB} type="number" defaultValue={max_db}></input>
                         </td>
+                        <td>dB</td>
                       </tr>
                       <tr>
                         <td style={{padding: "15px"}}>
@@ -168,8 +190,13 @@ function Notifications() {
                         <td>
                             <input onChange={updateMaxPitch} type="number" defaultValue={max_pitch}></input>
                         </td>
+                        <td>Hz</td>
                       </tr>
                     </table>
+                    For room: 
+                    <select style={{padding: "10px", marginLeft: "10px"}} id="room_select" onChange={(val) => handleRoomChange(val.target.value)}>
+                       {rooms}
+                    </select>
                     <div style={{padding: "15px", textAlign: "center", minHeight:"100%"}}>
                       <button onClick={setNots} style={{minHeight: "100%", padding: "15px", backgroundColor: "rgba(0, 0, 0, 0.2)", color: "white", border: "1px solid black", borderRadius: "15%"}}>Save</button>
                     </div>

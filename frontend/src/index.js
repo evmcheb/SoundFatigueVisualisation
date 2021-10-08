@@ -14,12 +14,11 @@ import BackgroundColorWrapper from "./components/BackgroundColorWrapper/Backgrou
 
 
 ReactDOM.render(
-  
   <ThemeContextWrapper>
     <BackgroundColorWrapper>
       <BrowserRouter>
         <Switch>
-        
+          
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
           <Redirect from="/" to="/admin/dashboard" />
         </Switch>

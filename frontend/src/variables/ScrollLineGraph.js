@@ -1,7 +1,7 @@
 import React from 'react';
-//import { zoomingData } from './data.js';
+
 import FetchDataTwo, { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchDataTwo";
-////////////////////////////////////////././/////////////
+
 import Button from 'react-bootstrap/Button'
 import Chart, {
   ArgumentAxis,
@@ -18,10 +18,10 @@ import Chart, {
   Aggregation,Point,CommonSeriesSettings
 } from 'devextreme-react/chart';
 
-///
 //if i want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
+
     
    
     constructor(props) {

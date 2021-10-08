@@ -34,11 +34,19 @@ def sound_generator(input,count,saved_random):
             # Say a 0.1% chance of there being a painful noise 
             # and noise has a random generated time to last
             # not safe for any period of time
-        if(loud_bang >= (9990) or (count >0 and count <= saved_random +1)):
+        if(loud_bang >= (9996) or (count >0 and count <= saved_random +1)):
             count += 1
             if(saved_random == 0):
                 saved_random = randomLenOfBang
-            line = round(random.uniform(50.0, 150.0),1)
+            randomValue = random.random()
+            if(randomValue<0.3):
+                line = round(random.uniform(90, 110),1)
+            elif(randomValue<0.6):
+                line = round(random.uniform(50, 90),1)
+            elif(randomValue<0.9):
+                line = round(random.uniform(110, 130),1)
+            else:
+                line = round(random.uniform(110, 150),1)
         else:
             line = round(random.uniform(30.0, 50.0),1) 
             count =0
@@ -69,11 +77,12 @@ while True:
         }
 
         timeStamp = int(time.time())
-       
+        now = datetime.datetime.now()
+        timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
         #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
         #print("THE TIME STAMP",newTimeStamp)
         
-        newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
+        newSample = models.Sample(rs.ID, timeString, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
 

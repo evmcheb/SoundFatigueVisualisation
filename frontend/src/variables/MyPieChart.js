@@ -30,7 +30,8 @@ class MyPieChart extends React.Component {
           this.setState({render:true})
       }.bind(this),600)
       
-      
+      this.interval = setInterval(() => this.setState({ time: Date.now(),data: {areas}}), 1500);
+
       
   }
  

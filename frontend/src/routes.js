@@ -10,10 +10,10 @@ import MainPage from "./views/MainPage";
 var routes = [
   
   {
-    path: "/mainpage",
-    name: "Main Room Page",
-    icon: "tim-icons icon-chart-pie-36",
-    component: MainPage,
+    path: "/Dashboard/:id~:date",
+    name: "MainPage",
+    icon: "tim-icons icon-components",
+    component: Dashboard,
     layout: "/admin",
   },
   {
@@ -21,13 +21,6 @@ var routes = [
     name: "Users",
     icon: "tim-icons icon-single-02",
     component: Users,
-    layout: "/admin",
-  },
-  {
-    path: "/Dashboard/:id",
-    name: "Dashboard",
-    icon: "tim-icons icon-components",
-    component: Dashboard,
     layout: "/admin",
   },
   {

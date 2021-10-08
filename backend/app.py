@@ -7,11 +7,8 @@ from db import engine
 import models
 from sqlmodel import Field, SQLModel, Session, select, update
 from fastapi.middleware.cors import CORSMiddleware
-<<<<<<< HEAD
 from sqlalchemy import and_
-=======
 from operator import add
->>>>>>> 6f97598f5bcf3660c2336c63b349f13b9b069dcb
 
 from datetime import date
 import datetime
@@ -37,14 +34,12 @@ over a specific time period.
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
     with Session(engine) as session:
-<<<<<<< HEAD
         #if not start_time:
         #    start_time = time.time() - 5*60
         #if not end_time:
         #    end_time = time.time()
         #start_time < models.Sample.Timestamp,
                # end_time > models.Sample.Timestamp
-=======
         current_day = date.today()
         d1 = current_day.strftime("%d/%m/%Y")
         ts = datetime.datetime.strptime(d1, "%d/%m/%Y").timestamp()
@@ -54,7 +49,6 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
             #start_time = time.time() - 5*60
         if not end_time:
             end_time = time.time()
->>>>>>> 6f97598f5bcf3660c2336c63b349f13b9b069dcb
 
         RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
         ret = []
@@ -221,7 +215,7 @@ async def query_update_nots(request: Request):
         session.exec(update(models.Room).where(models.Room.ID == room_id).values(MaxDB=max_db, MaxPitch=max_pitch))
         session.commit()
     
-# this show retrive a list of notifications that have not been marked as seen
+'''# this show retrive a list of notifications that have not been marked as seen
 @app.get("/notifications/")
 def notification_queue(room_id: Optional[int]):
     with Session(engine) as session:
@@ -244,7 +238,7 @@ async def mark_as_seen(room_id: int, request: Request):
     rid = int(json_data["ID"])
     with Session(engine) as session:
         session.exec(update(models.Notification).where(models.Notification.ID == room_id).values(Seen=True))
-        session.commit()
+        session.commit()'''
  
 @app.get("/sensor/{sensor_id}/")
 def query_sensor(room_id: int, start_time: int, end_time: int):

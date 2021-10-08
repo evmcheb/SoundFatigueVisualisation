@@ -53,7 +53,7 @@ function Notifications() {
       <UncontrolledAlert color="warning">
         <span>
           <b>Warning - </b>
-          { nots[i]['msg'] } from { start_time } to { end_time } in {nots[i]['room']} peaking at {nots[i]['peak']} on { end_date }! {nots[i]["end_time"]}
+          { nots[i]['msg'] } from { start_time } to { end_time } in {nots[i]['room']} peaking at {nots[i]['peak']} on { end_date }!
         </span>
       </UncontrolledAlert>)
     }

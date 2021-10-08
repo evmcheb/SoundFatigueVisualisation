@@ -289,13 +289,12 @@ def query_notification():
             series['rooms'].append(room_data)
 
         #Get timestamp of the latest sample last checked for notifications
-        last_sample = session.exec(select(models.Sample).where(models.Sample.Notification == 1).order_by(models.Sample.Timestamp.desc())).first()
+        last_sample = session.exec(select(models.Sample).where(models.Sample.Notification == 1).order_by(models.Sample.ID.desc())).first()
 
         if last_sample == None:
             last_sample = session.exec(select(models.Sample)).first()
 
-        samples = session.exec(select(models.Sample).where(models.Sample.Timestamp > last_sample.Timestamp).order_by(models.Sample.Timestamp.asc())).all()
-
+        samples = session.exec(select(models.Sample).where(models.Sample.ID > last_sample.ID).order_by(models.Sample.Timestamp.asc())).all()
 
         time_db = 0
         started_db = False
@@ -305,8 +304,10 @@ def query_notification():
         started_pitch = False
         peak_pitch = 0
 
+        interval = 300
+
         i = 0
-        for item in samples:
+        for item in samples:            
             i += 1
             room = session.exec(select(models.Room).join(models.RoomSensor, models.RoomSensor.RoomID == models.Room.ID).join(models.Sample, models.Sample.RoomSensorID == models.RoomSensor.ID).where(models.Sample.RoomSensorID == item.RoomSensorID)).first()
 
@@ -314,7 +315,7 @@ def query_notification():
                         time_db = timeToUNIX(item.Timestamp)
                         time_pitch = timeToUNIX(item.Timestamp)
 
-            if started_db and json.loads(item.MeasurementsJSON)['dB'] < room.MaxDB and (timeToUNIX(item.Timestamp) - time_db) > 300 and not item.NotificationSeen:
+            if started_db and json.loads(item.MeasurementsJSON)['dB'] < room.MaxDB and (timeToUNIX(item.Timestamp) - time_db) > interval and item.NotificationSeen != 1:
                 series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
 
                 nt = models.Notification()
@@ -337,7 +338,7 @@ def query_notification():
                 started_db = True
                 peak_db = json.loads(item.MeasurementsJSON)['dB']
 
-            if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < room.MaxPitch and (timeToUNIX(item.Timestamp) - time_pitch) > 300 and not item.NotificationSeen:
+            if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < room.MaxPitch and (timeToUNIX(item.Timestamp) - time_pitch) > interval and item.NotificationSeen != 1:
                 series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
 
                 nt = models.Notification()
@@ -370,6 +371,43 @@ def query_notification():
             if i == len(samples):
                 session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(Notification=1))
                 session.commit()
+                
+                if started_db:
+                    series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
+
+                    nt = models.Notification()
+                    nt.msg = "High decibal warning"
+                    nt.StartTime = time_db
+                    nt.EndTime = timeToUNIX(item.Timestamp)
+                    nt.RoomID = room.ID
+                    nt.peak = peak_db
+
+                    session.add(nt)
+                    session.exec(update(models.Sample).where(item.ID == models.Sample.ID).values(NotificationSeen=True))
+                    session.commit()
+
+                    started_db = False
+                    time_db = 0
+                    peak_db = 0
+                
+                if started_pitch:
+                    series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
+
+                    nt = models.Notification()
+                    nt.msg = "High pitch warning"
+                    nt.StartTime = time_pitch
+                    nt.EndTime = timeToUNIX(item.Timestamp)
+                    nt.RoomID = room.ID
+                    nt.peak = peak_pitch
+
+                    session.add(nt)
+                    session.exec(update(models.Sample).where(item.ID == models.Sample.ID).values(NotificationSeen=True))
+                    session.commit()
+
+                    started_pitch = False
+                    time_pitch = 0
+                    peak_pitch = 0
+
 
 
     ret.append(series)

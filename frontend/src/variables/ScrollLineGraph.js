@@ -72,7 +72,7 @@ class ScrollLineGraph extends React.Component {
         id="chart"
         palette="Material"
         dataSource= {this.state.data.zoomingData}
-        format="HH:MM:SS"
+        
         
         >
         <Series  valueField="y1"  type="line" >
@@ -81,9 +81,10 @@ class ScrollLineGraph extends React.Component {
         </Series>
         
         <ArgumentAxis
-            argumentType="date"
+            valueMarginsEnabled={ true}
+            argumentType="time"
             aggregationInterval={120}/>
-
+            <Label format="shortTime" />
        
         {/* Setting the green to red horizontal lines */}
         <ValueAxis>

@@ -93,7 +93,10 @@ render(){
           start={this.updateVisualRange}
           end={this.updateVisualRange}
           onValueChanged={this.updateVisualRange}
+          
         >
+           
+          
           <Size height={100} />
           <RsChart>
             
@@ -101,8 +104,12 @@ render(){
               type="line"
               valueField="y1"
               argumentField="arg"
+             
+              
             >
+              
               <RsAggregation enabled="true" />
+             
             </RsSeries>
           </RsChart>
           <Scale
@@ -139,7 +146,12 @@ render(){
             visualRange={this.state.visualRange}
             valueMarginsEnabled={false}
             
-          ></ArgumentAxis>
+            argumentType="datetime"
+           
+            
+          >
+            <Label format="shortTime" />
+          </ArgumentAxis>
         
         {/* Setting the green to red horizontal lines */}
         <ValueAxis valueType="numeric" >

@@ -81,9 +81,9 @@ class ScrollLineGraph extends React.Component {
         </Series>
         
         <ArgumentAxis
-            valueMarginsEnabled={ true}
-            argumentType="time"
-            aggregationInterval={120}/>
+            
+            argumentType="datetime"
+           />
             <Label format="shortTime" />
        
         {/* Setting the green to red horizontal lines */}

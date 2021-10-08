@@ -63,9 +63,9 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
-
-populateFrom = 1633536060 #= 1/10/2021 00:01
+populateFrom = 1633638370
 while True:
+    print(populateFrom)
     for rs in room_sensors:
         #print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
@@ -77,33 +77,24 @@ while True:
             "dB":datadb,
             "pitch": round(100 * np.sin(2*np.pi/(60*3) + int(time.time()) + phase), 3)
         }
-        
+
         timeStamp = int(time.time())
-        # Hour:Minute:Seconds string format
-        timeString = ""
-        now = datetime.datetime.now()
-        timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
-        print(timeString)
-
-        populateFrom = timeStamp
-
-        '''if(populateFrom != timeStamp):
-            timeStampPopulate = populateFrom
-            populateFrom +=1
-
+        if(populateFrom != timeStamp):
+            toDataBaseTimeStamp = populateFrom
         else:
-            timeStampPopulate = timeStamp'''
-  
-       # print("THE TIME STAMP",newTimeStamp)
-        #print(timeStampPopulate)
-        newSample = models.Sample(rs.ID, timeString, 1, json.dumps(data))
+            toDataBaseTimeStamp = timeStamp 
+       # now = datetime.datetime.now()
+        #timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
+        #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
+        #print("THE TIME STAMP",newTimeStamp)
+        
+        newSample = models.Sample(rs.ID, toDataBaseTimeStamp, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
-    #if(timeStampPopulate == timeStamp):
-    #    print("reached")
+    if(populateFrom == timeStamp):
         time.sleep(1)
-
-    
+    else:
+        populateFrom+=1
 
 '''
 from fastapi import FastAPI

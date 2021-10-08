@@ -49,7 +49,6 @@ class Sample(SQLModel, table=True):
     Timestamp: int
     Duration: int
     MeasurementsJSON: str
-<<<<<<< HEAD
     Notification: bool
     NotificationSeen: bool
     RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")
@@ -61,6 +60,3 @@ class Notification(SQLModel, table=True):
     EndTime: int
     peak: int
     RoomID: int = Field(default=None, foreign_key="sample.ID")
-=======
-    RoomSensorB: Optional[RoomSensor] = Relationship(back_populates="Samples")
->>>>>>> 6f97598f5bcf3660c2336c63b349f13b9b069dcb

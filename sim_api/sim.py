@@ -87,21 +87,21 @@ while True:
 
         populateFrom = timeStamp
 
-        if(populateFrom != timeStamp):
+        '''if(populateFrom != timeStamp):
             timeStampPopulate = populateFrom
             populateFrom +=1
 
         else:
-            timeStampPopulate = timeStamp
+            timeStampPopulate = timeStamp'''
   
        # print("THE TIME STAMP",newTimeStamp)
         #print(timeStampPopulate)
         newSample = models.Sample(rs.ID, timeString, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
-    if(timeStampPopulate == timeStamp):
-        print("reached")
-        time.sleep(1)
+    #if(timeStampPopulate == timeStamp):
+    #    print("reached")
+    #    time.sleep(1)
 
     
 

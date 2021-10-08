@@ -21,12 +21,9 @@ import Chart, {
 //if i want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
-<<<<<<< HEAD
 
-=======
     
    
->>>>>>> 6f97598f5bcf3660c2336c63b349f13b9b069dcb
     constructor(props) {
         super(props);
         this.state = {

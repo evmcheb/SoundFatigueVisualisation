@@ -63,7 +63,9 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
+populateFrom = 1633638370
 while True:
+    print(populateFrom)
     for rs in room_sensors:
         print(rs.RoomID, rs.SensorID)
         # same sensor should return same data
@@ -77,16 +79,22 @@ while True:
         }
 
         timeStamp = int(time.time())
+        if(populateFrom != timeStamp):
+            toDataBaseTimeStamp = populateFrom
+        else:
+            toDataBaseTimeStamp = timeStamp 
        # now = datetime.datetime.now()
         #timeString = str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second)
         #newTimeStamp = time.strftime("%H:%M:%S", time.gmtime(timeStamp))
         #print("THE TIME STAMP",newTimeStamp)
         
-        newSample = models.Sample(rs.ID, timeStamp, 1, json.dumps(data))
+        newSample = models.Sample(rs.ID, toDataBaseTimeStamp, 1, json.dumps(data))
         db.add(newSample)
         db.commit()
-
-    time.sleep(1)
+    if(populateFrom == timeStamp):
+        time.sleep(1)
+    else:
+        populateFrom+=1
 
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse

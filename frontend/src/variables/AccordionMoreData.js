@@ -39,7 +39,8 @@ export default function SimpleAccordion() {
             <TimesConcernDisp/>
             </div>
             <div style={{width: "100%"}}>
-          <MyRangeSlider /> 
+              {/*  <MyRangeSlider />  */}
+          
             </div>
            
         </AccordionDetails>

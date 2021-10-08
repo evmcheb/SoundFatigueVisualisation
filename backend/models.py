@@ -37,12 +37,6 @@ class MovementEvent(SQLModel, table=True):
     OfficerID: int = Field(default=None, foreign_key="officer.ID")
     Timestamp: int
 
-class Notification(SQLModel, table=True):
-    ID: int = Field(primary_key=True)
-    RoomID: int = Field(default=None, foreign_key="room.ID")
-    Timestamp: int
-    Seen: int
-
 class Sample(SQLModel, table=True):
     ID: int = Field(primary_key=True)
     RoomSensorID: int = Field(default=None, foreign_key="roomsensor.ID")

@@ -26,6 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 SECONDS_IN_A_DAY = 86400
 '''
 This function should return the amount of sound in a room
@@ -370,6 +371,16 @@ def query_notification():
 
     ret.append(series)
     return ret
+
+
+@app.get("/test/")
+def query_test():
+    with Session(engine) as session:
+        samples = session.exec(select(models.Sample)).all()
+
+        first_sample = samples[0]
+
+        print(first_sample.Timestamp)
 
 
 

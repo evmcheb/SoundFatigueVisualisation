@@ -227,6 +227,7 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         
         rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         if(len(timestamps) == 0):
+            # timestamps are not input_date
             rs_series["dB"] = []
             rs_series["pitches"] = []
             rs_series["CurrentRoom"] = None

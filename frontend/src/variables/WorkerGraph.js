@@ -20,7 +20,7 @@ import Chart, {
 
 //if i want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
-class ScrollLineGraph extends React.Component {
+class WorkerGraph extends React.Component {
 
     
    
@@ -38,7 +38,7 @@ class ScrollLineGraph extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),500)
+          }.bind(this),1500)
           
           this.interval = setInterval(() => this.setState({ time: Date.now(),data: {workerData}}), 3000);
           
@@ -50,7 +50,7 @@ class ScrollLineGraph extends React.Component {
 
         let renderContainer = false
         if(this.state.render) {
-            console.log({done})
+            
             if(done==1 && this.state.data.workerData==0){
                 
                 this.setState({data: {workerData}});
@@ -169,5 +169,5 @@ class ScrollLineGraph extends React.Component {
   }
 
 
-export default ScrollLineGraph;
+export default WorkerGraph;
 ////

@@ -3,6 +3,7 @@ import React from "react";
 
 import moment from "moment";
 import ScrollLineGraph from "variables/ScrollLineGraph"
+import WorkerGraph from "variables/WorkerGraph"
 // reactstrap components
 import {
   Button,
@@ -24,8 +25,6 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-
-import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime, lastTime} from "../FetchData/FetchDataTwo";
 import FetchWorkerData from "../FetchData/FetchWorkerData";
 
 
@@ -110,7 +109,7 @@ function WorkerDashboard(props) {
              
                 
                   {/* Main graph */}
-                  <ScrollLineGraph />
+                  <WorkerGraph />
                 
              
             </Card>
@@ -125,22 +124,24 @@ function WorkerDashboard(props) {
               <div>
                 <Row>
                 <div className="thePieChart" style={{padding: "25px"}}>
-                <MyPieChart/>
+                    {/*<MyPieChart/> */}
+                
                 </div>
                 <div>
-                  
-                  <AvgGauge/>
+                   {/*<AvgGauge/> */}
+                
                 </div>
                 
                 <div  >
-                <MaxGuage/>
+                       {/*  <MaxGuage/> */}
+              
                  
                  
                   
                 </div>
                 
                 <div>
-            {maxDecibel} 
+           
               </div>
                 
                 

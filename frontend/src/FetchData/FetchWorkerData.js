@@ -58,12 +58,12 @@ export default class FetchDataTwo extends React.Component {
         this.intervalID = setTimeout(this.getData.bind(this), 15000);//refresh data every 15 seconds
         
         this.setState(prevState => ({
-            dbs: [...prevState.dbs, data[0].dB]
+            dbs: [...prevState.dbs, data.dB]
         }))
         
         
         this.setState(prevState => ({
-           timeStamp: [...prevState.timeStamp, data[0].x]
+           timeStamp: [...prevState.timeStamp, data.x]
         }))
         this.setState({loading:false})
         this.setState({room:this.props.room})
@@ -82,9 +82,9 @@ export default class FetchDataTwo extends React.Component {
         maxValues = [];
         
         //{ arg: 10, y1: -12 },
-        for(var i=0; i< data[0].dB.length; i++){
-            var decibels = data[0].dB[i];
-            var timestamp = data[0].x[i];
+        for(var i=0; i< data.dB.length; i++){
+            var decibels = data.dB[i];
+            var timestamp = data.x[i];
             amountDecibels += decibels;
             
             //For pie chart
@@ -103,7 +103,7 @@ export default class FetchDataTwo extends React.Component {
 
             lastTime = timestamp;
             //lastTime = timestamp;
-            if(i === data[0].dB.length-100){
+            if(i === data.dB.length-100){
                //startTime = formattedTime;
                startTime = timestamp;
             }
@@ -125,16 +125,16 @@ export default class FetchDataTwo extends React.Component {
           }
           
           //Times of concern for 80 db+ => damage to hearing after 2 hours
-          for(var j=0; j< data[0].dB.length; j++){
-            var dB = data[0].dB[j];
-            var timestamp80 = data[0].x[j];
+          for(var j=0; j< data.dB.length; j++){
+            var dB = data.dB[j];
+            var timestamp80 = data.x[j];
             if(dB>=80){
                 var startTimeConcern = timestamp80;
                 j++;
                 var endTimeConcern =0;
-                while(data[0].dB[j]>=80){
+                while(data.dB[j]>=80){
                     
-                    endTimeConcern = data[0].x[j];
+                    endTimeConcern = data.x[j];
                     j++;
                 }
                 if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 7200)){
@@ -143,16 +143,16 @@ export default class FetchDataTwo extends React.Component {
             }
           }
           //Times of concern for 85 db+ => damage to hearing after 50 minutes
-          for(var k=0; k< data[0].dB.length; k++){
-            var dB = data[0].dB[k];
-            var timestamp85 = data[0].x[k];
+          for(var k=0; k< data.dB.length; k++){
+            var dB = data.dB[k];
+            var timestamp85 = data.x[k];
             if(dB>=85){
                 var startTimeConcern = timestamp85;
                 k++;
                 var endTimeConcern =0;
-                while(data[0].dB[j]>=85){
+                while(data.dB[j]>=85){
                     
-                    endTimeConcern = data[0].x[k];
+                    endTimeConcern = data.x[k];
                     k++;
                 }
                 if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 3000)){
@@ -161,16 +161,16 @@ export default class FetchDataTwo extends React.Component {
             }
           }
           //Times of concern for 100 db+ => damage to hearing after 15 minutes
-          for(var l=0; l< data[0].dB.length; l++){
-            var dB = data[0].dB[l];
-            var timestamp100 = data[0].x[l];
+          for(var l=0; l< data.dB.length; l++){
+            var dB = data.dB[l];
+            var timestamp100 = data.x[l];
             if(dB>=100){
                 var startTimeConcern = timestamp100;
                 k++;
                 var endTimeConcern =0;
-                while(data[0].dB[l]>=100){
+                while(data.dB[l]>=100){
                     
-                    endTimeConcern = data[0].x[l];
+                    endTimeConcern = data.x[l];
                     l++;
                 }
                 if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 900)){
@@ -179,16 +179,16 @@ export default class FetchDataTwo extends React.Component {
             }
           }
           //Times of concern for 105 db+ => damage to hearing after 5 minutes
-          for(var m=0; m< data[0].dB.length; m++){
-            var dB = data[0].dB[m];
-            var timestamp105 = data[0].x[m];
+          for(var m=0; m< data.dB.length; m++){
+            var dB = data.dB[m];
+            var timestamp105 = data.x[m];
             if(dB>=105){
                 var startTimeConcern = timestamp105;
                 k++;
                 var endTimeConcern =0;
-                while(data[0].dB[m]>=105){
+                while(data.dB[m]>=105){
                     
-                    endTimeConcern = data[0].x[m];
+                    endTimeConcern = data.x[m];
                     m++;
                 }
                 if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 300)){
@@ -197,16 +197,16 @@ export default class FetchDataTwo extends React.Component {
             }
           }
           //Times of concern for 110 db+ => damage to hearing after 2 minutes
-          for(var n=0; n< data[0].dB.length; n++){
-            var dB = data[0].dB[n];
-            var timestamp110 = data[0].x[n];
+          for(var n=0; n< data.dB.length; n++){
+            var dB = data.dB[n];
+            var timestamp110 = data.x[n];
             if(dB>=110){
                 var startTimeConcern = timestamp110;
                 n++;
                 var endTimeConcern = 0;
-                while(data[0].dB[n]>=110){
+                while(data.dB[n]>=110){
                     
-                    endTimeConcern = data[0].x[n];
+                    endTimeConcern = data.x[n];
                     n++;
                 }
                 if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 120)){
@@ -215,16 +215,16 @@ export default class FetchDataTwo extends React.Component {
             }
           }
           //Times of concern for 120 db+ => damage to hearing after any amount of time
-          for(var p=0; p< data[0].dB.length; p++){
-            var dB = data[0].dB[p];
-            var timestamp120 = data[0].x[p];
+          for(var p=0; p< data.dB.length; p++){
+            var dB = data.dB[p];
+            var timestamp120 = data.x[p];
             if(dB>=120){
                 var startTimeConcern = timestamp120;
                 p++;
                 var endTimeConcern = 0;
-                while(data[0].dB[p]>=120){
+                while(data.dB[p]>=120){
                     
-                    endTimeConcern = data[0].x[p];
+                    endTimeConcern = data.x[p];
                     p++;
                 }
                 if(endTimeConcern!=0 ){
@@ -259,7 +259,7 @@ export default class FetchDataTwo extends React.Component {
 
 
 
-          avgDecibel = amountDecibels/data[0].dB.length;
+          avgDecibel = amountDecibels/data.dB.length;
           avgDecibel = avgDecibel.toFixed(2);
           //Determing what colour of average decibels
         if(avgDecibel <=70){
@@ -277,9 +277,14 @@ export default class FetchDataTwo extends React.Component {
         done = 1;
 
         
-        worker.push({workerId:1,checkIn:1632428957,checkOut:1632429709})
-        workerData.push({timeSheet:worker});
+        
         console.log("RIGHT HERE",workerData)
+        if(workerData.length ==0){
+            console.log("In here dog")
+            workerData.push({arg:1, y1:1});
+
+        }
+        console.log(workerData)
           this.setState({workerData})
           this.setState({lastTime})
           this.setState({avgDecibel})

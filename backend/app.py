@@ -210,7 +210,7 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
             pitches[i] = sum(pitch_dups)/len(pitch_dups)
         print(len(timestamps), len(dbs), len(pitches))
             
-        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, 'x':timestamps, "dB":dbs, "pitches":pitches}
+        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 
 
@@ -338,7 +338,7 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
             pitches[i] = sum(pitch_dups)/len(pitch_dups)
         print(len(timestamps), len(dbs), len(pitches))
             
-        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, 'x':timestamps, "dB":dbs, "pitches":pitches}
+        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 
 
@@ -406,7 +406,7 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
             pitches[i] = sum(pitch_dups)/len(pitch_dups)
         print(len(timestamps), len(dbs), len(pitches))
             
-        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, 'x':timestamps, "dB":dbs, "pitches":pitches}
+        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 
 @app.post("/set_notifications/{room_id}/")

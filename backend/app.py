@@ -224,7 +224,13 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         splitting = input_date_string.split("-")
         new_case_date = splitting[2] + "-" + splitting[1]+"-"+splitting[0]
         timestamps = [x for x in timeStringArr if x[0:10]== new_case_date]
+        
         rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
+        if(len(timestamps) == 0):
+            rs_series["dB"] = []
+            rs_series["pitches"] = []
+            rs_series["CurrentRoom"] = None
+        
         return rs_series
 
 

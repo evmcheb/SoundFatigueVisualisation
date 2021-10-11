@@ -11,7 +11,7 @@ var passDate = null;
 export default function TheDateBox(props) {
   // To have datebox displaying input date
   var dateToDisplay = props.date
-  var roomViewing = props.room
+  var id = props.id
   var[day,month,year] = dateToDisplay.split('-')
 
   const [selectedDate, setselectedDate] = useState({data:new Date(`${month}/${day}/${year}`)});
@@ -28,7 +28,7 @@ export default function TheDateBox(props) {
   };
   const displayNewDate = () =>{
     var newPath = "" 
-    newPath = newPath.concat(roomViewing);
+    newPath = newPath.concat(id);
     newPath = newPath.concat("~");
     newPath = newPath.concat(passDate);
     history.push(newPath);

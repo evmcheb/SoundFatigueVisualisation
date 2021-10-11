@@ -97,7 +97,7 @@ function Dashboard(props) {
                   <Col className="text-left" sm="6">
                     <h4 >Viewing Room {props.match.params.id} For  {moment(`${month}/${day}/${year}`).format("LL")} </h4>
                     
-                    <TheDateBox room= {props.match.params.id} date = {props.match.params.date}/>
+                    <TheDateBox id= {props.match.params.id} date = {props.match.params.date}/>
                     
   
                     <CardTitle tag="h2">Decibel Reading </CardTitle>

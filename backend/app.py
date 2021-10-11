@@ -153,8 +153,15 @@ for an input date
 WIP
 '''
 @app.get("/officer/{officer_id}/{input_date}")
-def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
+def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
     with Session(engine) as session:
+        if(str(input_date[0])=='0'):
+            
+            input_date_string = str(input_date)
+        else:
+            input_date_string = str(input_date)
+        
+
         if not start_time:
             start_time = 0
         if not end_time:
@@ -174,24 +181,46 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         dbs = []
         pitches = []
         e = MovementEvents[0]
+        array = []
         for e in MovementEvents:
             # we have changed room, so calculate sound exposure in cur_room
             # since enter_time til now
             # get the AVERAGE sound/pitch because there are multiple sensors in the room
             # assumption - data comes in every second
+
             RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == e.RoomID)).all()
             for rs in RoomSensors:
+                print("HERE1")
                 valid_samples = session.exec(select(models.Sample).where(
                     models.Sample.RoomSensorID == rs.ID,
                     models.Sample.Timestamp,
                     e.Timestamp >= models.Sample.Timestamp
                 )).all()
-                timestamps.extend([x.Timestamp for x in valid_samples])
-                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                dbs.extend([x['dB'] for x in data])
-                pitches.extend([x['pitch'] for x in data])
 
-            start_time = e.Timestamp
+                timeStringArr = []
+                for x in valid_samples:
+                    
+                    now = str(datetime.fromtimestamp(int(x.Timestamp)))
+                # timeStringArr.append(str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second))
+                    timeStringArr.append(now)
+            
+                    splitting = input_date_string.split("-")
+                    new_case_date = splitting[2] + "-" + splitting[1]+"-"+splitting[0]
+            
+                    
+                    array = [x for x in timeStringArr if x[0:10]== new_case_date]
+                if(len(array) !=0):
+                    timestamps.extend([x.Timestamp for x in valid_samples])
+                    data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+                    dbs.extend([x['dB'] for x in data])
+                    pitches.extend([x['pitch'] for x in data])
+                       
+                    print("HERE3")
+                        
+                    
+                start_time = e.Timestamp
+
+
 
         # remove duplicates by taking averages
         for i, t in enumerate(timestamps):
@@ -209,71 +238,17 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
             dbs[i] = sum(db_dups)/len(db_dups)
             pitches[i] = sum(pitch_dups)/len(pitch_dups)
         print(len(timestamps), len(dbs), len(pitches))
-            
+        timestamps = array
+
+        #rs_series["x"] = [x.Timestamp for x in valid_samples]
+        
+        
         rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 
 
 
 
-'''
-This function should return the amount of sound in a room
-for the specified date
-'''
-@app.get("/room/{room_id}/{input_date}")
-def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
-    with Session(engine) as session:
-        
-        ####For time string
-        
-        if(str(input_date[0])=='0'):
-            
-            input_date_string = str(input_date[1:])
-        else:
-            input_date_string = str(input_date)
-        
-        ts = datetime.datetime.strptime(input_date, "%d-%m-%Y").timestamp()
-        
-        if not start_time:
-            # Show 
-            start_time = ts
-            #start_time = time.time() - 5*60
-        if not end_time:
-            end_time = ts + SECONDS_IN_A_DAY
-            
-
-        RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
-        ret = []
-
-        Room = session.exec(select(models.Room).where(models.Room.ID == room_id)).one()
-        max_db = Room.MaxDB
-        max_pitch = Room.MaxPitch
-
-        for rs in RoomSensors:
-            rs_series = {"SensorID": rs.SensorB.ID, "SensorName":rs.SensorB.Name}
-            valid_samples = session.exec(select(models.Sample).where(
-                models.Sample.RoomSensorID == rs.ID,
-                models.Sample.Timestamp,
-                models.Sample.Timestamp
-            )).all()
-            #time.strftime("%H:%M:%S", time.gmtime(timeStampPopulate))
-            #rs_series["x"] = [time.strftime('%H:%M:%S',time.gmtime(x.Timestamp)) for x in valid_samples]
-            
-            rs_series["x"] = [x.Timestamp[10:] for x in rs.Samples if x.Timestamp[0:9]==input_date_string]
-            print(len(rs_series['x']))
-            if(len(rs_series['x']) !=0):
-                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                rs_series["dB"] = [x['dB'] for x in data]
-                rs_series["pitch"] = [x["pitch"] for x in data]
-            else:
-                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                rs_series["dB"] = []
-                rs_series["pitch"] = []
-            ret.append(rs_series)
-
-            session.commit()
-        
-        return ret
 
 '''
 This function should return the amount of sound exposed to a single officer

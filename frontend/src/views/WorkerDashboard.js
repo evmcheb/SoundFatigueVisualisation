@@ -51,7 +51,7 @@ function WorkerDashboard(props) {
 
 
   var dateToDisplay = props.match.params.date
-  var roomViewing = props.room
+  
   var[day,month,year] = dateToDisplay.split('-')
   //If sidebar link was clicked and no room is selected
   //make user select room to display
@@ -97,9 +97,9 @@ function WorkerDashboard(props) {
             <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h4 >Viewing Room {props.match.params.id} For  {moment(`${month}/${day}/${year}`).format("LL")} </h4>
+                    <h4 >Viewing WorkerID {props.match.params.id} For  {moment(`${month}/${day}/${year}`).format("LL")} </h4>
                     
-                    <TheDateBox room= {props.match.params.id} date = {props.match.params.date}/>
+                    <TheDateBox id= {props.match.params.id} date = {props.match.params.date}/>
                     
   
                     <CardTitle tag="h2">Decibel Reading </CardTitle>

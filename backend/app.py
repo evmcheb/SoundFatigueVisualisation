@@ -10,13 +10,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import and_
 from operator import add
 
-from datetime import date
 import datetime
-import ciso8601
-import datetime
+from datetime import datetime
 SQLModel.metadata.create_all(engine)
 
-from datetime import datetime
+#from datetime import datetime, timedelta
 app = FastAPI()
 origins = ["*"]
 
@@ -161,16 +159,18 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         else:
             input_date_string = str(input_date)
         
-
+    with Session(engine) as session:
         if not start_time:
-            start_time = 0
+            dateTimeStamp = datetime.strptime(input_date, "%d-%m-%Y").timestamp()
+            # start at midnight
+            start_time = dateTimeStamp
         if not end_time:
-            end_time = 0
+            end_time = time.time()
         Officer = session.exec(select(models.Officer).where(models.Officer.ID == officer_id)).one()
         MovementEvents = session.exec(select(models.MovementEvent).where(
             models.MovementEvent.OfficerID == officer_id,
-           models.MovementEvent.Timestamp,
-            models.MovementEvent.Timestamp
+            start_time < models.MovementEvent.Timestamp,
+            end_time > models.MovementEvent.Timestamp
             )).all()
 
         if len(MovementEvents) < 1:
@@ -181,46 +181,24 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         dbs = []
         pitches = []
         e = MovementEvents[0]
-        array = []
         for e in MovementEvents:
             # we have changed room, so calculate sound exposure in cur_room
             # since enter_time til now
             # get the AVERAGE sound/pitch because there are multiple sensors in the room
             # assumption - data comes in every second
-
             RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == e.RoomID)).all()
             for rs in RoomSensors:
-                print("HERE1")
                 valid_samples = session.exec(select(models.Sample).where(
                     models.Sample.RoomSensorID == rs.ID,
-                    models.Sample.Timestamp,
+                    start_time <= models.Sample.Timestamp,
                     e.Timestamp >= models.Sample.Timestamp
                 )).all()
+                timestamps.extend([x.Timestamp for x in valid_samples])
+                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
+                dbs.extend([x['dB'] for x in data])
+                pitches.extend([x['pitch'] for x in data])
 
-                timeStringArr = []
-                for x in valid_samples:
-                    
-                    now = str(datetime.fromtimestamp(int(x.Timestamp)))
-                # timeStringArr.append(str(now.day)+"-"+str(now.month)+"-"+ str(now.year)+"-"+str(now.hour) +":"+ str(now.minute) +":"+ str(now.second))
-                    timeStringArr.append(now)
-            
-                    splitting = input_date_string.split("-")
-                    new_case_date = splitting[2] + "-" + splitting[1]+"-"+splitting[0]
-            
-                    
-                    array = [x for x in timeStringArr if x[0:10]== new_case_date]
-                if(len(array) !=0):
-                    timestamps.extend([x.Timestamp for x in valid_samples])
-                    data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                    dbs.extend([x['dB'] for x in data])
-                    pitches.extend([x['pitch'] for x in data])
-                       
-                    print("HERE3")
-                        
-                    
-                start_time = e.Timestamp
-
-
+            start_time = e.Timestamp
 
         # remove duplicates by taking averages
         for i, t in enumerate(timestamps):
@@ -238,11 +216,14 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
             dbs[i] = sum(db_dups)/len(db_dups)
             pitches[i] = sum(pitch_dups)/len(pitch_dups)
         print(len(timestamps), len(dbs), len(pitches))
-        timestamps = array
-
-        #rs_series["x"] = [x.Timestamp for x in valid_samples]
-        
-        
+        timeStringArr = []
+        for x in timestamps:
+            now = str(datetime.fromtimestamp(int(x)))
+            timeStringArr.append(now)
+        print(timeStringArr)
+        splitting = input_date_string.split("-")
+        new_case_date = splitting[2] + "-" + splitting[1]+"-"+splitting[0]
+        timestamps = [x for x in timeStringArr if x[0:10]== new_case_date]
         rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 

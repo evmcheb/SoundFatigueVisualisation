@@ -85,7 +85,7 @@ function WorkerDashboard(props) {
     <div>
       {/* pass in what room was clicked?*/}
 
-      <FetchWorkerData workerid= {props.match.params.id} date = {props.match.params.date}/>
+      <FetchWorkerData id= {props.match.params.id} date = {props.match.params.date}/>
      
       </div>
       

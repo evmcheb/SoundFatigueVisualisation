@@ -34,19 +34,25 @@ def sound_generator(input,count,saved_random):
             # Say a 0.1% chance of there being a painful noise 
             # and noise has a random generated time to last
             # not safe for any period of time
-        if(loud_bang >= (9996) or (count >0 and count <= saved_random +1)):
+        if(loud_bang >= (9997) or (count >0 and count <= saved_random +1)):
             count += 1
             if(saved_random == 0):
                 saved_random = randomLenOfBang
             randomValue = random.random()
-            if(randomValue<0.3):
-                line = round(random.uniform(90, 110),1)
-            elif(randomValue<0.6):
-                line = round(random.uniform(50, 90),1)
-            elif(randomValue<0.9):
-                line = round(random.uniform(110, 130),1)
+            if(randomValue<0.2):
+                line = round(random.uniform(50, 80),1)
+            elif(randomValue<0.45):
+                line = round(random.uniform(80, 90),1)
+            elif(randomValue<0.65):
+                line = round(random.uniform(80, 95),1)
+            elif(randomValue<0.75):
+                line = round(random.uniform(90, 100),1)
+            elif(randomValue<0.99):
+                line = round(random.uniform(80, 100),1)
+            elif(randomValue>0.999):
+                line = round(random.uniform(100, 130),1)
             else:
-                line = round(random.uniform(110, 150),1)
+                line = round(random.uniform(30.0, 50.0),1) 
         else:
             line = round(random.uniform(30.0, 50.0),1) 
             count =0
@@ -63,7 +69,7 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
-populateFrom = 1633638370
+populateFrom = 1633880110
 while True:
     print(populateFrom)
     for rs in room_sensors:
@@ -79,6 +85,9 @@ while True:
         }
 
         timeStamp = int(time.time())
+        # change this to populate
+        populateFrom = timeStamp
+
         if(populateFrom != timeStamp):
             toDataBaseTimeStamp = populateFrom
         else:

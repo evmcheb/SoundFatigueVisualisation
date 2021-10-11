@@ -51,9 +51,7 @@ class TimesConcernDisp extends React.Component {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu style={{overflowY: "scroll"  ,height: " 300px"}}>
-                <Dropdown.Item href="#/action-1">Example</Dropdown.Item>
  
-            
             {this.state.data.timesOfConcern.map((itemDetail,index)=>{
                 return(
                     <Dropdown.Item>

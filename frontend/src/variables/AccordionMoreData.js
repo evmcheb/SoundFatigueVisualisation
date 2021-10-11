@@ -6,9 +6,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TimesConcernDisp from './TimesConcernDisp';
-import MyPieChart from './MyPieChart';
-import MyRangeSlider from './MyRangeSlider';
 
+import BulletChartGroup from './BulletChartGroup'
 const useStyles = makeStyles((theme) => ({
   root: {
     
@@ -25,7 +24,7 @@ export default function SimpleAccordion() {
 
   return (
     <div className={classes.root}>
-      <Accordion>
+      <Accordion style={{overflow: 'auto'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -34,14 +33,18 @@ export default function SimpleAccordion() {
           <Typography className={classes.heading}></Typography>
           Time Data Analysis
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails >
             <div>
             <TimesConcernDisp/>
             </div>
-            <div style={{width: "100%"}}>
-              {/*  <MyRangeSlider />  */}
-          
-            </div>
+            
+              {/*  <MyRangeSlider
+                PLACE HEAT MAP
+              />  */}
+              
+             
+              
+            
            
         </AccordionDetails>
       </Accordion>

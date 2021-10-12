@@ -1,6 +1,6 @@
-import axios from 'axios';
+
 import React from 'react'
-import TheDateBox, { passDate } from '../variables/TheDateBox';
+
 ///
 var zoomingData = [];
 var lastTime= 0;
@@ -165,7 +165,7 @@ export default class FetchDataTwo extends React.Component {
                 maxDbTime = timestamp;
                
             }        
-          }
+        }
           
           //Times of concern for 80 db+ => damage to hearing after 2 hours
           for(var j=0; j< data[0].dB.length; j++){
@@ -180,7 +180,7 @@ export default class FetchDataTwo extends React.Component {
                     endTimeConcern = data[0].x[j];
                     j++;
                 }
-                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 7200)){
+                if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern == 7200)){
                 timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
                 }
             }

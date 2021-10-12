@@ -220,7 +220,7 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         for x in timestamps:
             now = str(datetime.fromtimestamp(int(x)))
             timeStringArr.append(now)
-        print(timeStringArr)
+        
         splitting = input_date_string.split("-")
         new_case_date = splitting[2] + "-" + splitting[1]+"-"+splitting[0]
         timestamps = [x for x in timeStringArr if x[0:10]== new_case_date]

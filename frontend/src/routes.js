@@ -11,13 +11,7 @@ import WorkerDashboard from "views/WorkerDashboard";
 
 var routes = [
 
-    {
-        path: "/mainpage",
-        name: "Dashboard",
-        icon: "tim-icons icon-chart-pie-36",
-        component: MainPage,
-        layout: "/admin",
-    },
+    
     {
       path: "/Dashboard/:id~:date",
       name: "Room Analytics",

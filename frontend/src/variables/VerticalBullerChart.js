@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { ChartBullet, ChartContainer,ChartThemeColor } from '@patternfly/react-charts';
 
-import FetchDataTwo, { averagesOverHours ,done} from "../FetchData/FetchDataTwo";
+import FetchDataTwo, { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchDataTwo";
 
 
 class VerticalBulletChart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: {averagesOverHours },
+          data: {averagesOverHours,maxDbHours},
           render:false
         };
        
@@ -21,7 +21,7 @@ class VerticalBulletChart extends React.Component {
               this.setState({render:true})
           }.bind(this),5000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours }}), 5000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 5000);
           
       }
      
@@ -34,7 +34,7 @@ class VerticalBulletChart extends React.Component {
             if(done==1 && this.state.data.averagesOverHours ==0){
                 
                 this.state = {
-                    data: {averagesOverHours }
+                    data: {averagesOverHours,maxDbHours }
                 };
                 
             }
@@ -52,6 +52,8 @@ class VerticalBulletChart extends React.Component {
                 width={3025}
               >
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
+                comparativeErrorMeasureLegendData={[{ name: 'Critical' }]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 comparativeWarningMeasureLegendData={[{ name: 'Warning' }]}
                 constrainToVisibleArea
@@ -65,6 +67,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[0].time, y: this.state.data.maxDbHours[0].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[0].value }]}
                 primarySegmentedMeasureLegendData={[{ name: 'Average dB' }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
@@ -74,6 +77,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -86,6 +90,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[1].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[1].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -93,6 +98,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -105,6 +111,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[2].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[2].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -112,6 +119,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y:95}]}
                 constrainToVisibleArea
                 height={750}
@@ -124,6 +132,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[3].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[3].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -132,6 +141,7 @@ class VerticalBulletChart extends React.Component {
               />
               
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -144,6 +154,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[4].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[4].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -151,6 +162,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -163,6 +175,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[5].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[5].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -170,6 +183,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -182,6 +196,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[6].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[6].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -189,6 +204,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -201,6 +217,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[7].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[7].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -208,6 +225,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -220,6 +238,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[8].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[8].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -227,6 +246,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -239,6 +259,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[9].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[9].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -246,6 +267,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -258,6 +280,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[10].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[10].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -265,6 +288,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -277,6 +301,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[11].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[11].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -288,6 +313,7 @@ class VerticalBulletChart extends React.Component {
 
               
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -300,6 +326,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[12].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[12].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -307,6 +334,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -319,6 +347,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[13].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[13].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -326,6 +355,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -338,6 +368,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[14].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[14].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -345,6 +376,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -357,6 +389,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[15].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[15].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -364,6 +397,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -376,6 +410,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[16].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[16].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -383,6 +418,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -395,6 +431,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[17].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[17].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -402,6 +439,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -414,6 +452,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[18].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[18].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -421,6 +460,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -433,6 +473,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[19].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[19].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -440,6 +481,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -452,6 +494,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[20].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[20].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -459,6 +502,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -471,6 +515,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[21].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[21].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -478,6 +523,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -490,6 +536,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[22].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[22].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -497,6 +544,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
+                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -509,6 +557,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[23].time, y: this.state.data.maxDbHours[23].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[23].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}

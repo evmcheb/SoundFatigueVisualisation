@@ -69,7 +69,7 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
-populateFrom = 1633880110
+populateFrom = 1634054401
 while True:
     print(populateFrom)
     for rs in room_sensors:

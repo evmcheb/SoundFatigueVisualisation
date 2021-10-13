@@ -17,7 +17,7 @@ var isOkay = -1;
 var worker = [];
 var barChartData =[];
 var averagesOverHours = [];
-
+var maxDbHours = [];
 export default class FetchDataTwo extends React.Component {
     intervalID;
      
@@ -34,7 +34,8 @@ export default class FetchDataTwo extends React.Component {
         maxValues:{x:0,y:0},
         isOkay:-1,
         barChartData: {bar:"None",value:0},
-        averagesOverHours: {hour:"None",value:0}
+        averagesOverHours: {hour:"None",value:0},
+        maxDbHours :{hour:'None',value:0}
     };
     
     
@@ -87,6 +88,7 @@ export default class FetchDataTwo extends React.Component {
         maxValues = [];
         barChartData = [];
         averagesOverHours = [];
+        maxDbHours = [];
         var bar1 = 0;
         var bar2 = 0;
         var bar3 = 0;
@@ -103,7 +105,8 @@ export default class FetchDataTwo extends React.Component {
    
         var averagesHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         
-        
+        var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var timeOfMaxDbHour = ["","","","","","","","","","","","","","","","","","","","","","","",""];
         
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
@@ -121,7 +124,13 @@ export default class FetchDataTwo extends React.Component {
                
                 hours[hour] +=1;
                 decibelHours[hour] += decibels;
+
+                if(maxDbInHours[hour]<decibels){
+                    maxDbInHours[hour] =decibels;
+                    timeOfMaxDbHour[hour] = timestamp;
                 }
+
+            }
 
 
             //For pie chart
@@ -196,6 +205,7 @@ export default class FetchDataTwo extends React.Component {
             }
            averagesHours[i] = (decibelHours[i]/hours[i]).toFixed(2);
            averagesOverHours.push({hour:"hour"+i,value:averagesHours[i]});
+           maxDbHours.push({time:timeOfMaxDbHour[i],value:maxDbInHours[i]});
         }
           
           //Times of concern for 80 db+ => damage to hearing after 2 hours
@@ -284,6 +294,7 @@ export default class FetchDataTwo extends React.Component {
                     n++;
                 }
                 if(endTimeConcern!=0 && (endTimeConcern-startTimeConcern== 120)){
+                    
                 timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
                 }
             }
@@ -302,9 +313,11 @@ export default class FetchDataTwo extends React.Component {
                     p++;
                 }
                 if(endTimeConcern!=0 ){
+                    
                 timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:endTimeConcern});
                 }
-                if(endTimeConcern ==0){
+                if(endTimeConcern == 0){
+                    
                     timesOfConcern.push({startTimeCon:startTimeConcern,endTimeCon:startTimeConcern});
 
                 }
@@ -314,7 +327,7 @@ export default class FetchDataTwo extends React.Component {
               isOkay =1;
           }
 
-
+            console.log("yoyoyo",timesOfConcern)
            
             //COnverting maxDbTime to hour:min:sec
             var date = new Date(maxDbTime * 1000);
@@ -376,6 +389,7 @@ export default class FetchDataTwo extends React.Component {
           this.setState({isOkay})
           this.setState({barChartData})
           this.setState({averagesOverHours})
+          this.setState({maxDbHours})
         
     }
 
@@ -411,5 +425,6 @@ export{
     maxValues,
     isOkay,
     barChartData,
-    averagesOverHours
+    averagesOverHours,
+    maxDbHours
 };

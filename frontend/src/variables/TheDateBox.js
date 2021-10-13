@@ -44,7 +44,7 @@ export default function TheDateBox(props) {
         
       <div className="input-container">
         <div>
-          <label>Select New Date To Display</label>
+          <label style={{ marginBottom: 20 }}>Select New Date To Display</label>
           <DatePicker
             selected={selectedDate.data}
             dateFormat="dd/MM/yyyy"
@@ -53,13 +53,13 @@ export default function TheDateBox(props) {
           />
           
         </div>
-        <button type="button" className="btn btn-info" onClick={displayNewDate} >
+        <button type="button" className="btn btn-info" onClick={displayNewDate} style={{ marginTop: 20 }}>
                             View New date
                             </button>
        
       </div>
       {selectedDate  && (
-        <div className="summary">
+        <div className="summary" style={{ marginTop: 20, marginBottom: 20 }}>
           <p>
             Viewing data for {moment(selectedDate.data).format("LL")} 
             

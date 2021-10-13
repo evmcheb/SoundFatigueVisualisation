@@ -63,7 +63,7 @@ class MaxGuage extends React.Component {
         <Tooltip enabled={true} />
        
         <Title text="Max Decibels in Room" >
-          <Font size={28} color="white" />
+           <Font size={20} color="gray" />
         </Title>
         
         <Export enabled={false} />

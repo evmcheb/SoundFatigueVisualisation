@@ -90,7 +90,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[1].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[1].time, y: this.state.data.maxDbHours[1].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[1].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -111,7 +111,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[2].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[2].time, y: this.state.data.maxDbHours[2].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[2].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -132,7 +132,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[3].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[3].time, y: this.state.data.maxDbHours[3].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[3].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -154,7 +154,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[4].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[4].time, y: this.state.data.maxDbHours[4].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[4].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -175,7 +175,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[5].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[5].time, y: this.state.data.maxDbHours[5].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[5].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -196,7 +196,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[6].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[6].time, y: this.state.data.maxDbHours[6].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[6].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -217,7 +217,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[7].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[7].time, y: this.state.data.maxDbHours[7].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[7].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -238,7 +238,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[8].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[8].time, y: this.state.data.maxDbHours[8].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[8].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -259,7 +259,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[9].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[9].time, y: this.state.data.maxDbHours[9].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[9].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -280,7 +280,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[10].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[10].time, y: this.state.data.maxDbHours[10].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[10].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -301,7 +301,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[11].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[11].time, y: this.state.data.maxDbHours[11].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[11].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -326,7 +326,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[12].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[12].time, y: this.state.data.maxDbHours[12].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[12].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -347,7 +347,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[13].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[13].time, y: this.state.data.maxDbHours[13].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[13].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -368,7 +368,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[14].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[14].time, y: this.state.data.maxDbHours[14].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[14].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -389,7 +389,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[15].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[15].time, y: this.state.data.maxDbHours[15].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[15].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -410,7 +410,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[16].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[16].time, y: this.state.data.maxDbHours[16].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[16].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -431,7 +431,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[17].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[17].time, y: this.state.data.maxDbHours[17].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[17].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -452,7 +452,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[18].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[18].time, y: this.state.data.maxDbHours[18].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[18].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -460,7 +460,7 @@ class VerticalBulletChart extends React.Component {
                 width={500}
               />
               <ChartBullet
-                comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
+                comparativeErrorMeasureData={[{name: this.state.data.maxDbHours[18].time, y: 130}]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
                 constrainToVisibleArea
                 height={750}
@@ -473,7 +473,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[19].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[19].time, y: this.state.data.maxDbHours[19].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[19].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -494,7 +494,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[20].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[20].time, y: this.state.data.maxDbHours[20].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[20].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -515,7 +515,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[21].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[21].time, y: this.state.data.maxDbHours[21].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[21].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -536,7 +536,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: 'Max dB', y: this.state.data.maxDbHours[22].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[22].time, y: this.state.data.maxDbHours[22].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[22].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
@@ -557,7 +557,7 @@ class VerticalBulletChart extends React.Component {
                   right: 50,
                   top: 50
                 }}
-                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[23].time, y: this.state.data.maxDbHours[23].value  }]}
+                primaryDotMeasureData={[{ name: this.state.data.maxDbHours[23].time, y: this.state.data.maxDbHours[23].value }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[23].value }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}

@@ -562,6 +562,7 @@ class VerticalBulletChart extends React.Component {
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 standalone={false}
                 title="23:00 - 24:00"
+                
                 width={500}
               />
             </ChartContainer>

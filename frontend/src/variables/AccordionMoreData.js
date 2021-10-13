@@ -5,9 +5,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TimesConcernDisp from './TimesConcernDisp';
 
-import BulletChartGroup from './BulletChartGroup'
+
 import VerticalBulletChart from './VerticalBullerChart';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,9 +34,7 @@ export default function SimpleAccordion() {
           Time Data Analysis
         </AccordionSummary>
         <AccordionDetails >
-            <div>
-            <TimesConcernDisp/>
-            </div>
+            
             
               {/*  <MyRangeSlider
                 PLACE HEAT MAP

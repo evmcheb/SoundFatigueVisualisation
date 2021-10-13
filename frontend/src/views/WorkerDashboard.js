@@ -31,7 +31,6 @@ import FetchWorkerData from "../FetchData/FetchWorkerData";
 import MyPieChart from "../variables/MyPieChart";
 
 import "../assets/css/myDashboard.css"
-import TimesConcernDisp from "../variables/TimesConcernDisp";
 import AvgGauge from "../variables/AvgGauge";
 import AccordionMoreData from "../variables/AccordionMoreData";
 import TheDateBox, { passDate} from "../variables/TheDateBox";

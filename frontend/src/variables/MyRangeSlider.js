@@ -76,13 +76,13 @@ render(){
       <div id="chart-demo">
            <TheTimePicker/>
            <div className="dx-field">
-            <div className="dx-field-label">Start value</div>
+           <div className="dx-field-label" style={{ color: 'gray' }}>Start value</div>
             <div className="dx-field-value">
               <NumberBox value={this.state.startValue} showSpinButtons={true} showClearButton={true} onValueChanged={this.updateVisualRange} />
             </div>
           </div>
           <div className="dx-field">
-            <div className="dx-field-label">End value</div>
+          <div className="dx-field-label" style={{ color: 'gray' }}>End value</div>
             <div className="dx-field-value">
               <NumberBox value={this.state.endValue}  showSpinButtons={true} onValueChanged={this.updateVisualRange} />
             </div>

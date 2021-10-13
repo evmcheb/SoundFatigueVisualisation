@@ -69,7 +69,7 @@ class MyPieChart extends React.Component {
 
         <Size width={500} />
         <Title text="Decibel Occurenses" >
-          <Font size={28} color="white" />
+          <Font size={28} color="gray" />
         </Title>
       </PieChart>
         );

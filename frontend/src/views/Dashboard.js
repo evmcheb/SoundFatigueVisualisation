@@ -122,15 +122,15 @@ function Dashboard(props) {
 
               <div>
                 <Row>
-                <div className="thePieChart" style={{padding: "25px"}}>
+                <div className="thePieChart" style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                 <MyPieChart/>
                 </div>
-                <div>
+                <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                   
                   <AvgGauge/>
                 </div>
                 
-                <div  >
+                <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}}  >
                 <MaxGuage/>
                  
                  

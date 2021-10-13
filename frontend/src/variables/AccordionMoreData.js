@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import { Card, CardHeader, CardBody, Collapse } from "reactstrap";
 
 import VerticalBulletChart from './VerticalBullerChart';
 
@@ -22,40 +22,38 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleAccordion() {
   const classes = useStyles();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggle = () => {
+    if (isOpen) {
+      setIsOpen(false)
+    }
+    else {
+      setIsOpen(true)
+    }
+  }
 
   return (
     <div className={classes.root}>
-      <Accordion style={{overflow: 'auto' }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}></Typography>
-          Time Data Analysis
-        </AccordionSummary>
-        <AccordionDetails >
-            
-            
-              {/*  <MyRangeSlider
-                PLACE HEAT MAP
-              />  */}
+       <Card style={{ marginBottom: '1rem', width: '100%' }}>
+          <CardHeader onClick={() => toggle()} >
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <span> Time Data Analysis</span>
+              <div >
+                <ExpandMoreIcon />
+              </div>
+            </div>
+          </CardHeader>
+          <Collapse isOpen={isOpen} >
+            <CardBody >
+              <div >
+              <p style={{color:'gray',marginLeft:10}}>Average Decibels Over 24 Hours</p>
+                 <VerticalBulletChart/>
+              </div>
               
-             
-              <div>
-              Average Decibels Over 24 Hours
-             <VerticalBulletChart/>
-             
-             </div>
-             
-             
-           
-
-            
-           
-        </AccordionDetails>
-      </Accordion>
-      
+            </CardBody>
+          </Collapse>
+        </Card>     
     </div>
   );
 }

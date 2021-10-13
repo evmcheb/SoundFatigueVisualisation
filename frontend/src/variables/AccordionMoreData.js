@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TimesConcernDisp from './TimesConcernDisp';
 
 import BulletChartGroup from './BulletChartGroup'
+import VerticalBulletChart from './VerticalBullerChart';
 const useStyles = makeStyles((theme) => ({
   root: {
     
@@ -24,7 +25,7 @@ export default function SimpleAccordion() {
 
   return (
     <div className={classes.root}>
-      <Accordion style={{overflow: 'auto'}}>
+      <Accordion style={{overflow: 'auto' }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -43,7 +44,15 @@ export default function SimpleAccordion() {
               />  */}
               
              
-              
+              <div>
+              Average Decibels Over 24 Hours
+             <VerticalBulletChart/>
+             
+             </div>
+             
+             
+           
+
             
            
         </AccordionDetails>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ChartBullet, ChartContainer,ChartThemeColor } from '@patternfly/react-charts';
-import FetchDataTwo, { barChartData,done} from "../FetchData/FetchDataTwo";
+import { barChartData,done} from "../FetchData/FetchWorkerData";
 
 
 class BulletChartGroup extends React.Component {
@@ -43,15 +43,15 @@ class BulletChartGroup extends React.Component {
             
         return (
             
-            <div style={{ height: '3000%', width: '650px' }}>
+            <div >
     <ChartContainer 
         ariaDesc="Storage capacity"
         ariaTitle="Bullet chart"
         height={1200}
-        width={650}
+        width={950}
       >
       <ChartBullet
-       
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 28800}]}
         constrainToVisibleArea
         groupSubTitle="Over 24 Hours"
         groupTitle="Dosage"
@@ -69,10 +69,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 8 Hours"
         title="85 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 14400}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -88,10 +88,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 4 Hours"
         title="88 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 7200}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -107,10 +107,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 2 Hours"
         title="91 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 3600}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -126,10 +126,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 1 Hour"
         title="94 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 1800}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -145,10 +145,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 30 Minutes"
         title="97 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 900}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -164,10 +164,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 15 Minutes"
         title="100 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 450}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -183,10 +183,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 7 Minutes 30 Seconds"
         title="103 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 225}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -202,10 +202,10 @@ class BulletChartGroup extends React.Component {
         standalone={false}
         subTitle="MAX: 3 Minutes 45 Seconds"
         title="106 DB"
-        width={600}
+        width={732.5}
       />
       <ChartBullet
-        
+        comparativeErrorMeasureData={[{name: 'Max Seconds', y: 110}]}
         constrainToVisibleArea
         height={600}
         labels={({ datum }) => `${datum.name}: ${datum.y}`}
@@ -224,7 +224,7 @@ class BulletChartGroup extends React.Component {
         subTitle="MAX: 1 Minute 50 Seconds"
         title=">109 DB"
         
-        width={600}
+        width={732.5}
 
       />
       

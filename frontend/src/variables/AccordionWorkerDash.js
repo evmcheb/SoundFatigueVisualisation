@@ -5,7 +5,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import BulletChartGroup from './BulletChartGroup';
+import TotalDosageGuage from './TotalDosageGuage'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,9 +41,11 @@ export default function SimpleAccordion() {
               />  */}
               
              
-              <div>
-              Dosage
-             
+              
+              <div style={{padding: "5px"}}>
+              <TotalDosageGuage/>
+              
+              <BulletChartGroup/>
              
              </div>
              

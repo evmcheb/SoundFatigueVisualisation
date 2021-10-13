@@ -14,8 +14,8 @@ var maxValues = [];
 var timesOfConcern = [];
 var done = -1;
 var isOkay = -1;
-var worker = [];
-
+var barChartData =[];
+var totalDosage = 0;
 export default class FetchDataTwo extends React.Component {
     intervalID;
      
@@ -29,6 +29,7 @@ export default class FetchDataTwo extends React.Component {
         done:-1,
         maxValues:{x:0,y:0},
         isOkay:-1,
+        barChartData: {bar:"None",value:0},
         
     };
     
@@ -84,7 +85,16 @@ export default class FetchDataTwo extends React.Component {
         workerData = [];
         areas = [];
         maxValues = [];
-        
+        barChartData = [];
+        var bar1 = 0;
+        var bar2 = 0;
+        var bar3 = 0;
+        var bar4 = 0;
+        var bar5 = 0;
+        var bar6 = 0;
+        var bar7 = 0;
+        var bar8 = 0;
+        var bar9 = 0;
         //{ arg: 10, y1: -12 },
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
@@ -104,7 +114,46 @@ export default class FetchDataTwo extends React.Component {
             else if(decibels>=113){
                 unSafeInt +=1;
             }
-
+            //For Bar Chart
+            totalDosage = 0.0001
+            if(decibels>=85 && decibels<88){
+                bar1+=1;
+                totalDosage += (1/28800)*100
+            
+            }
+            else if(decibels>=88 && decibels<91){
+                bar2+=1;
+                totalDosage += (1/14400)*100
+            }
+            else if(decibels>=91 && decibels<94){
+                bar3+=1;
+                totalDosage += (1/7200)*100
+            }
+            else if(decibels>=94 && decibels<97){
+                bar4+=1;
+                totalDosage += (1/3600)*100
+            }
+            else if(decibels>=97 && decibels<100){
+                bar5 +=1;
+                totalDosage += (1/1800)*100
+            }
+            else if(decibels>=100 && decibels<106){
+                bar6+=1;
+                totalDosage += (1/900)*100
+            }
+            else if (decibels>=103 && decibels<106){
+                bar7+=1;
+                totalDosage += (1/450)*100
+            }
+            else if (decibels>=106 && decibels<109){
+                bar8+=1;
+                totalDosage += (1/225)*100
+            }
+            else if(decibels>=109){
+                bar9 +=1;
+                totalDosage += (1/110)*100
+            }
+            
             lastTime = timestamp;
             //lastTime = timestamp;
             if(i === data.dB.length-100){
@@ -261,8 +310,16 @@ export default class FetchDataTwo extends React.Component {
           areas.push({risk:"UnSafe",area:unSafeInt});
           areas.push({risk:"Threatening",area:threateningInt});
 
-
-
+          barChartData.push({bar:"Bar1",value:bar1});
+          barChartData.push({bar:"Bar2",value:bar2});
+          barChartData.push({bar:"Bar3",value:bar3});
+          barChartData.push({bar:"Bar4",value:bar4});
+          barChartData.push({bar:"Bar5",value:bar5});
+          barChartData.push({bar:"Bar6",value:bar6});
+          barChartData.push({bar:"Bar7",value:bar7});
+          barChartData.push({bar:"Bar8",value:bar8});
+          barChartData.push({bar:"Bar9",value:bar9});
+          
           avgDecibel = amountDecibels/data.dB.length;
           avgDecibel = avgDecibel.toFixed(2);
           //Determing what colour of average decibels
@@ -300,8 +357,10 @@ export default class FetchDataTwo extends React.Component {
           this.setState({done})
           this.setState({maxValues})
           this.setState({isOkay})
+          this.setState({barChartData})
+          this.setState({totalDosage})
 
-         
+
           
     }
 
@@ -334,5 +393,7 @@ export{
     timesOfConcern,
     done,
     maxValues,
-    isOkay
+    isOkay,
+    barChartData,
+    totalDosage
 };

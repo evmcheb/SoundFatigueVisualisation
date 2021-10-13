@@ -20,11 +20,9 @@ class TotalDosageGuage extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),700)
+          }.bind(this),2000)
           
-          this.interval = setInterval(() => this.setState({data: {totalDosage}}), 1500);
-
-          
+          this.interval = setInterval(() => this.setState({data: {totalDosage}}), 2000);
       }
      
 

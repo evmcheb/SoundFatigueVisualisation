@@ -41,8 +41,8 @@ export default function SimpleAccordion() {
               />  */}
               
              
-              
-              <div style={{padding: "5px"}}>
+             
+              <div >
               <TotalDosageGuage/>
               
               <BulletChartGroup/>

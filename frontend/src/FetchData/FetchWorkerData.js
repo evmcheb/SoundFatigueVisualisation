@@ -96,6 +96,8 @@ export default class FetchDataTwo extends React.Component {
         var bar8 = 0;
         var bar9 = 0;
         //{ arg: 10, y1: -12 },
+        totalDosage = 0.01;
+        
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
             var timestamp = data.x[i];
@@ -115,7 +117,7 @@ export default class FetchDataTwo extends React.Component {
                 unSafeInt +=1;
             }
             //For Bar Chart
-            totalDosage = 0.0001
+            
             if(decibels>=85 && decibels<88){
                 bar1+=1;
                 totalDosage += (1/28800)*100
@@ -371,9 +373,7 @@ export default class FetchDataTwo extends React.Component {
         <>
         <div>
           {lastTime}
-            <p>
-          showing data for room  :{this.props.room}
-          </p>
+            
         </div>
         </>
         )

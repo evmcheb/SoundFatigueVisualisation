@@ -347,6 +347,7 @@ export default class FetchDataTwo extends React.Component {
             workerData.push({arg:1, y1:1});
 
         }
+        totalDosage = totalDosage.toFixed(2);
         console.log(workerData)
           this.setState({workerData})
           this.setState({lastTime})

@@ -138,7 +138,6 @@ function Dashboard(props) {
                 </div>
                 
                 <div>
-            {maxDecibel} 
               </div>
                 
                 

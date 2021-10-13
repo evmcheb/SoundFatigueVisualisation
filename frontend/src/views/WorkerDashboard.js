@@ -32,7 +32,7 @@ import MyPieChart from "../variables/MyPieChart";
 
 import "../assets/css/myDashboard.css"
 import AvgGauge from "../variables/AvgGauge";
-import AccordionMoreData from "../variables/AccordionMoreData";
+import AccordionWorkerDash from "../variables/AccordionWorkerDash";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
 import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
@@ -149,7 +149,7 @@ function WorkerDashboard(props) {
               
               </div>
                
-                <AccordionMoreData/>
+                <AccordionWorkerDash/>
               
             </Card>
           </Col>

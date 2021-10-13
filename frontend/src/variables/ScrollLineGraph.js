@@ -15,7 +15,8 @@ import Chart, {
   ValueAxis,
   Scale,
   LoadingIndicator,
-  Aggregation,Point,CommonSeriesSettings
+  Aggregation,Point,CommonSeriesSettings,
+  Export,
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
@@ -149,6 +150,7 @@ class ScrollLineGraph extends React.Component {
             <Label visible={false} />
           </Crosshair>
           <Legend visible={false} />
+         
       </Chart>
       
    

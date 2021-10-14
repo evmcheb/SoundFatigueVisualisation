@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BulletChartGroup from './BulletChartGroup';
 import TotalDosageGuage from './TotalDosageGuage'
+import VerticalBulletWorker from './VerticalBulletWorker';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +47,7 @@ export default function SimpleAccordion() {
               <TotalDosageGuage/>
               
               <BulletChartGroup/>
-           
+              <VerticalBulletWorker/>
              </div>
              
              

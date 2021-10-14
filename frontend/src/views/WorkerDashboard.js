@@ -35,7 +35,7 @@ import "../assets/css/myDashboard.css"
 import AccordionWorkerDash from "../variables/AccordionWorkerDash";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
 import MainPage from "./MainPage";
-import MaxGuage from "../variables/MaxGuage";
+import MaxWorkerGuage from "../variables/MaxWorkerGuage";
 import { Dropdown} from 'react-bootstrap';
 import AverageWorkGauge from "variables/AverageWorkGuage";
 function WorkerDashboard(props) {
@@ -133,7 +133,7 @@ function WorkerDashboard(props) {
                 </div>
                 
                 <div  >
-                       {/*  <MaxGuage/> */}
+                         <MaxWorkerGuage/> 
               
                  
                  

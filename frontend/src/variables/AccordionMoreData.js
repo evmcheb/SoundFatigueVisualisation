@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Card, CardHeader, CardBody, Collapse } from "reactstrap";
 
-import VerticalBulletChart from './VerticalBullerChart';
+import VerticalBulletChart from './VerticalBulletChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {

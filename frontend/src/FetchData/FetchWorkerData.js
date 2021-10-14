@@ -16,6 +16,8 @@ var done = -1;
 var isOkay = -1;
 var barChartData =[];
 var totalDosage = 0;
+var averagesOverHours = [];
+var maxDbHours = [];
 export default class FetchDataTwo extends React.Component {
     intervalID;
      
@@ -30,6 +32,8 @@ export default class FetchDataTwo extends React.Component {
         maxValues:{x:0,y:0},
         isOkay:-1,
         barChartData: {bar:"None",value:0},
+        averagesOverHours: {hour:"None",value:0},
+        maxDbHours :{hour:'None',value:0}
         
     };
     
@@ -95,14 +99,43 @@ export default class FetchDataTwo extends React.Component {
         var bar7 = 0;
         var bar8 = 0;
         var bar9 = 0;
+
         //{ arg: 10, y1: -12 },
         totalDosage = 0.01;
+        averagesOverHours = [];
+        maxDbHours = [];
+
+    //    Getting averages over hours of day
+        var hours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        var decibelHours= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      
+   
+        var averagesHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         
+        var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var timeOfMaxDbHour = ["","","","","","","","","","","","","","","","","","","","","","","",""];
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
             var timestamp = data.x[i];
             amountDecibels += decibels;
-            
+            //for average hours
+            if(timestamp != undefined){
+                timestamp = timestamp.toString();
+                //getting hour
+                var timeSub = timestamp.substr(11,2)
+                
+                var hour = parseInt(timeSub)
+                
+               
+                hours[hour] +=1;
+                decibelHours[hour] += decibels;
+
+                if(maxDbInHours[hour]<decibels){
+                    maxDbInHours[hour] =decibels;
+                    timeOfMaxDbHour[hour] = timestamp;
+                }
+
+            }
             //For pie chart
             if(decibels <=70){
                 safeInt +=1;
@@ -178,7 +211,15 @@ export default class FetchDataTwo extends React.Component {
                
             }        
           }
-          
+          //pushing averages to array for dsiplaying
+        for (var i = 0;i<24;i++){
+            if(decibelHours[i] == 0 || hours[i] == 0){
+                averagesHours[i] = 0
+            }
+           averagesHours[i] = (decibelHours[i]/hours[i]).toFixed(2);
+           averagesOverHours.push({hour:"hour"+i,value:averagesHours[i]});
+           maxDbHours.push({time:timeOfMaxDbHour[i],value:maxDbInHours[i]});
+        }
           //Times of concern for 80 db+ => damage to hearing after 2 hours
           for(var j=0; j< data.dB.length; j++){
             var dB = data.dB[j];
@@ -428,6 +469,8 @@ export default class FetchDataTwo extends React.Component {
           this.setState({isOkay})
           this.setState({barChartData})
           this.setState({totalDosage})
+          this.setState({averagesOverHours})
+          this.setState({maxDbHours})
 
 
           
@@ -462,5 +505,7 @@ export{
     maxValues,
     isOkay,
     barChartData,
-    totalDosage
+    totalDosage,
+    averagesOverHours,
+    maxDbHours
 };

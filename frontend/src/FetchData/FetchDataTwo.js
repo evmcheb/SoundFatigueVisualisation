@@ -12,8 +12,6 @@ var maxDecibel = -Number.MIN_VALUE;
 var maxDbTime = 0;
 var maxValues = [];
 var done = -1;
-var worker = [];
-var barChartData =[];
 var averagesOverHours = [];
 var maxDbHours = [];
 export default class FetchDataTwo extends React.Component {
@@ -25,11 +23,9 @@ export default class FetchDataTwo extends React.Component {
         timeStamp: [],
         zoomingData:{args:0,y1:0,},
         areas:{risk:"None",area: 0},
-        worker:{worderId:-1,checkIn:0,checkOut:0},
 
         done:-1,
         maxValues:{x:0,y:0},
-        barChartData: {bar:"None",value:0},
         averagesOverHours: {hour:"None",value:0},
         maxDbHours :{hour:'None',value:0}
     };
@@ -82,18 +78,10 @@ export default class FetchDataTwo extends React.Component {
         zoomingData = [];
         areas = [];
         maxValues = [];
-        barChartData = [];
+  
         averagesOverHours = [];
         maxDbHours = [];
-        var bar1 = 0;
-        var bar2 = 0;
-        var bar3 = 0;
-        var bar4 = 0;
-        var bar5 = 0;
-        var bar6 = 0;
-        var bar7 = 0;
-        var bar8 = 0;
-        var bar9 = 0;
+
     //    Getting averages over hours of day
         var hours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         var decibelHours= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -143,34 +131,7 @@ export default class FetchDataTwo extends React.Component {
                 unSafeInt +=1;
             }
 
-            //For Bar Chart
-            if(decibels>=85 && decibels<88){
-                bar1+=1;
-            }
-            else if(decibels>=88 && decibels<91){
-                bar2+=1;
-            }
-            else if(decibels>=91 && decibels<94){
-                bar3+=1;
-            }
-            else if(decibels>=94 && decibels<97){
-                bar4+=1;
-            }
-            else if(decibels>=97 && decibels<100){
-                bar5 +=1;
-            }
-            else if(decibels>=100 && decibels<106){
-                bar6+=1;
-            }
-            else if (decibels>=103 && decibels<106){
-                bar7+=1;
-            }
-            else if (decibels>=106 && decibels<109){
-                bar8+=1;
-            }
-            else if(decibels>=109){
-                bar9 +=1;
-            }
+        
             
             lastTime = timestamp;
             //lastTime = timestamp;
@@ -227,15 +188,7 @@ export default class FetchDataTwo extends React.Component {
           areas.push({risk:"UnSafe",area:unSafeInt});
           areas.push({risk:"Threatening",area:threateningInt});
 
-          barChartData.push({bar:"Bar1",value:bar1});
-          barChartData.push({bar:"Bar2",value:bar2});
-          barChartData.push({bar:"Bar3",value:bar3});
-          barChartData.push({bar:"Bar4",value:bar4});
-          barChartData.push({bar:"Bar5",value:bar5});
-          barChartData.push({bar:"Bar6",value:bar6});
-          barChartData.push({bar:"Bar7",value:bar7});
-          barChartData.push({bar:"Bar8",value:bar8});
-          barChartData.push({bar:"Bar9",value:bar9});
+   
 
 
           avgDecibel = amountDecibels/data[0].dB.length;
@@ -257,7 +210,7 @@ export default class FetchDataTwo extends React.Component {
 
         
         
-        zoomingData.push({timeSheet:worker});
+       
         console.log("RIGHT HERE",zoomingData)
           this.setState({zoomingData})
           this.setState({lastTime})
@@ -268,7 +221,6 @@ export default class FetchDataTwo extends React.Component {
           this.setState({maxDbTime})
           this.setState({done})
           this.setState({maxValues})
-          this.setState({barChartData})
           this.setState({averagesOverHours})
           this.setState({maxDbHours})
         
@@ -303,7 +255,6 @@ export{
     maxDbTime,
     done,
     maxValues,
-    barChartData,
     averagesOverHours,
     maxDbHours
 };

@@ -114,6 +114,8 @@ export default class FetchDataTwo extends React.Component {
         
         var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         var timeOfMaxDbHour = ["","","","","","","","","","","","","","","","","","","","","","","",""];
+
+        
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
             var timestamp = data.x[i];
@@ -210,15 +212,19 @@ export default class FetchDataTwo extends React.Component {
                 maxDbTime = timestamp;
                
             }        
-          }
+        }
           //pushing averages to array for dsiplaying
+          console.log("brooo")
         for (var i = 0;i<24;i++){
+            
             if(decibelHours[i] == 0 || hours[i] == 0){
                 averagesHours[i] = 0
             }
            averagesHours[i] = (decibelHours[i]/hours[i]).toFixed(2);
            averagesOverHours.push({hour:"hour"+i,value:averagesHours[i]});
+          
            maxDbHours.push({time:timeOfMaxDbHour[i],value:maxDbInHours[i]});
+           
         }
           //Times of concern for 80 db+ => damage to hearing after 2 hours
           for(var j=0; j< data.dB.length; j++){

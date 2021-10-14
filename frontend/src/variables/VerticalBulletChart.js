@@ -19,9 +19,9 @@ class VerticalBulletChart extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),5000)
+          }.bind(this),15000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 5000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 15000);
           
       }
      

@@ -116,7 +116,7 @@ export default class FetchDataTwo extends React.Component {
                 var timeSub = timestamp.substr(11,2)
                 
                 var hour = parseInt(timeSub)
-                console.log("hello",hour);
+                
                
                 hours[hour] +=1;
                 decibelHours[hour] += decibels;

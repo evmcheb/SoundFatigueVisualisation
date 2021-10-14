@@ -311,16 +311,81 @@ export default class FetchDataTwo extends React.Component {
           
           areas.push({risk:"UnSafe",area:unSafeInt});
           areas.push({risk:"Threatening",area:threateningInt});
-
+          if(bar1!=0){
+              console.log(bar1)
           barChartData.push({bar:"Bar1",value:bar1});
-          barChartData.push({bar:"Bar2",value:bar2});
-          barChartData.push({bar:"Bar3",value:bar3});
-          barChartData.push({bar:"Bar4",value:bar4});
-          barChartData.push({bar:"Bar5",value:bar5});
-          barChartData.push({bar:"Bar6",value:bar6});
-          barChartData.push({bar:"Bar7",value:bar7});
-          barChartData.push({bar:"Bar8",value:bar8});
-          barChartData.push({bar:"Bar9",value:bar9});
+          }
+          else{
+              console.log("1")
+            barChartData.push({bar:"Bar1",value:0.01});
+          }
+          if(bar2!=0){
+            barChartData.push({bar:"Bar2",value:bar2});
+        }
+        else{
+            console.log("2")
+          barChartData.push({bar:"Bar2",value:0.01});
+        }
+        if(bar3!=0){
+            
+            barChartData.push({bar:"Bar3",value:bar3});
+            }
+        else{
+            console.log("3")
+              barChartData.push({bar:"Bar3",value:0.01});
+        }
+        if(bar4!=0){
+            
+            barChartData.push({bar:"Bar5",value:bar4});
+            }
+        else{
+            console.log("4")
+              barChartData.push({bar:"Bar4",value:0.01});
+        }
+        if(bar5!=0){
+            barChartData.push({bar:"Bar5",value:bar5});
+            }
+        else{
+            console.log("5")
+              barChartData.push({bar:"Bar5",value:0.01});
+            }
+        if(bar6!=0){
+            barChartData.push({bar:"Bar6",value:bar6});
+            }
+        else{
+            console.log("6")
+            barChartData.push({bar:"Bar6",value:0.01});
+        }
+        if(bar7!=0){
+            barChartData.push({bar:"Bar1",value:bar7});
+            }
+        else{
+            console.log("7")
+            barChartData.push({bar:"Bar7",value:0.01});
+            }
+        if(bar8!=0){
+            barChartData.push({bar:"Bar8",value:bar8});
+            }
+        else{
+            console.log("8")
+            barChartData.push({bar:"Bar8",value:0.01});
+            }
+        if(bar9!=0){
+            barChartData.push({bar:"Bar9",value:bar9});
+            }
+        else{
+            console.log("9")
+            barChartData.push({bar:"Bar9",value:0.01});
+          }
+
+        //   barChartData.push({bar:"Bar2",value:bar2});
+        //   barChartData.push({bar:"Bar3",value:bar3});
+        //   barChartData.push({bar:"Bar4",value:bar4});
+        //   barChartData.push({bar:"Bar5",value:bar5});
+        //   barChartData.push({bar:"Bar6",value:bar6});
+        //   barChartData.push({bar:"Bar7",value:bar7});
+        //   barChartData.push({bar:"Bar8",value:bar8});
+        //   barChartData.push({bar:"Bar9",value:bar9});
           
           avgDecibel = amountDecibels/data.dB.length;
           avgDecibel = avgDecibel.toFixed(2);
@@ -337,7 +402,7 @@ export default class FetchDataTwo extends React.Component {
         else if(avgDecibel>=113){
             averageDecibelColour ="red";
         }
-        done = 1;
+        
 
         
         
@@ -348,7 +413,8 @@ export default class FetchDataTwo extends React.Component {
 
         }
         totalDosage = totalDosage.toFixed(2);
-        console.log(workerData)
+
+        done = 1;
           this.setState({workerData})
           this.setState({lastTime})
           this.setState({avgDecibel})

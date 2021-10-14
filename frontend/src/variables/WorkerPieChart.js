@@ -28,7 +28,7 @@ class WorkerPieChart extends React.Component {
 
         setTimeout(function() {
             this.setState({ render: true })
-        }.bind(this), 600)
+        }.bind(this), 9000)
 
         this.interval = setInterval(() => this.setState({ time: Date.now(), data: { areas } }), 1500);
 
@@ -40,7 +40,7 @@ class WorkerPieChart extends React.Component {
 
         let renderContainer = false
         if (this.state.render) {
-            console.log({ done })
+            
             if (done == 1 && this.state.data.areas == 0) {
 
                 this.setState({ data: { areas } });

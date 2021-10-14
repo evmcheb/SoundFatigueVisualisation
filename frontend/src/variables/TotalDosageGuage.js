@@ -60,7 +60,7 @@ class TotalDosageGuage extends React.Component {
         </RangeContainer>
         <Tooltip enabled={true} />
        
-        <Title text="Max Decibels in Room" >
+        <Title text="Dosage Percentage" >
           <Font size={28} color="white" />
         </Title>
         

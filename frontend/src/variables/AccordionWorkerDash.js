@@ -32,22 +32,16 @@ export default function SimpleAccordion() {
           id="panel1a-header"
         >
           <Typography className={classes.heading}></Typography>
-          Time Data Analysis
+          Dosimeter
         </AccordionSummary>
         <AccordionDetails >
             
-            
-              {/*  <MyRangeSlider
-                PLACE HEAT MAP
-              />  */}
-              
              
              
               <div >
               <TotalDosageGuage/>
               
               <BulletChartGroup/>
-              <VerticalBulletWorker/>
              </div>
              
              

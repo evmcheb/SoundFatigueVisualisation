@@ -20,7 +20,7 @@ class AverageWorkGauge extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),700)
+          }.bind(this),900)
           
           this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 3050);
 
@@ -32,7 +32,7 @@ class AverageWorkGauge extends React.Component {
         
         let renderContainer = false
         if(this.state.render) {
-            console.log({done})
+            
             if(done==1 && this.state.data.avgDecibel==0){
                 
                 this.setState({data: {avgDecibel}});

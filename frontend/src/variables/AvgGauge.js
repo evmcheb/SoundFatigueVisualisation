@@ -32,7 +32,7 @@ class AvgGauge extends React.Component {
         
         let renderContainer = false
         if(this.state.render) {
-            console.log({done})
+            
             if(done==1 && this.state.data.avgDecibel==0){
                 
                 this.setState({data: {avgDecibel}});

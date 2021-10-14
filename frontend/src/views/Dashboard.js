@@ -45,6 +45,7 @@ import TheDateBox, { passDate} from "../variables/TheDateBox";
 import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
 import { Dropdown} from 'react-bootstrap';
+import VerticalBulletChart from "variables/VerticalBulletChart";
 function Dashboard(props) {
   
 
@@ -145,11 +146,35 @@ function Dashboard(props) {
               </Row>
               
               </div>
-               
-                <AccordionMoreData/>
+                
+                
               
             </Card>
           </Col>
+          
+        </Row>
+        <Row>
+
+        <Card className="card-chart">
+            <CardHeader>
+                <Row>
+                  <Col className="text-left" sm="6">
+                    
+                    
+                    
+  
+                    <CardTitle tag="h2">Averages Over 24 Hours </CardTitle>
+                  </Col>
+                  </Row>
+                  
+              </CardHeader>
+             
+                
+                  {/* Main graph */}
+                 
+                  <VerticalBulletChart/>
+             
+            </Card>
         </Row>
         
       </div>

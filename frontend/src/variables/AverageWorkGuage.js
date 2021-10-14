@@ -59,7 +59,7 @@ class AverageWorkGauge extends React.Component {
           <Range startValue={112} endValue={160} />
         </RangeContainer>
         <Tooltip enabled={true} />
-        <Title text="Average Decibels in Room">
+        <Title text="Average Decibels For Worker">
           <Font size={20} color="gray" />
         </Title>
         <Export enabled={false} />

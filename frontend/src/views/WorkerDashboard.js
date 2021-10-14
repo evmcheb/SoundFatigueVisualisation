@@ -28,7 +28,7 @@ import {
 import FetchWorkerData from "../FetchData/FetchWorkerData";
 
 
-import MyPieChart from "../variables/MyPieChart";
+import WorkerPieChart from "../variables/WorkerPieChart";
 
 import "../assets/css/myDashboard.css"
 
@@ -124,12 +124,12 @@ function WorkerDashboard(props) {
               <div>
                 <Row>
                 <div className="thePieChart" style={{padding: "25px"}}>
-                    {/*<MyPieChart/> */}
+                    <WorkerPieChart/>
                 
                 </div>
                 <div>
                    
-                <AverageWorkGauge/>
+                  <AverageWorkGauge/>
                 </div>
                 
                 <div  >

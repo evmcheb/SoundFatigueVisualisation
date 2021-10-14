@@ -9,9 +9,9 @@ import PieChart, {
     Font,
 } from 'devextreme-react/pie-chart';
 //
-import { areas, done } from "../FetchData/FetchDataTwo";
+import { areas, done } from "../FetchData/FetchWorkerData";
 ///
-class MyPieChart extends React.Component {
+class WorkerPieChart extends React.Component {
     constructor(props) {
         super(props);
 
@@ -95,4 +95,4 @@ class MyPieChart extends React.Component {
     }
 }
 
-export default MyPieChart;
+export default WorkerPieChart;

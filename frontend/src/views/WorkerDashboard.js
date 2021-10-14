@@ -38,6 +38,9 @@ import MainPage from "./MainPage";
 import MaxWorkerGuage from "../variables/MaxWorkerGuage";
 import { Dropdown} from 'react-bootstrap';
 import AverageWorkGauge from "variables/AverageWorkGuage";
+import VerticalBulletWorker from "variables/VerticalBulletWorker";
+import TotalDosageGuage from "variables/TotalDosageGuage";
+import BulletChartGroup from "variables/BulletChartGroup";
 function WorkerDashboard(props) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -149,11 +152,62 @@ function WorkerDashboard(props) {
               </Row>
               
               </div>
-               
-                <AccordionWorkerDash/>
+              
               
             </Card>
           </Col>
+        </Row>
+        <Row>
+
+          <Card className="card-chart">
+              <CardHeader>
+                  <Row>
+                    <Col className="text-left" sm="6">
+                      
+                      
+                      
+
+                      <CardTitle tag="h2">Dosimeter </CardTitle>
+                    </Col>
+                    </Row>
+                    
+                </CardHeader>
+              
+                  
+            
+                  
+                  <TotalDosageGuage/>
+                  <BulletChartGroup/>
+              
+              </Card>
+          </Row>
+        <Row>
+
+        <Card className="card-chart">
+            <CardHeader>
+                <Row>
+                  <Col className="text-left" sm="6">
+                    
+                    
+                    
+  
+                    <CardTitle tag="h2">Averages Over 24 Hours </CardTitle>
+                  </Col>
+                  </Row>
+                  
+              </CardHeader>
+             
+                
+                  {/* Main graph 
+                  
+                  <TotalDosageGuage/>
+              
+              <BulletChartGroup/>
+                  */}
+                 
+                  <VerticalBulletWorker/>
+             
+            </Card>
         </Row>
         
       </div>

@@ -29,7 +29,7 @@ class BulletChartGroup extends React.Component {
        
         let renderContainer = false
         if(this.state.render) {
-            console.log({done})
+            
             if(done==1 && this.state.data.barChartData==0){
                 
                 this.state = {

@@ -46,7 +46,7 @@ export default function SimpleAccordion() {
               <TotalDosageGuage/>
               
               <BulletChartGroup/>
-             
+           
              </div>
              
              

@@ -31,12 +31,13 @@ import FetchWorkerData from "../FetchData/FetchWorkerData";
 import MyPieChart from "../variables/MyPieChart";
 
 import "../assets/css/myDashboard.css"
-import AvgGauge from "../variables/AvgGauge";
+
 import AccordionWorkerDash from "../variables/AccordionWorkerDash";
 import TheDateBox, { passDate} from "../variables/TheDateBox";
 import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
 import { Dropdown} from 'react-bootstrap';
+import AverageWorkGauge from "variables/AverageWorkGuage";
 function WorkerDashboard(props) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -127,8 +128,8 @@ function WorkerDashboard(props) {
                 
                 </div>
                 <div>
-                   {/*<AvgGauge/> */}
-                
+                   
+                <AverageWorkGauge/>
                 </div>
                 
                 <div  >

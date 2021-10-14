@@ -1,15 +1,15 @@
 import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
+import { avgDecibel,averageDecibelColour,maxDecibel,done} from "../FetchData/FetchWorkerData";
 
-import {totalDosage,done} from "../FetchData/FetchWorkerData";
-class TotalDosageGuage extends React.Component {
+class AverageWorkGauge extends React.Component {
 
   
    
     constructor(props) {
         super(props);
         this.state = {
-          data: {totalDosage},
+          data: {avgDecibel},
           render:false
         };
         
@@ -20,36 +20,36 @@ class TotalDosageGuage extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),15000)
+          }.bind(this),700)
           
-          this.interval = setInterval(() => this.setState({data: {totalDosage}}), 15000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 3050);
+
+          
       }
      
 
       render(){
         
-        let renderContainer = false;
-     
+        let renderContainer = false
         if(this.state.render) {
             console.log({done})
-            if(done==1 && this.state.data.totalDosage==0){
+            if(done==1 && this.state.data.avgDecibel==0){
                 
-                this.setState({data: {totalDosage}});
-                console.log(this.state.data)
+                this.setState({data: {avgDecibel}});
+                 
             }
             if(done==-1){
                 this.componentDidMount();
             }
 
     return (
-      <>
         
       <CircularGauge
         id="gauge"
-        value={this.state.data.totalDosage}
+        value={this.state.data.avgDecibel}
         
       >
-        <Scale startValue={0} endValue={100} tickInterval={10}>
+        <Scale startValue={0} endValue={maxDecibel} tickInterval={10}>
           <Label useRangeColors={true} />
         </Scale>
         <RangeContainer palette="bright">
@@ -59,15 +59,11 @@ class TotalDosageGuage extends React.Component {
           <Range startValue={112} endValue={160} />
         </RangeContainer>
         <Tooltip enabled={true} />
-       
-        <Title text="Max Decibels in Room" >
-          <Font size={28} color="white" />
+        <Title text="Average Decibels in Room">
+          <Font size={20} color="gray" />
         </Title>
-        
         <Export enabled={false} />
       </CircularGauge>
-      
-      </>
     );
 }
 
@@ -82,4 +78,4 @@ return (
   
 }
 
-export default TotalDosageGuage;
+export default AverageWorkGauge;

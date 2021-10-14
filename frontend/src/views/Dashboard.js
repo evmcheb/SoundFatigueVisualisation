@@ -60,18 +60,7 @@ function Dashboard(props) {
       <>
       <div className="content">
         <MainPage/>
-        <Dropdown >
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Display Room:
-                <i className="tim-icons icon-minimal-down" data-notify="icon" style={{padding: "15px"}}/>
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu style={{overflowY: "scroll"  ,height: "300px",width:"30%"}}>
-            <Dropdown.Item href="1">Engine Room 1</Dropdown.Item>
-            <Dropdown.Item href="2">Engine Room 2</Dropdown.Item>
-            <Dropdown.Item href="3">Common Room</Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
+        
         
     </div>
     </>)

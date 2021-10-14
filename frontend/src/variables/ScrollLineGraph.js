@@ -39,7 +39,7 @@ class ScrollLineGraph extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),500)
+          }.bind(this),1500)
           
           this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 3000);
           

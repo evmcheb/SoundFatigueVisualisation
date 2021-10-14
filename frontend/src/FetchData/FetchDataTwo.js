@@ -91,7 +91,10 @@ export default class FetchDataTwo extends React.Component {
         
         var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         var timeOfMaxDbHour = ["","","","","","","","","","","","","","","","","","","","","","","",""];
-        
+        if(data[0].dB.length == 0 ){
+            console.log("empty")
+            zoomingData.push({arg:"0", y1:0});
+        }
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
             var timestamp = data[0].x[i];
@@ -207,7 +210,7 @@ export default class FetchDataTwo extends React.Component {
             averageDecibelColour ="red";
         }
         done = 1;
-
+        
         
         
        

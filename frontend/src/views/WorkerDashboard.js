@@ -157,30 +157,7 @@ function WorkerDashboard(props) {
             </Card>
           </Col>
         </Row>
-        <Row>
-
-          <Card className="card-chart">
-              <CardHeader>
-                  <Row>
-                    <Col className="text-left" sm="6">
-                      
-                      
-                      
-
-                      <CardTitle tag="h2">Dosimeter </CardTitle>
-                    </Col>
-                    </Row>
-                    
-                </CardHeader>
-              
-                  
-            
-                  
-                  <TotalDosageGuage/>
-                  <BulletChartGroup/>
-              
-              </Card>
-          </Row>
+        
         <Row>
 
         <Card className="card-chart">
@@ -206,7 +183,27 @@ function WorkerDashboard(props) {
                   */}
                  
                   <VerticalBulletWorker/>
+                  
+            </Card>
+        </Row>
+        <Row>
+
+        <Card className="card-chart">
+          
+            <AccordionWorkerDash/>
+                  
+            
              
+                
+                  {/* Main graph 
+                  
+                  <TotalDosageGuage/>
+              
+              <BulletChartGroup/>
+                  */}
+                 
+                  
+                  
             </Card>
         </Row>
         

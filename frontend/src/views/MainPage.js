@@ -11,12 +11,8 @@ import {
     Col,
   } from "reactstrap";
 
-<<<<<<< HEAD
-import FetchDataTwo, { loading } from '../FetchData/FetchDataTwo';
 import FetchDataAVG from '../FetchData/FetchDataAVG';
 import AvgGauge from '../variables/AvgGauge';
-=======
->>>>>>> ebdc63a30fa1419531b978a222801e3fbfe0ac64
 
 
 

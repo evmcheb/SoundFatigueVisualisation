@@ -15,7 +15,7 @@ import Chart, {
   ValueAxis,
   Scale,
   LoadingIndicator,
-  Aggregation,Point,CommonSeriesSettings
+  Aggregation,Point,CommonSeriesSettings,Grid
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
@@ -83,7 +83,9 @@ class WorkerGraph extends React.Component {
         <ArgumentAxis
             
             argumentType="datetime"
-           />
+           >
+       
+           </ArgumentAxis>
             <Label format="shortTime" />
        
         {/* Setting the green to red horizontal lines */}

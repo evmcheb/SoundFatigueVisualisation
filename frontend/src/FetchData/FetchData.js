@@ -14,7 +14,7 @@ const FetchData = (type = 1) => {
     if(!Number.isInteger(type)){
         url = type;
     }
-    
+   
     const fetchData = async (url) => {
         console.log("Fetching data")
         return new Promise((res, rej) => {

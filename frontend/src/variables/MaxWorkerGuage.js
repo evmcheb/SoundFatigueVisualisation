@@ -62,7 +62,7 @@ class MaxWorkerGuage extends React.Component {
         </RangeContainer>
         <Tooltip enabled={true} />
        
-        <Title text="Max Decibels in Room" >
+        <Title text="Max Decibel Experienced" >
            <Font size={20} color="gray" />
         </Title>
         

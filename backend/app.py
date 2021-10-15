@@ -385,31 +385,6 @@ async def query_update_nots(room_id: int, request: Request):
     with Session(engine) as session:
         session.exec(update(models.Room).where(models.Room.ID == room_id).values(MaxDB=max_db, MaxPitch=max_pitch))
         session.commit()
-    
-'''# this show retrive a list of notifications that have not been marked as seen
-@app.get("/notifications/")
-def notification_queue(room_id: Optional[int]):
-    with Session(engine) as session:
-        if room_id:
-            notifications = session.exec(select(models.Notification).where(
-                models.Notification.RoomID == room_id,
-                models.Notification.Seen == False
-            )).all()
-            return notifications
-        else:
-            notifications = session.exec(select(models.Notification).where(
-                models.Notification.Seen == False
-            )).all()
-            return notifications
-
-@app.post("/seen_notification/")
-async def mark_as_seen(room_id: int, request: Request):
-    data = await request.body()
-    json_data = json.loads(data)
-    rid = int(json_data["ID"])
-    with Session(engine) as session:
-        session.exec(update(models.Notification).where(models.Notification.ID == room_id).values(Seen=True))
-        session.commit()'''
  
 @app.get("/sensor/{sensor_id}/")
 def query_sensor(room_id: int, start_time: int, end_time: int):
@@ -590,102 +565,27 @@ def timeToUNIX(t):
 
 
 
-
-
-'''
-@app.get("/notifications/")
-def query_notifications():
+@app.get("/rooms/{input_date}")
+def query_rooms(start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
     with Session(engine) as session:
-        rooms = session.exec(select(models.Room)).all()
+        
+        rooms = session.exec(select(models.Room).order_by(models.Room.ID.asc())).all()
 
-
-        series = {"notifications": [], "rooms": []}
-        ret = []
+        ret = [[]]
 
         for room in rooms:
+            sensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room.ID)).all()
+
+            rsum = 0
+            count = 0
+            
+            for sensor in sensors:
+                sample = session.exec(select(models.Sample).where(models.Sample.RoomSensorID == sensor.ID).order_by(models.Sample.ID.desc())).first()
+
+                rsum += json.loads(sample.MeasurementsJSON)['dB']
+                count += 1
+            
+            avg = rsum / count
+            ret[0].append(avg)
         
-            room_name = room.Name
-            max_db = room.MaxDB
-            max_pitch = room.MaxPitch
-
-            room_data = {"ID": room.ID, "name": room_name, "maxDB": max_db, "maxPitch": max_pitch}
-            series["rooms"].append(room_data)
-
-            RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room.ID)).all()
-
-            for rs in RoomSensors:
-
-                time_db = 0
-                started_db = False
-                peak_db = 0
-
-                time_pitch = 0
-                started_pitch = False
-                peak_pitch = 0
-
-                for item in rs.Samples:
-                    if time_db == 0 or time_pitch == 0:
-                        time_db = item.Timestamp
-                        time_pitch = item.Timestamp
-
-                    if started_db and json.loads(item.MeasurementsJSON)['dB'] < max_db and (item.Timestamp - time_db) > 300 and not item.NotificationSeen:
-                        series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High decibal warning", "room": room_name, "peak": str(peak_db) + "dB"})
-
-                        nt = models.Notification()
-                        nt.msg = "High decibal warning"
-                        nt.StartTime = time_db
-                        nt.EndTime = item.Timestamp
-                        nt.RoomID = room.ID
-                        nt.peak = peak_db
-
-                        session.add(nt)
-                        session.exec(update(models.Sample).where(item.ID == models.Sample.ID).values(NotificationSeen=True))
-                        session.commit()
-
-                        started_db = False
-                        time_db = 0
-                        peak_db = 0
-
-                    if json.loads(item.MeasurementsJSON)['dB'] > max_db and not started_db:
-                        time_db = item.Timestamp
-                        started_db = True
-                        peak_db = json.loads(item.MeasurementsJSON)['dB']
-
-                    if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < max_pitch and (item.Timestamp - time_pitch) > 300 and not item.NotificationSeen:
-                        series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High pitch warning", "room": room_name, "peak": str(peak_pitch) + "Hz"})
-
-                        nt = models.Notification()
-                        nt.msg = "High pitch warning"
-                        nt.StartTime = time_pitch
-                        nt.EndTime = item.Timestamp
-                        nt.RoomID = room.ID
-                        nt.peak = peak_pitch
-
-                        session.add(nt)
-                        session.exec(update(models.Sample).where(item.ID == models.Sample.ID).values(NotificationSeen=True))
-                        session.commit()
-
-                        started_pitch = False
-                        time_pitch = 0
-                        peak_pitch = 0
-                                        
-                    if json.loads(item.MeasurementsJSON)['pitch'] > max_pitch and not started_pitch:
-                        time_pitch = item.Timestamp
-                        started_pitch = True
-                        peak_pitch = json.loads(item.MeasurementsJSON)['pitch']
-
-                    if started_db or started_pitch:
-                        session.exec(update(models.Sample).where(models.Sample.ID == item.ID).values(NotificationSeen=True))
-                        session.commit()
-                    
-
-                    if started_db and json.loads(item.MeasurementsJSON)['dB'] > peak_db:
-                        peak_db = json.loads(item.MeasurementsJSON)['dB']
-
-                    if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] > peak_pitch:
-                        peak_pitch = json.loads(item.MeasurementsJSON)['pitch']
-
-
-    ret.append(series)
-    
-    return ret'''
+        return ret

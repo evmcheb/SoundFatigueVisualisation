@@ -1,6 +1,6 @@
-import axios from 'axios';
+
 import React from 'react'
-import TheDateBox, { passDate } from '../variables/TheDateBox';
+
 ///
 var workerData = [];
 var lastTime= 0;
@@ -18,6 +18,7 @@ var barChartData =[];
 var totalDosage = 0;
 var averagesOverHours = [];
 var maxDbHours = [];
+var currentRoom = null;
 export default class FetchDataTwo extends React.Component {
     intervalID;
      
@@ -33,8 +34,8 @@ export default class FetchDataTwo extends React.Component {
         isOkay:-1,
         barChartData: {bar:"None",value:0},
         averagesOverHours: {hour:"None",value:0},
-        maxDbHours :{hour:'None',value:0}
-        
+        maxDbHours :{hour:'None',value:0},
+        currentRoom:null,
     };
     
     
@@ -61,7 +62,7 @@ export default class FetchDataTwo extends React.Component {
         const response = await fetch(url);
         const data =  await response.json();
         this.intervalID = setTimeout(this.getData.bind(this), 15000);//refresh data every 15 seconds
-        console.log("hi",data.length);
+        
         if(data.length == 0){
             //No data in api
             return -1;
@@ -114,7 +115,7 @@ export default class FetchDataTwo extends React.Component {
         
         var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         var timeOfMaxDbHour = ["","","","","","","","","","","","","","","","","","","","","","","",""];
-
+        console.log("CURRENT ROOM",data.CurrentRoom)
         
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
@@ -425,14 +426,7 @@ export default class FetchDataTwo extends React.Component {
             barChartData.push({bar:"Bar9",value:0.01});
           }
 
-        //   barChartData.push({bar:"Bar2",value:bar2});
-        //   barChartData.push({bar:"Bar3",value:bar3});
-        //   barChartData.push({bar:"Bar4",value:bar4});
-        //   barChartData.push({bar:"Bar5",value:bar5});
-        //   barChartData.push({bar:"Bar6",value:bar6});
-        //   barChartData.push({bar:"Bar7",value:bar7});
-        //   barChartData.push({bar:"Bar8",value:bar8});
-        //   barChartData.push({bar:"Bar9",value:bar9});
+
           
           avgDecibel = amountDecibels/data.dB.length;
           avgDecibel = avgDecibel.toFixed(2);
@@ -452,10 +446,9 @@ export default class FetchDataTwo extends React.Component {
         
 
         
+        currentRoom = data.CurrentRoom;
         
-        console.log("RIGHT HERE",workerData)
         if(workerData.length ==0){
-            console.log("In here dog")
             workerData.push({arg:1, y1:1});
 
         }
@@ -477,6 +470,8 @@ export default class FetchDataTwo extends React.Component {
           this.setState({totalDosage})
           this.setState({averagesOverHours})
           this.setState({maxDbHours})
+          this.setState({currentRoom})
+
 
 
           
@@ -487,10 +482,7 @@ export default class FetchDataTwo extends React.Component {
         
        return(
         <>
-        <div>
-          {lastTime}
-            
-        </div>
+
         </>
         )
        
@@ -513,5 +505,6 @@ export{
     barChartData,
     totalDosage,
     averagesOverHours,
-    maxDbHours
+    maxDbHours,
+    currentRoom
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FetchWorkerData, { workerData,lastTime,startTime, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchWorkerData";
+import  { workerData, avgDecibel,averageDecibelColour,done,currentRoom} from "../FetchData/FetchWorkerData";
 
 import Button from 'react-bootstrap/Button'
 import Chart, {
@@ -27,7 +27,7 @@ class WorkerGraph extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: {workerData},
+          data: {workerData,currentRoom},
           render:false
         };
        
@@ -40,7 +40,7 @@ class WorkerGraph extends React.Component {
               this.setState({render:true})
           }.bind(this),1500)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {workerData}}), 3000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {workerData,currentRoom}}), 3000);
           
       }
      
@@ -53,7 +53,7 @@ class WorkerGraph extends React.Component {
             
             if(done==1 && this.state.data.workerData==0){
                 
-                this.setState({data: {workerData}});
+                this.setState({data: {workerData,currentRoom}});
                  
             }
             if(done==-1){
@@ -151,7 +151,9 @@ class WorkerGraph extends React.Component {
           <Legend visible={false} />
       </Chart>
       
-   
+      <div>
+      <h4> Worker is Currently in Room: {this.state.data.currentRoom} </h4>
+      </div>
     </>
     
     );

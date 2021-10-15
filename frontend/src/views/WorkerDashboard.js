@@ -120,7 +120,7 @@ function WorkerDashboard(props) {
           <Col lg="">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Data</h5>
+              <CardTitle tag="h3"> Room Data Over 24 Hours  </CardTitle>
                 
               </CardHeader>
 
@@ -168,20 +168,14 @@ function WorkerDashboard(props) {
                     
                     
   
-                    <CardTitle tag="h2">Averages Over 24 Hours </CardTitle>
+                  <CardTitle tag="h3">Averages & Max Decibels Readings For Every Hour </CardTitle>
                   </Col>
                   </Row>
                   
               </CardHeader>
              
                 
-                  {/* Main graph 
-                  
-                  <TotalDosageGuage/>
-              
-              <BulletChartGroup/>
-                  */}
-                 
+
                   <VerticalBulletWorker/>
                   
             </Card>
@@ -194,14 +188,7 @@ function WorkerDashboard(props) {
                   
             
              
-                
-                  {/* Main graph 
-                  
-                  <TotalDosageGuage/>
-              
-              <BulletChartGroup/>
-                  */}
-                 
+
                   
                   
             </Card>

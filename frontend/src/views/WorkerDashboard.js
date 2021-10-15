@@ -2,27 +2,14 @@ import React from "react";
 // nodejs library that concatenates classes
 
 import moment from "moment";
-import ScrollLineGraph from "variables/ScrollLineGraph"
 import WorkerGraph from "variables/WorkerGraph"
 // reactstrap components
 import {
-  Button,
-  ButtonGroup,
   Card,
   CardHeader,
-  CardBody,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
-  Table,
   Row,
   Col,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 import FetchWorkerData from "../FetchData/FetchWorkerData";
@@ -33,14 +20,12 @@ import WorkerPieChart from "../variables/WorkerPieChart";
 import "../assets/css/myDashboard.css"
 
 import AccordionWorkerDash from "../variables/AccordionWorkerDash";
-import TheDateBox, { passDate} from "../variables/TheDateBox";
-import MainPage from "./MainPage";
+import TheDateBox from "../variables/TheDateBox";
 import MaxWorkerGuage from "../variables/MaxWorkerGuage";
 import { Dropdown} from 'react-bootstrap';
 import AverageWorkGauge from "variables/AverageWorkGuage";
 import VerticalBulletWorker from "variables/VerticalBulletWorker";
-import TotalDosageGuage from "variables/TotalDosageGuage";
-import BulletChartGroup from "variables/BulletChartGroup";
+
 function WorkerDashboard(props) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');

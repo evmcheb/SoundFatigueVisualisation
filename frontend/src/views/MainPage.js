@@ -1,30 +1,16 @@
 // Main Page displaying the cards of all rooms iwth their average data
 ///
 import React from 'react'
-import { render } from 'react-dom';
 import {Link } from "react-router-dom";
 import {
-    Button,
-    ButtonGroup,
     Card,
     CardHeader,
     CardBody,
     CardTitle,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    UncontrolledDropdown,
-    Label,
-    FormGroup,
-    Input,
-    Table,
     Row,
     Col,
-    UncontrolledTooltip,
   } from "reactstrap";
 
-import FetchDataTwo, { loading } from '../FetchData/FetchDataTwo';
-import AvgGauge from '../variables/AvgGauge';
 
 
 

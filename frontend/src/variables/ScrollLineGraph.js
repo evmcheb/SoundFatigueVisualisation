@@ -1,8 +1,8 @@
 import React from 'react';
 
-import FetchDataTwo, { zoomingData,lastTime,startTime, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchDataTwo";
+import  { zoomingData, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchDataTwo";
 
-import Button from 'react-bootstrap/Button'
+
 import Chart, {
   ArgumentAxis,
   Series,
@@ -13,10 +13,9 @@ import Chart, {
   Label,
   ConstantLine,
   ValueAxis,
-  Scale,
   LoadingIndicator,
-  Aggregation,Point,CommonSeriesSettings,
-  Export,
+  Aggregation,
+  Point,
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
@@ -47,17 +46,16 @@ class ScrollLineGraph extends React.Component {
      
 
       render(){
-        console.log("HMM",this.props.zoomingData)
 
         let renderContainer = false
         if(this.state.render) {
             console.log({done})
-            if(done==1 && this.state.data.zoomingData==0){
+            if(done===1 && this.state.data.zoomingData===0){
                 
                 this.setState({data: {zoomingData}});
                  
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
         return (

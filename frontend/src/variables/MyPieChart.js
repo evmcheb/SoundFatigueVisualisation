@@ -41,12 +41,12 @@ class MyPieChart extends React.Component {
         let renderContainer = false
         if (this.state.render) {
             console.log({ done })
-            if (done == 1 && this.state.data.areas == 0) {
+            if (done=== 1 && this.state.data.areas === 0) {
 
                 this.setState({ data: { areas } });
 
             }
-            if (done == -1) {
+            if (done === -1) {
                 this.componentDidMount();
             }
             return ( <PieChart id = "pie"
@@ -58,13 +58,15 @@ class MyPieChart extends React.Component {
                 <Series argumentField = "risk"
                 valueField = "area" >
                 <Label visible = { true } >
-                <Connector visible = { true }
-                width = { 1 }/> </Label > </Series>
+                    <Connector visible = { true }width = { 1 }/> 
+                    </Label >
+                </Series>
 
-                <Size width = { 500 }/> <Title text = "Decibel Occurrences" >
-                <Font size = { 28 }
-                color = "gray" / >
-                </Title> </PieChart>
+                <Size width = { 500 }/> 
+                <Title text = "Decibel Occurrences" >
+                <Font size = { 28 } color = "gray" / >
+                    </Title> 
+                </PieChart>
             );
         }
 

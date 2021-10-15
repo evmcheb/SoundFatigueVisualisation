@@ -32,12 +32,12 @@ class TotalDosageGuage extends React.Component {
      
         if(this.state.render) {
             console.log({done})
-            if(done==1 && this.state.data.totalDosage==0){
+            if(done===1 && this.state.data.totalDosage===0){
                 
                 this.setState({data: {totalDosage}});
                 console.log(this.state.data)
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
 

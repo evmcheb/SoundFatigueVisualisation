@@ -2,7 +2,6 @@ import React from 'react';
 
 import  { workerData, avgDecibel,averageDecibelColour,done,currentRoom} from "../FetchData/FetchWorkerData";
 
-import Button from 'react-bootstrap/Button'
 import Chart, {
   ArgumentAxis,
   Series,
@@ -13,9 +12,9 @@ import Chart, {
   Label,
   ConstantLine,
   ValueAxis,
-  Scale,
   LoadingIndicator,
-  Aggregation,Point,CommonSeriesSettings,Grid
+  Aggregation,
+  Point,
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
@@ -51,12 +50,12 @@ class WorkerGraph extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data.workerData==0){
+            if(done===1 && this.state.data.workerData===0){
                 
                 this.setState({data: {workerData,currentRoom}});
                  
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
         return (

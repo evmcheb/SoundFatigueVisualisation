@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
-import FetchDataTwo from "../FetchData/FetchDataTwo";
-import Button from 'react-bootstrap/Button'
 
-import {Link } from "react-router-dom";
+
 import { useHistory } from 'react-router-dom';
 var passDate = null;
 export default function TheDateBox(props) {
@@ -21,10 +19,8 @@ export default function TheDateBox(props) {
   const handleselectedDate = (date) => {
     setselectedDate({data:date});
     passDate= moment(selectedDate.data).format("DD-MM-YYYY")
-    //window.location.reload();
-    
-    //window.location.reload();
-   console.log("presed")
+
+   console.log("New Date Pressed")
   };
   const displayNewDate = () =>{
     var newPath = "" 

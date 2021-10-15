@@ -1,57 +1,41 @@
 import React from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
-import FetchData from "FetchData/FetchData.js";
-import {Link} from 'react-router-dom'
 
 import moment from "moment";
 import ScrollLineGraph from "variables/ScrollLineGraph"
 // reactstrap components
 import {
-  Button,
-  ButtonGroup,
+
   Card,
   CardHeader,
-  CardBody,
+
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
-  Table,
+
   Row,
   Col,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 
-import FetchDataTwo, { avgDecibel ,averageDecibelColour, maxDecibel, maxDbTime, lastTime} from "../FetchData/FetchDataTwo";
+import FetchDataTwo from "../FetchData/FetchDataTwo";
 
 
 
 import MyPieChart from "../variables/MyPieChart";
 
 import "../assets/css/myDashboard.css"
-import { Size } from "devextreme-react/pie-chart";
+
 
 import AvgGauge from "../variables/AvgGauge";
-import AccordionMoreData from "../variables/AccordionMoreData";
-import TheDateBox, { passDate} from "../variables/TheDateBox";
+
+import TheDateBox from "../variables/TheDateBox";
 import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
-import { Dropdown} from 'react-bootstrap';
+
 import VerticalBulletChart from "variables/VerticalBulletChart";
 function Dashboard(props) {
   
 
 
   var dateToDisplay = props.match.params.date
-  var roomViewing = props.room
   var[day,month,year] = dateToDisplay.split('-')
   //If sidebar link was clicked and no room is selected
   //make user select room to display

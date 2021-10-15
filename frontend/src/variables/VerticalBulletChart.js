@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ChartBullet, ChartContainer } from '@patternfly/react-charts';
 
 import { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchDataTwo";
@@ -21,7 +21,7 @@ class VerticalBulletChart extends React.Component {
               this.setState({render:true})
           }.bind(this),15000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 15000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 2500);
           
       }
      
@@ -31,14 +31,13 @@ class VerticalBulletChart extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             console.log({done})
-            if(done==1 && this.state.data.averagesOverHours ==0){
+            if(done===1 && this.state.data.averagesOverHours ===0){
                 
-                this.state = {
-                    data: {averagesOverHours,maxDbHours }
-                };
+
                 
+                this.setState({data: {averagesOverHours,maxDbHours}});
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
             

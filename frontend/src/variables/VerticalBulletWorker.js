@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { ChartBullet, ChartContainer,ChartThemeColor } from '@patternfly/react-charts';
+import React from 'react'
+import { ChartBullet, ChartContainer } from '@patternfly/react-charts';
 
 import  { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchWorkerData";
 
@@ -31,11 +31,9 @@ class VerticalBulletWorker extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done===1 && this.state.data.averagesOverHours ==0){
+            if(done===1 && this.state.data.averagesOverHours ===0){
                 
-                this.state = {
-                    data: {averagesOverHours,maxDbHours }
-                };
+                this.setState({data: {averagesOverHours,maxDbHours}});
                 
             }
             if(done===-1){

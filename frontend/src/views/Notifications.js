@@ -3,23 +3,23 @@ import React from "react";
 import NotificationAlert from "react-notification-alert";
 import FetchData from "FetchData/FetchData";
 import axios from "axios";
-import { Dropdown} from 'react-bootstrap';
+
 
 
 
 
 // reactstrap components
 import {
-  Alert,
+
   UncontrolledAlert,
-  Button,
+
   Card,
   CardHeader,
   CardBody,
   CardTitle,
   Row,
   Col,
-  CardColumns,
+
 } from "reactstrap";
 
 
@@ -67,9 +67,9 @@ function Notifications() {
   }
 
   if(rs !== undefined && rs.length > 0){
-    for(var i = 0; i < rs.length; i++){
+    for(var j = 0; j < rs.length; j++){
       rooms.push(
-        <option value={rs[i]["ID"]}>{rs[i]["name"]}</option>
+        <option value={rs[j]["ID"]}>{rs[j]["name"]}</option>
       )
     }
   }else{
@@ -85,7 +85,7 @@ function Notifications() {
 
   function setNots(){
 
-      if(max_db == undefined || max_pitch == undefined){
+      if(max_db === undefined || max_pitch === undefined){
         alert("Invalid value!");
         return;
       }

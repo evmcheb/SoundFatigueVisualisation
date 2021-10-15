@@ -51,7 +51,7 @@ export default class FetchDataTwo extends React.Component {
         console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
-        this.intervalID = setTimeout(this.getData.bind(this), 15000);//refresh data every 15 seconds
+        this.intervalID = setTimeout(this.getData.bind(this), 30000);//refresh data every 10 seconds
         
         if(data.length === 0){
             //No data in api
@@ -88,7 +88,7 @@ export default class FetchDataTwo extends React.Component {
         var bar7 = 0;
         var bar8 = 0;
         var bar9 = 0;
-
+        
         totalDosage = 0.01;
         averagesOverHours = [];
         maxDbHours = [];
@@ -101,7 +101,7 @@ export default class FetchDataTwo extends React.Component {
         var averagesHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         
         var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        var timeOfMaxDbHour = ["-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1"];
+        var timeOfMaxDbHour = ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"];
         
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
@@ -178,7 +178,6 @@ export default class FetchDataTwo extends React.Component {
                 totalDosage += (1/110)*100
             }
             
-
             //pushing values for main graph
             workerData.push({arg:timestamp, y1:decibels});
             
@@ -209,64 +208,85 @@ export default class FetchDataTwo extends React.Component {
           areas.push({risk:"UnSafe",area:unSafeInt});
           areas.push({risk:"Threatening",area:threateningInt});
 
+          
           //pushing values for dosimeter
           if(bar1!==0){
           barChartData.push({bar:"Bar1",value:bar1});
+  
           }
-          else{
+        else{
               // have to give it a value that isnt 0 or undefined otherwise page crashes
             barChartData.push({bar:"Bar1",value:0.01});
+   
           }
           if(bar2!==0){
             barChartData.push({bar:"Bar2",value:bar2});
+         
         }
         else{
           barChartData.push({bar:"Bar2",value:0.01});
+        
         }
         if(bar3!==0){
             
             barChartData.push({bar:"Bar3",value:bar3});
+          
             }
         else{
               barChartData.push({bar:"Bar3",value:0.01});
+              
         }
         if(bar4!==0){
             
             barChartData.push({bar:"Bar5",value:bar4});
+         
             }
         else{
               barChartData.push({bar:"Bar4",value:0.01});
+              
         }
         if(bar5!==0){
             barChartData.push({bar:"Bar5",value:bar5});
+            
             }
         else{
               barChartData.push({bar:"Bar5",value:0.01});
+              
             }
         if(bar6!==0){
             barChartData.push({bar:"Bar6",value:bar6});
+          
             }
         else{
             barChartData.push({bar:"Bar6",value:0.01});
+            
         }
         if(bar7!==0){
             barChartData.push({bar:"Bar1",value:bar7});
+            
             }
         else{
             barChartData.push({bar:"Bar7",value:0.01});
+           
             }
         if(bar8!==0){
             barChartData.push({bar:"Bar8",value:bar8});
+            
             }
         else{
             barChartData.push({bar:"Bar8",value:0.01});
+            
             }
         if(bar9!==0){
+            
             barChartData.push({bar:"Bar9",value:bar9});
+            
             }
         else{
             barChartData.push({bar:"Bar9",value:0.01});
+            
           }
+
 
 
           
@@ -296,7 +316,7 @@ export default class FetchDataTwo extends React.Component {
         }
         totalDosage = totalDosage.toFixed(2);
         
-        
+        done = 1;
           this.setState({workerData})
           this.setState({avgDecibel})
           this.setState({areas})
@@ -308,7 +328,7 @@ export default class FetchDataTwo extends React.Component {
           this.setState({averagesOverHours})
           this.setState({maxDbHours})
           this.setState({currentRoom})
-          done = 1;
+          
           this.setState({done})
 
           

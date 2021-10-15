@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { ChartBullet, ChartContainer,ChartThemeColor } from '@patternfly/react-charts';
+import React from 'react'
+import { ChartBullet, ChartContainer } from '@patternfly/react-charts';
 import { barChartData,done} from "../FetchData/FetchWorkerData";
 
 
@@ -18,9 +18,9 @@ class BulletChartGroup extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),30000)
+          }.bind(this),35000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {barChartData}}), 30000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {barChartData}}), 2500);
           
       }
      
@@ -30,14 +30,16 @@ class BulletChartGroup extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data.barChartData==0){
+            if(done===1 && this.state.data.barChartData.length ===0){
+
+
+
+                this.setState({data: {barChartData}
+                });
                 
-                this.state = {
-                    data: {barChartData}
-                };
-                
+
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
             

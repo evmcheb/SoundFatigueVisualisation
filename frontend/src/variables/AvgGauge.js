@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
-import { avgDecibel,averageDecibelColour,maxDecibel,done} from "../FetchData/FetchDataTwo";
+import { avgDecibel,maxDecibel,done} from "../FetchData/FetchDataTwo";
 
 class AvgGauge extends React.Component {
 
@@ -33,12 +33,12 @@ class AvgGauge extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data.avgDecibel==0){
+            if(done===1 && this.state.data.avgDecibel===0){
                 
                 this.setState({data: {avgDecibel}});
                  
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
 

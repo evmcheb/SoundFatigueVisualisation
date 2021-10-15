@@ -1,7 +1,7 @@
 import React from 'react'
 import { ChartBullet, ChartContainer } from '@patternfly/react-charts';
 
-import { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchDataTwo";
+import { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchRoomData";
 
 
 class VerticalBulletChart extends React.Component {

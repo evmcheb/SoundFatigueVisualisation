@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 
 
-import FetchDataTwo from "../FetchData/FetchDataTwo";
+import FetchRoomData from "../FetchData/FetchRoomData";
 
 
 
@@ -57,7 +57,7 @@ function Dashboard(props) {
     <div>
       {/* pass in what room was clicked?*/}
      
-      <FetchDataTwo room= {props.match.params.id} date = {props.match.params.date}/>
+      <FetchRoomData room= {props.match.params.id} date = {props.match.params.date}/>
      
       </div>
       

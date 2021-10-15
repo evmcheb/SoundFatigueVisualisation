@@ -12,7 +12,7 @@ var maxDecibel = -Number.MIN_VALUE;
 var done = -1;
 var averagesOverHours = [];
 var maxDbHours = [];
-export default class FetchDataTwo extends React.Component {
+export default class FetchRoomData extends React.Component {
     intervalID;
     state = {
         loading:true,

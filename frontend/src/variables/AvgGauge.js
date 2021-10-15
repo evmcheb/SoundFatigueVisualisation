@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
-import { avgDecibel,maxDecibel,done} from "../FetchData/FetchDataTwo";
+import { avgDecibel,maxDecibel,done} from "../FetchData/FetchRoomData";
 
 class AvgGauge extends React.Component {
 

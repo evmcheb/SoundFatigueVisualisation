@@ -9,7 +9,7 @@ import PieChart, {
     Font,
 } from 'devextreme-react/pie-chart';
 //
-import { areas, done } from "../FetchData/FetchDataTwo";
+import { areas, done } from "../FetchData/FetchRoomData";
 ///
 class MyPieChart extends React.Component {
     constructor(props) {

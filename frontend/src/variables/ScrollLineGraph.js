@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  { zoomingData, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchDataTwo";
+import  { zoomingData, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchRoomData";
 
 
 import Chart, {

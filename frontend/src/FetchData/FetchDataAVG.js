@@ -37,8 +37,6 @@ export default class FetchDataAVG extends React.Component {
 
         done = 1;
         rdata = data[0];
-
-        console.log(rdata);
         
     }
 

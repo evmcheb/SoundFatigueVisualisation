@@ -90,7 +90,7 @@ function Notifications() {
         return;
       }
 
-      var url = `http://127.0.0.1:8000/set_notifications/`;
+      var url = "http://127.0.0.1:8000/set_notifications/";
 
       data = { 
           MaxDB: max_db.toString(),

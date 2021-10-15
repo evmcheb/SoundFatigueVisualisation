@@ -372,8 +372,8 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 
-@app.post("/set_notifications/{room_id}/")
-async def query_update_nots(room_id: int, request: Request):
+@app.post("/set_notifications/")
+async def query_update_nots(request: Request):
     data = await request.body()
 
     json_data = json.loads(data)
@@ -452,21 +452,21 @@ def query_notification():
         interval = 300
 
         i = 0
-        for item in samples:            
+        for item in samples:         
             i += 1
             room = session.exec(select(models.Room).join(models.RoomSensor, models.RoomSensor.RoomID == models.Room.ID).join(models.Sample, models.Sample.RoomSensorID == models.RoomSensor.ID).where(models.Sample.RoomSensorID == item.RoomSensorID)).first()
 
             if time_db == 0 or time_pitch == 0:
-                        time_db = timeToUNIX(item.Timestamp)
-                        time_pitch = timeToUNIX(item.Timestamp)
+                        time_db = item.Timestamp
+                        time_pitch = item.Timestamp
 
-            if started_db and json.loads(item.MeasurementsJSON)['dB'] < room.MaxDB and (timeToUNIX(item.Timestamp) - time_db) > interval and item.NotificationSeen != 1:
-                series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
+            if started_db and json.loads(item.MeasurementsJSON)['dB'] < room.MaxDB and (item.Timestamp - time_db) > interval and item.NotificationSeen != 1:
+                series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
 
                 nt = models.Notification()
                 nt.msg = "High decibal warning"
                 nt.StartTime = time_db
-                nt.EndTime = timeToUNIX(item.Timestamp)
+                nt.EndTime = item.Timestamp
                 nt.RoomID = room.ID
                 nt.peak = peak_db
 
@@ -479,17 +479,17 @@ def query_notification():
                 peak_db = 0
 
             if json.loads(item.MeasurementsJSON)['dB'] > room.MaxDB and not started_db:
-                time_db = timeToUNIX(item.Timestamp)
+                time_db = item.Timestamp
                 started_db = True
                 peak_db = json.loads(item.MeasurementsJSON)['dB']
 
-            if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < room.MaxPitch and (timeToUNIX(item.Timestamp) - time_pitch) > interval and item.NotificationSeen != 1:
-                series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
+            if started_pitch and json.loads(item.MeasurementsJSON)['pitch'] < room.MaxPitch and (item.Timestamp - time_pitch) > interval and item.NotificationSeen != 1:
+                series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
 
                 nt = models.Notification()
                 nt.msg = "High pitch warning"
                 nt.StartTime = time_pitch
-                nt.EndTime = timeToUNIX(item.Timestamp)
+                nt.EndTime = item.Timestamp
                 nt.RoomID = room.ID
                 nt.peak = peak_pitch
 
@@ -502,7 +502,7 @@ def query_notification():
                 peak_pitch = 0
                                 
             if json.loads(item.MeasurementsJSON)['pitch'] > room.MaxPitch and not started_pitch:
-                time_pitch = timeToUNIX(item.Timestamp)
+                time_pitch = item.Timestamp
                 started_pitch = True
                 peak_pitch = json.loads(item.MeasurementsJSON)['pitch']
             
@@ -518,12 +518,12 @@ def query_notification():
                 session.commit()
                 
                 if started_db:
-                    series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
+                    series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High decibal warning", "room": room.Name, "peak": str(peak_db) + "dB"})
 
                     nt = models.Notification()
                     nt.msg = "High decibal warning"
                     nt.StartTime = time_db
-                    nt.EndTime = timeToUNIX(item.Timestamp)
+                    nt.EndTime = item.Timestamp
                     nt.RoomID = room.ID
                     nt.peak = peak_db
 
@@ -536,12 +536,12 @@ def query_notification():
                     peak_db = 0
                 
                 if started_pitch:
-                    series["notifications"].append({"start_time": time_db, "end_time": timeToUNIX(item.Timestamp), "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
+                    series["notifications"].append({"start_time": time_db, "end_time": item.Timestamp, "msg": "High pitch warning", "room": room.Name, "peak": str(peak_pitch) + "Hz"})
 
                     nt = models.Notification()
                     nt.msg = "High pitch warning"
                     nt.StartTime = time_pitch
-                    nt.EndTime = timeToUNIX(item.Timestamp)
+                    nt.EndTime = item.Timestamp
                     nt.RoomID = room.ID
                     nt.peak = peak_pitch
 

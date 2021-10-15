@@ -52,6 +52,7 @@ class VerticalBulletWorker extends React.Component {
                 width={3025}
               >
               <ChartBullet
+                primaryDotMeasureLegendData = {[{name:'Dot: Max dB and Time of Occurence'}]}
                 comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeErrorMeasureLegendData={[{ name: 'Critical' }]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
@@ -69,7 +70,7 @@ class VerticalBulletWorker extends React.Component {
                 }}
                 primaryDotMeasureData={[{ name: this.state.data.maxDbHours[0].time, y: this.state.data.maxDbHours[0].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[0].value }]}
-                primarySegmentedMeasureLegendData={[{ name: 'Average dB' }]}
+                primarySegmentedMeasureLegendData={[{ name: 'Bar: Average dB' }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 
                 standalone={false}

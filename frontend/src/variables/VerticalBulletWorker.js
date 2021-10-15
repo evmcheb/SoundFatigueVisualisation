@@ -19,9 +19,9 @@ class VerticalBulletWorker extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),15000)
+          }.bind(this),30000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 15000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 30000);
           
       }
      
@@ -31,14 +31,14 @@ class VerticalBulletWorker extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data.averagesOverHours ==0){
+            if(done===1 && this.state.data.averagesOverHours ==0){
                 
                 this.state = {
                     data: {averagesOverHours,maxDbHours }
                 };
                 
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
             

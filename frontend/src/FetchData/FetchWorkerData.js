@@ -101,7 +101,7 @@ export default class FetchDataTwo extends React.Component {
         var averagesHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         
         var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        var timeOfMaxDbHour = [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "];
+        var timeOfMaxDbHour = ["-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1","-1"];
         
         for(var i=0; i< data.dB.length; i++){
             var decibels = data.dB[i];
@@ -295,21 +295,21 @@ export default class FetchDataTwo extends React.Component {
 
         }
         totalDosage = totalDosage.toFixed(2);
-
-        done = 1;
+        
+        
           this.setState({workerData})
           this.setState({avgDecibel})
           this.setState({areas})
           this.setState({averageDecibelColour})
           this.setState({maxDecibel})
-          this.setState({done})
+          
           this.setState({barChartData})
           this.setState({totalDosage})
           this.setState({averagesOverHours})
           this.setState({maxDbHours})
           this.setState({currentRoom})
-
-
+          done = 1;
+          this.setState({done})
 
           
     }

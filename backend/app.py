@@ -585,7 +585,7 @@ def query_notification():
 
 
 def timeToUNIX(t):
-        unixtime = time.mktime(datetime.datetime.strptime(t, "%d-%m-%Y-%H:%M:%S").timetuple())
+        unixtime = time.mktime(datetime.strptime(t, "%d-%m-%Y-%H:%M:%S").timetuple())
         return unixtime
 
 

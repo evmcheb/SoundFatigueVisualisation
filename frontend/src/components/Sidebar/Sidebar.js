@@ -62,12 +62,12 @@ function Sidebar(props) {
       */
       logoText = (
         <a
-          href={logo.outterLink}
+          
           className="simple-text logo-normal"
           target="_blank"
           onClick={props.toggleSidebar}
         >
-          Navigation
+          Sound Visualisation
         </a>
       );
     } else {

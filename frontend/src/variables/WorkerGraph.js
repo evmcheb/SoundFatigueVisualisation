@@ -1,8 +1,7 @@
 import React from 'react';
 
-import FetchWorkerData, { workerData,lastTime,startTime, avgDecibel,averageDecibelColour,done} from "../FetchData/FetchWorkerData";
+import  { workerData, avgDecibel,averageDecibelColour,done,currentRoom} from "../FetchData/FetchWorkerData";
 
-import Button from 'react-bootstrap/Button'
 import Chart, {
   ArgumentAxis,
   Series,
@@ -13,9 +12,9 @@ import Chart, {
   Label,
   ConstantLine,
   ValueAxis,
-  Scale,
   LoadingIndicator,
-  Aggregation,Point,CommonSeriesSettings
+  Aggregation,
+  Point,
 } from 'devextreme-react/chart';
 
 //if i want to shorten the defualt range
@@ -27,7 +26,7 @@ class WorkerGraph extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: {workerData},
+          data: {workerData,currentRoom},
           render:false
         };
        
@@ -40,7 +39,7 @@ class WorkerGraph extends React.Component {
               this.setState({render:true})
           }.bind(this),1500)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {workerData}}), 3000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {workerData,currentRoom}}), 3000);
           
       }
      
@@ -51,12 +50,12 @@ class WorkerGraph extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data.workerData==0){
+            if(done===1 && this.state.data.workerData===0){
                 
-                this.setState({data: {workerData}});
+                this.setState({data: {workerData,currentRoom}});
                  
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
         return (
@@ -83,7 +82,9 @@ class WorkerGraph extends React.Component {
         <ArgumentAxis
             
             argumentType="datetime"
-           />
+           >
+       
+           </ArgumentAxis>
             <Label format="shortTime" />
        
         {/* Setting the green to red horizontal lines */}
@@ -151,7 +152,9 @@ class WorkerGraph extends React.Component {
           <Legend visible={false} />
       </Chart>
       
-   
+      <div>
+      <h4> Worker is Currently in Room: {this.state.data.currentRoom} </h4>
+      </div>
     </>
     
     );

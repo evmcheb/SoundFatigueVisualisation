@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
-import { maxDecibel,done, maxDbTime,maxValues} from "../FetchData/FetchDataTwo";
+import { maxDecibel,done} from "../FetchData/FetchRoomData";
 
 class MaxGuage extends React.Component {
 
@@ -34,12 +34,12 @@ class MaxGuage extends React.Component {
      
         if(this.state.render) {
             console.log({done})
-            if(done==1 && this.state.data.maxDecibel==0){
+            if(done===1 && this.state.data.maxDecibel===0){
                 
                 this.setState({data: {maxDecibel}});
                 console.log(this.state.data)
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
 

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { ChartBullet, ChartContainer,ChartThemeColor } from '@patternfly/react-charts';
+import React from 'react'
+import { ChartBullet, ChartContainer } from '@patternfly/react-charts';
 
 import  { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchWorkerData";
 
@@ -19,9 +19,9 @@ class VerticalBulletWorker extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),15000)
+          }.bind(this),30000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 15000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 2500);
           
       }
      
@@ -31,14 +31,12 @@ class VerticalBulletWorker extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data.averagesOverHours ==0){
+            if(done===1 && this.state.data.averagesOverHours ===0){
                 
-                this.state = {
-                    data: {averagesOverHours,maxDbHours }
-                };
+                this.setState({data: {averagesOverHours,maxDbHours}});
                 
             }
-            if(done==-1){
+            if(done===-1){
                 this.componentDidMount();
             }
             
@@ -52,6 +50,7 @@ class VerticalBulletWorker extends React.Component {
                 width={3025}
               >
               <ChartBullet
+                primaryDotMeasureLegendData = {[{name:'Dot: Max dB and Time of Occurence'}]}
                 comparativeErrorMeasureData={[{name: 'Critical', y: 130}]}
                 comparativeErrorMeasureLegendData={[{ name: 'Critical' }]}
                 comparativeWarningMeasureData={[{name: 'Warning', y: 95}]}
@@ -69,7 +68,7 @@ class VerticalBulletWorker extends React.Component {
                 }}
                 primaryDotMeasureData={[{ name: this.state.data.maxDbHours[0].time, y: this.state.data.maxDbHours[0].value  }]}
                 primarySegmentedMeasureData={[{ name: 'Measure', y: this.state.data.averagesOverHours[0].value }]}
-                primarySegmentedMeasureLegendData={[{ name: 'Average dB' }]}
+                primarySegmentedMeasureLegendData={[{ name: 'Bar: Average dB' }]}
                 qualitativeRangeData={[{ name: 'Range', y: 60 }, { name: 'Range', y: 95 },{name: 'Range',y:140}]}
                 
                 standalone={false}

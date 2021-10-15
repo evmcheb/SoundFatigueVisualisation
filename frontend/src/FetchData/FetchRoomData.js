@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-///
+// Declaring variables for data collection
 var zoomingData = [];
 var lastTime= 0;
 var startTime =0;
@@ -9,14 +9,11 @@ var avgDecibel = 0;
 var areas =[];
 var averageDecibelColour = '';
 var maxDecibel = -Number.MIN_VALUE;
-var maxDbTime = 0;
-var maxValues = [];
 var done = -1;
 var averagesOverHours = [];
 var maxDbHours = [];
-export default class FetchDataTwo extends React.Component {
+export default class FetchRoomData extends React.Component {
     intervalID;
-     
     state = {
         loading:true,
         dbs: [],
@@ -25,7 +22,6 @@ export default class FetchDataTwo extends React.Component {
         areas:{risk:"None",area: 0},
 
         done:-1,
-        maxValues:{x:0,y:0},
         averagesOverHours: {hour:"None",value:0},
         maxDbHours :{hour:'None',value:0}
     };
@@ -43,9 +39,7 @@ export default class FetchDataTwo extends React.Component {
     getData = async() =>{
 
         console.log("Getting data ",this.props.room,"for date",this.props.date)
-        
         var url = "http://127.0.0.1:8000/room/";
-        //url = url.concat(passDate);
         url = url.concat(this.props.room);
         url = url.concat("/");
         url = url.concat(this.props.date);
@@ -53,7 +47,7 @@ export default class FetchDataTwo extends React.Component {
         console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
-        this.intervalID = setTimeout(this.getData.bind(this), 15000);//refresh data every 15 seconds
+        this.intervalID = setTimeout(this.getData.bind(this), 15000);//Fetch Data every 15 seconds
         
         this.setState(prevState => ({
             dbs: [...prevState.dbs, data[0].dB]
@@ -68,8 +62,6 @@ export default class FetchDataTwo extends React.Component {
         
         var amountDecibels = 0;
 
-        console.log(data);
-        
         //For pie chart
         var safeInt=0;
         var dangerousInt=0;
@@ -77,31 +69,29 @@ export default class FetchDataTwo extends React.Component {
         var unSafeInt = 0;
         zoomingData = [];
         areas = [];
-        maxValues = [];
-  
+        
+        // For Vertical bullet chart
         averagesOverHours = [];
         maxDbHours = [];
 
-    //    Getting averages over hours of day
+    //    Getting averages over 34 hours of day
         var hours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         var decibelHours= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       
-   
         var averagesHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         
         var maxDbInHours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         var timeOfMaxDbHour = ["","","","","","","","","","","","","","","","","","","","","","","",""];
-        if(data[0].dB.length == 0 ){
-            console.log("empty")
+        if(data[0].dB.length === 0 ){ 
+            // if data is empty push 0 values so page does not crash
             zoomingData.push({arg:"0", y1:0});
         }
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
             var timestamp = data[0].x[i];
             amountDecibels += decibels;
-            
             //for average hours
-            if(timestamp != undefined){
+            if(timestamp !== undefined){
                 timestamp = timestamp.toString();
                 //getting hour
                 var timeSub = timestamp.substr(11,2)
@@ -118,8 +108,6 @@ export default class FetchDataTwo extends React.Component {
                 }
 
             }
-
-
             //For pie chart
             if(decibels <=70){
                 safeInt +=1;
@@ -133,70 +121,44 @@ export default class FetchDataTwo extends React.Component {
             else if(decibels>=113){
                 unSafeInt +=1;
             }
-
-        
             
             lastTime = timestamp;
             //lastTime = timestamp;
             if(i === data[0].dB.length-100){
-               //startTime = formattedTime;
+               
                startTime = timestamp;
             }
-            //var date = new Date(timestamp * 1000);
-            //var hours = date.getHours();
-            //var minutes = "0" + date.getMinutes();
-            //var seconds = "0" + date.getSeconds();     
 
-            //timestam = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
             zoomingData.push({arg:timestamp, y1:decibels});
             
             //Getting max dB value
             if(decibels>maxDecibel){
-              
                 maxDecibel = decibels;
-                maxDbTime = timestamp;
                
             }        
         }
         //pushing averages to array for dsiplaying
-        for (var i = 0;i<24;i++){
-            if(decibelHours[i] == 0 || hours[i] == 0){
-                averagesHours[i] = 0
+        for (var j = 0;j<24;j++){
+            if(decibelHours[j] === 0 || hours[j] === 0){
+                averagesHours[j] = 0
             }
-           averagesHours[i] = (decibelHours[i]/hours[i]).toFixed(2);
-           averagesOverHours.push({hour:"hour"+i,value:averagesHours[i]});
-           maxDbHours.push({time:timeOfMaxDbHour[i],value:maxDbInHours[i]});
+           averagesHours[j] = (decibelHours[j]/hours[j]).toFixed(2);
+           averagesOverHours.push({hour:"hour"+j,value:averagesHours[j]});
+           maxDbHours.push({time:timeOfMaxDbHour[j],value:maxDbInHours[j]});
         }
           
-          
-          
-          
-          
-          
-          
-            
-           
-            //COnverting maxDbTime to hour:min:sec
-            var date = new Date(maxDbTime * 1000);
-            var hours = date.getHours();
-            var minutes = "0" + date.getMinutes();
-            var seconds = "0" + date.getSeconds();     
-            maxDbTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            maxValues.push({x:maxDbTime, y:maxDecibel});
-            
-
+            // pushing pie chart values
           areas.push({risk:"Safe",area:safeInt});
           areas.push({risk:"Dangerous",area:dangerousInt});
-          
           areas.push({risk:"UnSafe",area:unSafeInt});
           areas.push({risk:"Threatening",area:threateningInt});
 
    
 
-
+            //Getting average over all data
           avgDecibel = amountDecibels/data[0].dB.length;
           avgDecibel = avgDecibel.toFixed(2);
-          //Determing what colour of average decibels
+          //Determing what colour of average decibels line should be on main graph
         if(avgDecibel <=70){
             averageDecibelColour = "green";
             }
@@ -211,19 +173,15 @@ export default class FetchDataTwo extends React.Component {
         }
         done = 1;
         
-        
-        
-       
-        console.log("RIGHT HERE",zoomingData)
+    
+            // Setting states for exportation
           this.setState({zoomingData})
           this.setState({lastTime})
           this.setState({avgDecibel})
           this.setState({areas})
           this.setState({averageDecibelColour})
           this.setState({maxDecibel})
-          this.setState({maxDbTime})
           this.setState({done})
-          this.setState({maxValues})
           this.setState({averagesOverHours})
           this.setState({maxDbHours})
         
@@ -234,13 +192,7 @@ export default class FetchDataTwo extends React.Component {
         
        return(
         <>
-        <div>
-          {lastTime}
-            <p>
-          showing data for room  :{this.props.room}
-          
-          </p>
-        </div>
+        
         </>
         )
        
@@ -255,9 +207,7 @@ export{
     areas,
     averageDecibelColour,
     maxDecibel,
-    maxDbTime,
     done,
-    maxValues,
     averagesOverHours,
     maxDbHours
 };

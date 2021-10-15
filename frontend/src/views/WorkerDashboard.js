@@ -2,27 +2,14 @@ import React from "react";
 // nodejs library that concatenates classes
 
 import moment from "moment";
-import ScrollLineGraph from "variables/ScrollLineGraph"
 import WorkerGraph from "variables/WorkerGraph"
 // reactstrap components
 import {
-  Button,
-  ButtonGroup,
   Card,
   CardHeader,
-  CardBody,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
-  Table,
   Row,
   Col,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 import FetchWorkerData from "../FetchData/FetchWorkerData";
@@ -33,14 +20,12 @@ import WorkerPieChart from "../variables/WorkerPieChart";
 import "../assets/css/myDashboard.css"
 
 import AccordionWorkerDash from "../variables/AccordionWorkerDash";
-import TheDateBox, { passDate} from "../variables/TheDateBox";
-import MainPage from "./MainPage";
+import TheDateBox from "../variables/TheDateBox";
 import MaxWorkerGuage from "../variables/MaxWorkerGuage";
 import { Dropdown} from 'react-bootstrap';
 import AverageWorkGauge from "variables/AverageWorkGuage";
 import VerticalBulletWorker from "variables/VerticalBulletWorker";
-import TotalDosageGuage from "variables/TotalDosageGuage";
-import BulletChartGroup from "variables/BulletChartGroup";
+
 function WorkerDashboard(props) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -120,7 +105,7 @@ function WorkerDashboard(props) {
           <Col lg="">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Data</h5>
+              <CardTitle tag="h3"> Room Data Over 24 Hours  </CardTitle>
                 
               </CardHeader>
 
@@ -168,20 +153,14 @@ function WorkerDashboard(props) {
                     
                     
   
-                    <CardTitle tag="h2">Averages Over 24 Hours </CardTitle>
+                  <CardTitle tag="h3">Averages & Max Decibels Readings For Every Hour </CardTitle>
                   </Col>
                   </Row>
                   
               </CardHeader>
              
                 
-                  {/* Main graph 
-                  
-                  <TotalDosageGuage/>
-              
-              <BulletChartGroup/>
-                  */}
-                 
+
                   <VerticalBulletWorker/>
                   
             </Card>
@@ -194,14 +173,7 @@ function WorkerDashboard(props) {
                   
             
              
-                
-                  {/* Main graph 
-                  
-                  <TotalDosageGuage/>
-              
-              <BulletChartGroup/>
-                  */}
-                 
+
                   
                   
             </Card>

@@ -41,12 +41,12 @@ class WorkerPieChart extends React.Component {
         let renderContainer = false
         if (this.state.render) {
             
-            if (done == 1 && this.state.data.areas == 0) {
+            if (done === 1 && this.state.data.areas === 0) {
 
                 this.setState({ data: { areas } });
 
             }
-            if (done == -1) {
+            if (done === -1) {
                 this.componentDidMount();
             }
             return ( <PieChart id = "pie"

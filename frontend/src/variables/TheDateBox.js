@@ -54,18 +54,8 @@ export default function TheDateBox(props) {
                             </button>
        
       </div>
-      {selectedDate  && (
-        <div className="summary" style={{ marginTop: 20, marginBottom: 20 }}>
-          <p>
-            Viewing data for {moment(selectedDate.data).format("LL")} 
-            
-          </p>
-         
-                        
-         
-          
-        </div>
-      )}
+      
+     
 
     </div>
   );

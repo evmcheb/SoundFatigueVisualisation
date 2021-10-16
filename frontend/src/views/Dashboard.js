@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react';
 
 import moment from "moment";
 import ScrollLineGraph from "variables/ScrollLineGraph"
@@ -29,10 +29,11 @@ import AvgGauge from "../variables/AvgGauge";
 import TheDateBox from "../variables/TheDateBox";
 import MainPage from "./MainPage";
 import MaxGuage from "../variables/MaxGuage";
+import { ThemeContext } from "contexts/ThemeContext";
 
 import VerticalBulletChart from "variables/VerticalBulletChart";
 function Dashboard(props) {
-  
+  const { theme } = useContext(ThemeContext);
 
 
   var dateToDisplay = props.match.params.date
@@ -123,7 +124,7 @@ function Dashboard(props) {
         </Row>
         <Row>
 
-        <Card className="card-chart"  style={{backgroundColor:'#817F99'}}>
+        <Card className="card-chart"  style={ theme==='white-content'? {  backgroundColor:'white'}:{backgroundColor:'#817F99'}}>
             <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">

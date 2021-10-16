@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BulletChartGroup from './BulletChartGroup';
 import TotalDosageGuage from './TotalDosageGuage'
+import { ThemeContext } from "contexts/ThemeContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,17 +23,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleAccordion() {
   const classes = useStyles();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <div className={classes.root}>
-      <Accordion style={{overflow: 'auto', backgroundColor:'#817F99', color:'white', fontSize: 24, fontWeight: 10}}>
+      <Accordion style={ theme==='white-content'? {  backgroundColor:'white',overflow: 'auto', color:'black', fontSize: 24, fontWeight: 10}:{backgroundColor:'#817F99',overflow: 'auto', color:'white', fontSize: 24, fontWeight: 10}} >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
           <Typography className={classes.heading}></Typography>
-          Dosimeter
+          <span style={ theme==='white-content'? { color:'black'}:{color:'white'}}>Dosimeter</span>
         </AccordionSummary>
         <AccordionDetails >
             

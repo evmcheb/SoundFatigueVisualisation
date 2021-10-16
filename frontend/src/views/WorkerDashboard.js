@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react';
 // nodejs library that concatenates classes
 
 import moment from "moment";
@@ -26,6 +26,7 @@ import { Dropdown } from 'react-bootstrap';
 import AverageWorkGauge from "variables/AverageWorkGuage";
 import VerticalBulletWorker from "variables/VerticalBulletWorker";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "contexts/ThemeContext";
 
 function WorkerDashboard(props) {
   var today = new Date();
@@ -34,6 +35,7 @@ function WorkerDashboard(props) {
   var yyyy = today.getFullYear();
 
   today = dd + '-' + mm + '-' + yyyy;
+  const { theme } = useContext(ThemeContext);
 
 
 
@@ -146,7 +148,7 @@ function WorkerDashboard(props) {
 
           <Row>
 
-            <Card className="card-chart"  style={{backgroundColor:'#817F99'}}>
+            <Card className="card-chart"  style={ theme==='white-content'? {  backgroundColor:'white'}:{backgroundColor:'#817F99'}}>
               <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
@@ -154,7 +156,7 @@ function WorkerDashboard(props) {
 
 
 
-                    <CardTitle tag="h3" style={{color:'white'}}>Averages & Max Decibels Readings For Every Hour </CardTitle>
+                    <CardTitle tag="h3" style={ theme==='white-content'? { color:'black'}:{color:'white'}} >Averages & Max Decibels Readings For Every Hour </CardTitle>
                   </Col>
                 </Row>
 

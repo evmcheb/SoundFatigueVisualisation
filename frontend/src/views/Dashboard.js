@@ -84,7 +84,6 @@ function Dashboard(props) {
              
             </Card>
       
-          <Col lg="">
             <Card className="card-chart">
               <CardHeader>
               <CardTitle tag="h3"> Room Data Over 24 Hours  </CardTitle>
@@ -120,12 +119,11 @@ function Dashboard(props) {
                 
               
             </Card>
-          </Col>
           
         </Row>
         <Row>
 
-        <Card className="card-chart"  style={{backgroundColor:'white'}}>
+        <Card className="card-chart"  style={{backgroundColor:'#817F99'}}>
             <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
@@ -133,7 +131,7 @@ function Dashboard(props) {
                     
                     
   
-                    <CardTitle tag="h3" style={{color:'black'}}>Averages & Max Decibels Readings For Every Hour </CardTitle>
+                    <CardTitle tag="h3" style={{color:''}}>Averages & Max Decibels Readings For Every Hour </CardTitle>
                   </Col>
                   </Row>
                   

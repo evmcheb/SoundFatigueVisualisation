@@ -103,7 +103,7 @@ function WorkerDashboard(props) {
 
             </Card>
 
-            <Col lg="">
+            
               <Card className="card-chart">
                 <CardHeader>
                   <CardTitle tag="h3"> Room Data Over 24 Hours  </CardTitle>
@@ -141,12 +141,12 @@ function WorkerDashboard(props) {
 
 
               </Card>
-            </Col>
+            
           </Row>
 
           <Row>
 
-            <Card className="card-chart">
+            <Card className="card-chart"  style={{backgroundColor:'#817F99'}}>
               <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
@@ -154,7 +154,7 @@ function WorkerDashboard(props) {
 
 
 
-                    <CardTitle tag="h3">Averages & Max Decibels Readings For Every Hour </CardTitle>
+                    <CardTitle tag="h3" style={{color:'white'}}>Averages & Max Decibels Readings For Every Hour </CardTitle>
                   </Col>
                 </Row>
 

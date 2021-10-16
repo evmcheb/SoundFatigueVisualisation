@@ -25,7 +25,7 @@ export default function SimpleAccordion() {
 
   return (
     <div className={classes.root}>
-      <Accordion style={{overflow: 'auto' }}>
+      <Accordion style={{overflow: 'auto', backgroundColor:'#817F99', color:'white', fontSize: 24, fontWeight: 10}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

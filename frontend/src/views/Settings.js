@@ -30,40 +30,14 @@ function Settings(props) {
                 <Row>
                     <Col md="12">
                         <h1>Settings</h1>
-                        <RangeAlert
-                            modalTitle={"Alert"}
-                            modalDescription={alertDesciption}
-                            alert={alert}
-                            onClickOk={() => setAlert(false)}
-                        />
                         <Card>
-                            <CardHeader className="mb-5">
-                                <CardTitle tag="h3">
-                                    Sound Range Settings
-                                </CardTitle>
-                            </CardHeader>
                             <CardBody>
-                                <div className="typography-line">
-                                    <h1>
-                                        <span>Notify me if decibels exceed:</span>
-                                        <FormGroup>
-                                            <Input type="number" value={range} name="number" id="number" placeholder="0 DB" onChange={(e) => setRange(e.target.value)} />
-                                        </FormGroup>
-                                    </h1>
-                                </div>
-                                <div className="typography-line">
-                                    <h1>
-                                        <FormGroup>
-                                            <Button onClick={submitSoundRange}>Submit</Button>
-                                        </FormGroup>
-                                    </h1>
-                                </div>
                                 <div className="typography-line">
                                     <div>
                                         <ThemeContext.Consumer>
                                             {({ changeTheme }) => (
                                                 <>
-                                                    <span className="color-label">Change theme</span>{" "}
+                                                    <span className="color-label"> Change theme </span>{" "}
                                                     <Button
                                                         className="light-badge mr-2"
                                                         onClick={() => changeTheme(themes.light)}

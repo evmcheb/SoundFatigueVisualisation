@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 // reactstrap components
 import { Card, CardHeader, CardBody, CardTitle, Row, Col, Button, FormGroup, Input } from "reactstrap";
-import RangeAlert from "components/Modals/RangeAlert";
 import { ThemeContext, themes } from "contexts/ThemeContext";
 
 function Settings(props) {

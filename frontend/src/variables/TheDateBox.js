@@ -49,7 +49,7 @@ export default function TheDateBox(props) {
           />
           
         </div>
-        <button type="button" className="btn btn-info" onClick={displayNewDate} style={{ marginTop: 20 }}>
+        <button type="button" className="btn btn-info" onClick={displayNewDate} style={{ marginTop: 30,marginBottom:20 }}>
                             View New date
                             </button>
        

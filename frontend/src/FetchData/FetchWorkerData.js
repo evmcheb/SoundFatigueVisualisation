@@ -53,7 +53,7 @@ export default class FetchDataTwo extends React.Component {
         console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
-        this.intervalID = setTimeout(this.getData.bind(this), 30000);//refresh data every 30 seconds
+        this.intervalID = setTimeout(this.getData.bind(this),15000);//refresh data every 15 seconds
         
         if(data.length === 0){
             //No data in api

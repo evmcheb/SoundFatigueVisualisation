@@ -7,14 +7,12 @@ import  { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchWorkerData
 class VerticalBulletWorker extends React.Component {
     constructor(props) {
         super(props);
-        console.log("hi")
+    
         this.state = {
           data: {averagesOverHours,maxDbHours},
           render:false
         };
-        console.log(this.state.render)
-        console.log(this.state.data.averagesOverHours)
-        
+
       }
 
       componentDidMount(){

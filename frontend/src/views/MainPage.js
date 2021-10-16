@@ -11,6 +11,8 @@ import {
     Col,
   } from "reactstrap";
 
+import FetchDataAVG from '../FetchData/FetchDataAVG';
+import AvgGauge from '../variables/AvgGauge';
 
 
 
@@ -42,11 +44,16 @@ function MainPage() {
                     
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
+                        <FetchDataAVG date = {today}/>
+
+                        <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
+                            <AvgGauge room={1}/>
+                        </div>
                         
                         <Link to= {"1~" + today}><button>
                             Go to Room 1 
                             </button>
-                            </Link>
+                        </Link>
                        
                     </CardTitle>
                 </CardHeader>
@@ -70,6 +77,12 @@ function MainPage() {
                     <h3 >Room 2</h3>
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
+                        <FetchDataAVG room={2} date = {today}/>
+
+                        <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
+                            <AvgGauge room={2}/>
+                        </div>
+
                         <Link to= {"2~" + today}><button>
                             Go to Room 2
                             </button>
@@ -96,6 +109,11 @@ function MainPage() {
                     <h3 >Room 3</h3>
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
+                        <FetchDataAVG room={3} date = {today}/>
+
+                        <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
+                            <AvgGauge room={3}/>
+                        </div>
                         <Link to= {"3~" + today}><button>
                             Go to Room 3
                             </button>
@@ -126,6 +144,11 @@ function MainPage() {
                     <h3 >Room 4</h3>
                     <CardTitle tag="h3">
                         {/* LINK TO room visualisation here */}
+                        <FetchDataAVG date = {today}/>
+
+                        <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
+                            <AvgGauge room={4}/>
+                        </div>
                         <Link to= {"4~" + today}><button>
                             Go to Room 4
                             </button>
@@ -150,6 +173,11 @@ function MainPage() {
                 <CardHeader>
                     <h3 >Room 5</h3>
                     <CardTitle tag="h3">
+                        <FetchDataAVG date = {today}/>
+
+                        <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
+                            <AvgGauge room={5}/>
+                        </div>
                         {/* LINK TO room visualisation here */}
                         <Link to= {"5~" + today}><button>
                             Go to Room 5
@@ -175,6 +203,11 @@ function MainPage() {
                 <CardHeader>
                     <h3 >Room 6</h3>
                     <CardTitle tag="h3">
+                        <FetchDataAVG date = {today}/>
+
+                        <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
+                            <AvgGauge room={6}/>
+                        </div>
                         {/* LINK TO room visualisation here */}
                         <Link to= {"6~" + today}><button>
                             Go to Room 6

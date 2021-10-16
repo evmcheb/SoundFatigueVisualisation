@@ -44,9 +44,7 @@ function Dashboard(props) {
       <>
       <div className="content">
         <MainPage/>
-        
-        
-    </div>
+      </div>
     </>)
   }
   else{
@@ -64,7 +62,6 @@ function Dashboard(props) {
       <div className="content">
       
         <Row>
-          
             <Card className="card-chart">
             <CardHeader>
                 <Row>

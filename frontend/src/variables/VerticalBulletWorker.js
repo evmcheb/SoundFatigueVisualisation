@@ -7,41 +7,50 @@ import  { averagesOverHours ,done,maxDbHours} from "../FetchData/FetchWorkerData
 class VerticalBulletWorker extends React.Component {
     constructor(props) {
         super(props);
+        console.log("hi")
         this.state = {
           data: {averagesOverHours,maxDbHours},
           render:false
         };
-       
+        console.log(this.state.render)
+        console.log(this.state.data.averagesOverHours)
         
       }
 
       componentDidMount(){
-        
-          setTimeout(function(){
-              this.setState({render:true})
-          }.bind(this),30000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {averagesOverHours,maxDbHours }}), 2500);
+            setTimeout(function(){
+             
+                this.setState({render:true})
+            }.bind(this),8000)
+
+          this.interval = setInterval(() => this.setState({  data: {averagesOverHours,maxDbHours }}), 20000);
           
       }
      
 
       render(){
        
-        let renderContainer = false
-        if(this.state.render) {
-            
-            if(done===1 && this.state.data.averagesOverHours ===0){
-                
+        let renderContainer = false;
+        if(this.state.render ===true) {
+      
+            if(done===1 && this.state.data.averagesOverHours ==0){
+
+                console.log(maxDbHours)
                 this.setState({data: {averagesOverHours,maxDbHours}});
                 
+                
             }
+
             if(done===-1){
+
                 this.componentDidMount();
             }
             
+
         return (
             
+            <>
             
             <ChartContainer 
                 ariaDesc="Storage capacity"
@@ -565,12 +574,13 @@ class VerticalBulletWorker extends React.Component {
                 width={500}
               />
             </ChartContainer>
-      
+      </>
 );
 }
 
- 
+
 return (
+    
     renderContainer //Render the dom elements, or, when this.state == false, nothing.
     
   )

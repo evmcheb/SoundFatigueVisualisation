@@ -11,8 +11,8 @@ var maxDecibel = -Number.MIN_VALUE;
 var done = -1;
 var barChartData =[];
 var totalDosage = 0;
-var averagesOverHours = [];
-var maxDbHours = [];
+var averagesOverHours = [{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01}];
+var maxDbHours = [{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01}];
 var currentRoom = null;
 export default class FetchDataTwo extends React.Component {
     intervalID;
@@ -26,13 +26,13 @@ export default class FetchDataTwo extends React.Component {
         done:-1,
         barChartData: {bar:"None",value:0},
         averagesOverHours: {hour:"None",value:0},
-        maxDbHours :{hour:'None',value:0},
+        maxDbHours :{time:'None',value:0},
         currentRoom:null,
     };
     
     
     componentDidMount(){
-
+      
         this.getData();
     }
 
@@ -41,7 +41,9 @@ export default class FetchDataTwo extends React.Component {
     }
 
     getData = async() =>{
+       
 
+  
         console.log("Getting data ",this.props.id,"for date",this.props.date,)
         var url = "http://127.0.0.1:8000/officer/";
         url = url.concat(this.props.id);
@@ -55,7 +57,8 @@ export default class FetchDataTwo extends React.Component {
         
         if(data.length === 0){
             //No data in api
-            return -1;
+           
+           return -1;
         }
         this.setState(prevState => ({
             dbs: [...prevState.dbs, data.dB]
@@ -90,8 +93,8 @@ export default class FetchDataTwo extends React.Component {
         var bar9 = 0;
         
         totalDosage = 0.01;
-        averagesOverHours = [];
-        maxDbHours = [];
+        
+        
 
     //    Getting averages over hours of day
         var hours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -119,7 +122,7 @@ export default class FetchDataTwo extends React.Component {
                 decibelHours[hour] += decibels;
 
                 if(maxDbInHours[hour]<decibels){
-                    maxDbInHours[hour] =decibels;
+                    maxDbInHours[hour] = decibels;
                     timeOfMaxDbHour[hour] = timestamp;
                     
                 }
@@ -189,7 +192,8 @@ export default class FetchDataTwo extends React.Component {
             }        
         }
           //pushing averages to array for dsiplaying
-          
+        averagesOverHours = []
+        maxDbHours=[]
         for (var j = 0;j<24;j++){
             
             if(decibelHours[j] === 0 || hours[j] === 0){
@@ -201,6 +205,7 @@ export default class FetchDataTwo extends React.Component {
            maxDbHours.push({time:timeOfMaxDbHour[j],value:maxDbInHours[j]});
            
         }
+
             //pushing values for pie chart
           areas.push({risk:"Safe",area:safeInt});
           areas.push({risk:"Dangerous",area:dangerousInt});

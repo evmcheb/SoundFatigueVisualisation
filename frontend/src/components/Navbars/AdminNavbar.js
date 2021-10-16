@@ -122,12 +122,12 @@ function AdminNavbar(props) {
           </NavbarToggler>
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="ml-auto" navbar>
-              <InputGroup className="search-bar">
+              {/* <InputGroup className="search-bar">
                 <Button color="link" onClick={toggleModalSearch}>
                   <i className="tim-icons icon-zoom-split" />
                   <span className="d-lg-none d-md-block">Search</span>
                 </Button>
-              </InputGroup>
+              </InputGroup> */}
               <UncontrolledDropdown nav>
                 <DropdownToggle
                   caret
@@ -150,7 +150,7 @@ function AdminNavbar(props) {
 
               </UncontrolledDropdown>
               <UncontrolledDropdown nav>
-                <DropdownToggle
+                {/* <DropdownToggle
                   caret
                   color="default"
                   nav
@@ -164,7 +164,7 @@ function AdminNavbar(props) {
                   </div>
                   <b className="caret d-none d-lg-block d-xl-block" />
                   <p className="d-lg-none">Log out</p>
-                </DropdownToggle>
+                </DropdownToggle> */}
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
                   <NavLink tag="li">
                     <DropdownItem className="nav-item">Profile</DropdownItem>
@@ -183,7 +183,7 @@ function AdminNavbar(props) {
           </Collapse>
         </Container>
       </Navbar>
-      <Modal
+      {/* <Modal
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
@@ -198,7 +198,7 @@ function AdminNavbar(props) {
             <i className="tim-icons icon-simple-remove" />
           </button>
         </ModalHeader>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

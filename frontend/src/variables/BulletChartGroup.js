@@ -18,9 +18,9 @@ class BulletChartGroup extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),35000)
+          }.bind(this),8000)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {barChartData}}), 2500);
+          this.interval = setInterval(() => this.setState({ data: {barChartData}}), 20000);
           
       }
      
@@ -34,8 +34,7 @@ class BulletChartGroup extends React.Component {
 
 
 
-                this.setState({data: {barChartData}
-                });
+                this.setState({data: {barChartData}});
                 
 
             }

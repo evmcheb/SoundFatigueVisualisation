@@ -8,7 +8,7 @@ function Footer() {
     <footer className="footer">
       <Container fluid>
         <div className="copyright">
-          © {new Date().getFullYear()} Group 35
+          © 2021 Group 35
         </div>
       </Container>
     </footer>

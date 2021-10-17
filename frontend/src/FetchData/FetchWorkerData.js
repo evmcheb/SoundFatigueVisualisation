@@ -164,15 +164,17 @@ export default class FetchDataTwo extends React.Component {
                 bar5 +=1;
                 totalDosage += (1/1800)*100
             }
-            else if(decibels>=100 && decibels<106){
+            else if(decibels>=100 && decibels<103){
                 bar6+=1;
                 totalDosage += (1/900)*100
             }
             else if (decibels>=103 && decibels<106){
+
                 bar7+=1;
                 totalDosage += (1/450)*100
             }
             else if (decibels>=106 && decibels<109){
+                
                 bar8+=1;
                 totalDosage += (1/225)*100
             }
@@ -213,7 +215,6 @@ export default class FetchDataTwo extends React.Component {
           areas.push({risk:"UnSafe",area:unSafeInt});
           areas.push({risk:"Threatening",area:threateningInt});
 
-          
           //pushing values for dosimeter
           if(bar1!==0){
           barChartData.push({bar:"Bar1",value:bar1});
@@ -243,7 +244,7 @@ export default class FetchDataTwo extends React.Component {
         }
         if(bar4!==0){
             
-            barChartData.push({bar:"Bar5",value:bar4});
+            barChartData.push({bar:"Bar4",value:bar4});
          
             }
         else{
@@ -267,7 +268,7 @@ export default class FetchDataTwo extends React.Component {
             
         }
         if(bar7!==0){
-            barChartData.push({bar:"Bar1",value:bar7});
+            barChartData.push({bar:"Bar7",value:bar7});
             
             }
         else{
@@ -291,7 +292,6 @@ export default class FetchDataTwo extends React.Component {
             barChartData.push({bar:"Bar9",value:0.01});
             
           }
-
 
 
           

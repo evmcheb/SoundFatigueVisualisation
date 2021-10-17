@@ -9,8 +9,6 @@ class LiveGuage extends React.Component {
         this.state = {
           data: {rdata},
           render:false,
-          done: 1,
-          data: 0,
           room: props.room,
           avgDB: rdata[this.room]
         };

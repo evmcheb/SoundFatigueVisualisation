@@ -40,15 +40,16 @@ export default function SimpleAccordion() {
             
              
              
-              <div  style={{ width:'100%'}}>
+              
+             <div  style={{ width:'100%'}}>
+             <BulletChartGroup/>
+           
+             </div>
+             <div  style={{ width:'100%',padding:"35px"}}>
               <TotalDosageGuage/>
               
-              <BulletChartGroup/>
+              
              </div>
-             
-             
-           
-
             
            
         </AccordionDetails>

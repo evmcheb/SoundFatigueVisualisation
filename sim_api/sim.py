@@ -86,7 +86,7 @@ while True:
 
         timeStamp = int(time.time())
         # change this to populate
-        #populateFrom = timeStamp
+        populateFrom = timeStamp
 
         if(populateFrom != timeStamp):
             toDataBaseTimeStamp = populateFrom

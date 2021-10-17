@@ -53,10 +53,10 @@ class TotalDosageGuage extends React.Component {
           <Label useRangeColors={true} />
         </Scale>
         <RangeContainer palette="bright">
-          <Range startValue={0} endValue={70} />
-          <Range startValue={70} endValue={91} />
-          <Range startValue={91} endValue={112} />
-          <Range startValue={112} endValue={160} />
+          <Range startValue={0} endValue={75} />
+          <Range startValue={75} endValue={90} />
+          <Range startValue={90} endValue={95} />
+          <Range startValue={95} endValue={100} />
         </RangeContainer>
         <Tooltip enabled={true} />
        

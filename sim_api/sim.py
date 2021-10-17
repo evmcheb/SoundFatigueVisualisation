@@ -69,7 +69,7 @@ db = SessionLocal()
 
 room_sensors = db.query(models.RoomSensor).all()
 saved_random = 0
-populateFrom = 1634054401
+populateFrom = 1634400001
 while True:
     print(populateFrom)
     for rs in room_sensors:
@@ -86,7 +86,7 @@ while True:
 
         timeStamp = int(time.time())
         # change this to populate
-        populateFrom = timeStamp
+        #populateFrom = timeStamp
 
         if(populateFrom != timeStamp):
             toDataBaseTimeStamp = populateFrom

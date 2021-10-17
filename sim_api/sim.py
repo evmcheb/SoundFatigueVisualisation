@@ -54,7 +54,7 @@ def sound_generator(input,count,saved_random):
             else:
                 line = round(random.uniform(30.0, 50.0),1) 
         else:
-            line = round(random.uniform(85, 111),1) 
+            line = round(random.uniform(30.0, 50.0),1) 
             count =0
             saved_random = 0
 

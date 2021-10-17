@@ -41,9 +41,9 @@ def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optiona
         #    end_time = time.time()
         #start_time < models.Sample.Timestamp,
                # end_time > models.Sample.Timestamp
-        current_day = date.today()
+        current_day = datetime.today()
         d1 = current_day.strftime("%d/%m/%Y")
-        ts = datetime.datetime.strptime(d1, "%d/%m/%Y").timestamp()
+        ts = datetime.strptime(d1, "%d/%m/%Y").timestamp()
         if not start_time:
             # Show 
             start_time = ts

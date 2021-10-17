@@ -20,7 +20,7 @@ class VerticalBulletWorker extends React.Component {
             setTimeout(function(){
              
                 this.setState({render:true})
-            }.bind(this),8000)
+            }.bind(this),5000)
 
           this.interval = setInterval(() => this.setState({  data: {averagesOverHours,maxDbHours }}), 20000);
           

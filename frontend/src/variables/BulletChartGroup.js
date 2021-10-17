@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChartBullet, ChartContainer, ChartThemeColor } from '@patternfly/react-charts';
+import { ChartBullet, ChartContainer } from '@patternfly/react-charts';
 import { barChartData, done } from "../FetchData/FetchWorkerData";
 
 

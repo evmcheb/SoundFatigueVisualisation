@@ -32,7 +32,7 @@ class VerticalBulletWorker extends React.Component {
         let renderContainer = false;
         if(this.state.render ===true) {
       
-            if(done===1 && this.state.data.averagesOverHours ==0){
+            if(done===1 && this.state.data.averagesOverHours ===0){
 
                 console.log(maxDbHours)
                 this.setState({data: {averagesOverHours,maxDbHours}});

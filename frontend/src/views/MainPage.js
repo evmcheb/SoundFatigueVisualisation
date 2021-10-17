@@ -12,7 +12,8 @@ import {
   } from "reactstrap";
 
 import FetchDataAVG from '../FetchData/FetchDataAVG';
-import AvgGauge from '../variables/AvgGauge';
+import LiveGuage from "../variables/LiveGuage";
+
 
 
 
@@ -47,7 +48,7 @@ function MainPage() {
                         <FetchDataAVG date = {today}/>
 
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
-                            <AvgGauge room={1}/>
+                            <LiveGuage room={1}/>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                             <Link to= {"1~" + today}><button>
@@ -82,7 +83,7 @@ function MainPage() {
                         <FetchDataAVG room={2} date = {today}/>
 
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
-                            <AvgGauge room={2}/>
+                            <LiveGuage room={2}/>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                         <Link to= {"2~" + today}><button>
@@ -114,7 +115,7 @@ function MainPage() {
                         <FetchDataAVG room={3} date = {today}/>
 
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
-                            <AvgGauge room={3}/>
+                            <LiveGuage room={3}/>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                         <Link to= {"3~" + today}><button>
@@ -150,7 +151,7 @@ function MainPage() {
                         <FetchDataAVG date = {today}/>
 
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
-                            <AvgGauge room={4}/>
+                            <LiveGuage room={4}/>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                         <Link to= {"4~" + today}><button>
@@ -181,7 +182,7 @@ function MainPage() {
                         <FetchDataAVG date = {today}/>
 
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
-                            <AvgGauge room={5}/>
+                            <LiveGuage room={5}/>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                         {/* LINK TO room visualisation here */}
@@ -213,7 +214,7 @@ function MainPage() {
                         <FetchDataAVG date = {today}/>
 
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
-                            <AvgGauge room={6}/>
+                            <LiveGuage room={6}/>
                         </div>
                         <div style={{display:'flex',justifyContent:'center',alignContent:'center',alignItems:'center'}} >
                         {/* LINK TO room visualisation here */}

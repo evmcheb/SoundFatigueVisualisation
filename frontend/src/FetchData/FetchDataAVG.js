@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-///
+///this fetch call does not get the live readings it just gets the last data point 
 var rdata = [];
 var done = -1;
 export default class FetchDataAVG extends React.Component {

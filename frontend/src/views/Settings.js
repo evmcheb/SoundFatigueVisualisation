@@ -1,27 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Row, Col, Button, FormGroup, Input } from "reactstrap";
+import { Card, CardBody, Row, Col, Button } from "reactstrap";
 import { ThemeContext, themes } from "contexts/ThemeContext";
 
 function Settings(props) {
-    const globalrange = localStorage.getItem('soundRange');
-    const [range, setRange] = useState(globalrange)
-    const [alert, setAlert] = useState(false);
-    const [alertDesciption, setAlertDesciption] = useState('Range should not be zero');
 
-    const submitSoundRange = () => {
-
-        if (Number(range) !== 0) {
-            localStorage.setItem('soundRange', range);
-            setAlertDesciption('Range successfully updated')
-            setAlert(true)
-        }
-        else {
-            setAlertDesciption('Range should not be zero')
-            setAlert(true);
-        }
-    }
 
     return (
         <>

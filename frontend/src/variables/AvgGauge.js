@@ -1,32 +1,29 @@
 import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
-import { rdata, done } from "../FetchData/FetchDataAVG";
+import { avgDecibel,maxDecibel,done} from "../FetchData/FetchRoomData";
 
-class AvgGauge extends React.Component {
+class AverageWorkGauge extends React.Component {
 
+  
+   
     constructor(props) {
         super(props);
         this.state = {
-          data: {rdata},
-          render:false,
-          done: 1,
-          data: 0,
-          room: props.room,
-          avgDB: rdata[this.room]
+          data: {avgDecibel},
+          render:false
         };
         
-        this.room = props.room
+        
       }
 
       componentDidMount(){
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),700)
+          }.bind(this),900)
           
-          this.interval = setInterval(() => this.setState({
-            data: {rdata},
-          }), 3050);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 3050);
+
           
       }
      
@@ -36,8 +33,9 @@ class AvgGauge extends React.Component {
         let renderContainer = false
         if(this.state.render) {
             
-            if(done==1 && this.state.data[0]==0){
-                this.setState({data: {rdata}});
+            if(done===1 && this.state.data.avgDecibel===0){
+                
+                this.setState({data: {avgDecibel}});
                  
             }
             if(done===-1){
@@ -48,10 +46,10 @@ class AvgGauge extends React.Component {
         
       <CircularGauge
         id="gauge"
-        value={rdata[this.room-1]}
+        value={this.state.data.avgDecibel}
         
       >
-        <Scale startValue={0} endValue={140} tickInterval={10}>
+        <Scale startValue={0} endValue={maxDecibel} tickInterval={10}>
           <Label useRangeColors={true} />
         </Scale>
         <RangeContainer palette="bright">
@@ -61,7 +59,7 @@ class AvgGauge extends React.Component {
           <Range startValue={112} endValue={160} />
         </RangeContainer>
         <Tooltip enabled={true} />
-        <Title text="LIVE Decibels">
+        <Title text="Average Decibels For Worker">
           <Font size={20} color="gray" />
         </Title>
         <Export enabled={false} />
@@ -80,4 +78,4 @@ return (
   
 }
 
-export default AvgGauge;
+export default AverageWorkGauge;

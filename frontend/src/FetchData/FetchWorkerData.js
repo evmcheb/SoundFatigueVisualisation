@@ -14,7 +14,7 @@ var totalDosage = 0;
 var averagesOverHours = [{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01}];
 var maxDbHours = [{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01}];
 var currentRoom = null;
-export default class FetchDataTwo extends React.Component {
+export default class FetchWorkerData extends React.Component {
     intervalID;
      
     state = {

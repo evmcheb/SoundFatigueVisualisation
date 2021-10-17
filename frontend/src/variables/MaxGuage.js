@@ -22,7 +22,7 @@ class MaxGuage extends React.Component {
               this.setState({render:true})
           }.bind(this),700)
           
-          this.interval = setInterval(() => this.setState({data: {maxDecibel}}), 3075);
+          this.interval = setInterval(() => this.setState({data: {maxDecibel}}), 16300);
 
           
       }

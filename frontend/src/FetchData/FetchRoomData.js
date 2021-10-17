@@ -12,8 +12,8 @@ var areas =[];
 var averageDecibelColour = '';
 var maxDecibel = -Number.MIN_VALUE;
 var done = -1;
-var averagesOverHours = [{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01}];
-var maxDbHours = [{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01}];
+var averagesOverHours = [{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01},{hour:"0",value:0.01}];
+var maxDbHours = [{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01},{time:"0",values:0.01}];
 export default class FetchRoomData extends React.Component {
     intervalID;
     state = {
@@ -49,7 +49,7 @@ export default class FetchRoomData extends React.Component {
         console.log("the url",url)
         const response = await fetch(url);
         const data =  await response.json();
-        this.intervalID = setTimeout(this.getData.bind(this), 15000);//Fetch Data every 15 seconds
+        this.intervalID = setTimeout(this.getData.bind(this), 10000);//Fetch Data every 10 seconds
         
         this.setState(prevState => ({
             dbs: [...prevState.dbs, data[0].dB]
@@ -148,7 +148,8 @@ export default class FetchRoomData extends React.Component {
         //pushing averages to array for dsiplaying
         for (var j = 0;j<24;j++){
             if(decibelHours[j] === 0 || hours[j] === 0){
-                averagesHours[j] = 0
+                averagesHours[j] = 0;
+                
             }
            averagesHours[j] = (decibelHours[j]/hours[j]).toFixed(2);
            averagesOverHours.push({hour:"hour"+j,value:averagesHours[j]});

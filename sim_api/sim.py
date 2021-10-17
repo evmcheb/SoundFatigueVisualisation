@@ -49,7 +49,7 @@ def sound_generator(input,count,saved_random):
                 line = round(random.uniform(90, 100),1)
             elif(randomValue<0.95):
                 line = round(random.uniform(80, 100),1)
-            elif(randomValue>0.95):
+            elif(randomValue>0.98):
                 line = round(random.uniform(100, 130),1)
             else:
                 line = round(random.uniform(30.0, 50.0),1) 

@@ -10,8 +10,8 @@ var areas =[];
 var averageDecibelColour = '';
 var maxDecibel = -Number.MIN_VALUE;
 var done = -1;
-var averagesOverHours = [];
-var maxDbHours = [];
+var averagesOverHours = [{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01},{hour:"",value:0.01}];
+var maxDbHours = [{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01},{time:'0',values:0.01}];
 export default class FetchRoomData extends React.Component {
     intervalID;
     state = {
@@ -137,6 +137,8 @@ export default class FetchRoomData extends React.Component {
                
             }        
         }
+        averagesOverHours = []
+        maxDbHours=[]
         //pushing averages to array for dsiplaying
         for (var j = 0;j<24;j++){
             if(decibelHours[j] === 0 || hours[j] === 0){

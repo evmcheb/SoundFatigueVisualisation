@@ -17,7 +17,7 @@ import {
 
 import FetchRoomData from "../FetchData/FetchRoomData";
 
-
+import PitchGraph from "../variables/PitchGraph";
 
 import MyPieChart from "../variables/MyPieChart";
 
@@ -142,6 +142,23 @@ function Dashboard(props) {
                   {/* Main graph */}
                  
                   <VerticalBulletChart/>
+             
+            </Card>
+            <Card className="card-chart">
+            <CardHeader>
+                <Row>
+                  <Col className="text-left" sm="6">
+  
+                    <CardTitle tag="h2">Pitch Reading </CardTitle>
+                  </Col>
+                  </Row>
+                  
+              </CardHeader>
+             
+                
+                  {/* Main graph */}
+                  <PitchGraph />
+                
              
             </Card>
         </Row>

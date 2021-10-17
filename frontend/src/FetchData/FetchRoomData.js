@@ -3,9 +3,11 @@ import React from 'react'
 
 // Declaring variables for data collection
 var zoomingData = [];
+var pitchData = [];
 var lastTime= 0;
 var startTime =0;
 var avgDecibel = 0;
+var avgPitch = 0;
 var areas =[];
 var averageDecibelColour = '';
 var maxDecibel = -Number.MIN_VALUE;
@@ -20,7 +22,7 @@ export default class FetchRoomData extends React.Component {
         timeStamp: [],
         zoomingData:{args:0,y1:0,},
         areas:{risk:"None",area: 0},
-
+        pitchData:{args:0,y1:0},
         done:-1,
         averagesOverHours: {hour:"None",value:0},
         maxDbHours :{hour:'None',value:0}
@@ -61,13 +63,14 @@ export default class FetchRoomData extends React.Component {
         this.setState({room:this.props.room})
         
         var amountDecibels = 0;
-
+        var amountPitches = 0;
         //For pie chart
         var safeInt=0;
         var dangerousInt=0;
         var threateningInt=0;
         var unSafeInt = 0;
         zoomingData = [];
+        pitchData = [];
         areas = [];
         
         // For Vertical bullet chart
@@ -85,10 +88,13 @@ export default class FetchRoomData extends React.Component {
         if(data[0].dB.length === 0 ){ 
             // if data is empty push 0 values so page does not crash
             zoomingData.push({arg:"0", y1:0});
+            pitchData.push({arg:"0",y1:0});
         }
         for(var i=0; i< data[0].dB.length; i++){
             var decibels = data[0].dB[i];
             var timestamp = data[0].x[i];
+            var pitch = data[0].pitch[i];
+            amountPitches += pitch;
             amountDecibels += decibels;
             //for average hours
             if(timestamp !== undefined){
@@ -130,7 +136,7 @@ export default class FetchRoomData extends React.Component {
             }
 
             zoomingData.push({arg:timestamp, y1:decibels});
-            
+            pitchData.push({arg:timestamp,y1:pitch});
             //Getting max dB value
             if(decibels>maxDecibel){
                 maxDecibel = decibels;
@@ -160,6 +166,8 @@ export default class FetchRoomData extends React.Component {
             //Getting average over all data
           avgDecibel = amountDecibels/data[0].dB.length;
           avgDecibel = avgDecibel.toFixed(2);
+          avgPitch = amountPitches/data[0].pitch.length;
+          avgPitch = avgPitch.toFixed(2);
           //Determing what colour of average decibels line should be on main graph
         if(avgDecibel <=70){
             averageDecibelColour = "green";
@@ -178,8 +186,10 @@ export default class FetchRoomData extends React.Component {
     
             // Setting states for exportation
           this.setState({zoomingData})
+          this.setState({pitchData})
           this.setState({lastTime})
           this.setState({avgDecibel})
+          this.setState({avgPitch})
           this.setState({areas})
           this.setState({averageDecibelColour})
           this.setState({maxDecibel})
@@ -211,5 +221,7 @@ export{
     maxDecibel,
     done,
     averagesOverHours,
-    maxDbHours
+    maxDbHours,
+    pitchData,
+    avgPitch
 };

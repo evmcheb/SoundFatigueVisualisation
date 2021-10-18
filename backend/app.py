@@ -1,10 +1,12 @@
-from .models import MovementEvent
+# from models import MovementEvent
+import sys
+sys.path.insert(1, './backend')
 from typing import Optional
 import json
 import time
 from fastapi import FastAPI, Request
-from .db import engine
-from . import models
+import db
+import models
 from sqlmodel import Field, SQLModel, Session, select, update
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import and_
@@ -12,7 +14,7 @@ from operator import add
 
 import datetime
 from datetime import datetime
-SQLModel.metadata.create_all(engine)
+SQLModel.metadata.create_all(db.engine)
 
 #from datetime import datetime, timedelta
 app = FastAPI()
@@ -34,7 +36,7 @@ over a specific time period.
 '''
 @app.get("/room/{room_id}/")
 def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         #if not start_time:
         #    start_time = time.time() - 5*60
         #if not end_time:
@@ -81,7 +83,7 @@ for the specified date in a timeString format
 '''
 @app.get("/room/{room_id}/{input_date}")
 def query_room(room_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         
         ####For time string
         
@@ -152,14 +154,14 @@ WIP
 '''
 @app.get("/officer/{officer_id}/{input_date}")
 def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         if(str(input_date[0])=='0'):
             
             input_date_string = str(input_date)
         else:
             input_date_string = str(input_date)
         
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         if not start_time:
             dateTimeStamp = datetime.strptime(input_date, "%d-%m-%Y").timestamp()
             # start at midnight
@@ -245,7 +247,7 @@ WIP
 '''
 @app.get("/officer/{officer_id}/")
 def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         if not start_time:
             start_time = time.time() - 5*60
         if not end_time:
@@ -313,7 +315,7 @@ WIP
 '''
 @app.get("/officer/{officer_id}/")
 def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         if not start_time:
             start_time = time.time() - 5*60
         if not end_time:
@@ -382,20 +384,20 @@ async def query_update_nots(request: Request):
     max_pitch = json_data["MaxPitch"]
     room_id = json_data["RoomID"]
 
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         session.exec(update(models.Room).where(models.Room.ID == room_id).values(MaxDB=max_db, MaxPitch=max_pitch))
         session.commit()
  
 @app.get("/sensor/{sensor_id}/")
 def query_sensor(room_id: int, start_time: int, end_time: int):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         roomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == room_id)).all()
         return [x.Samples for x in roomSensors]
 
 
 @app.get("/notification_history/")
 def query_nots():
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         notifications = session.exec(select(models.Notification)).all()
 
 
@@ -423,7 +425,7 @@ def query_nots():
 def query_notification():
     ret = []
 
-    with Session(engine) as session:
+    with Session(db.engine) as session:
 
         series = {"notifications": [], "rooms": []}
 
@@ -567,7 +569,7 @@ def timeToUNIX(t):
 
 @app.get("/rooms/{input_date}")
 def query_rooms(start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
-    with Session(engine) as session:
+    with Session(db.engine) as session:
         
         rooms = session.exec(select(models.Room).order_by(models.Room.ID.asc())).all()
 

@@ -3,9 +3,8 @@ from fastapi.testclient import TestClient
 from sqlalchemy.sql.expression import null
 from starlette.status import HTTP_200_OK
 import sys
-sys.path.insert(1, '../')
-import backend
-from backend.app import app
+sys.path.insert(1, './')
+from backend.app import *
 
 @pytest.fixture
 def client():

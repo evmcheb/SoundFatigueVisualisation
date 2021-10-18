@@ -1,7 +1,7 @@
 from typing import List, Optional
 from sqlmodel import Field, SQLModel, Relationship
 
-from .db import Base
+from db import Base
 
 class Officer(SQLModel, table=True):
     ID: int = Field(primary_key=True)

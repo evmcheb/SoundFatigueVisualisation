@@ -26,6 +26,8 @@ SECONDS_IN_A_DAY = 86400
 count =0
 # Quiet room is 30dBA to 50dBA
 
+"""Returns an amount of sound over a period of time
+"""
 def sound_generator(input,count,saved_random):
     if(input == "quietRoom"):
         loud_bang = random.randint(1, 10000)

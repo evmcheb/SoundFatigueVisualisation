@@ -28,7 +28,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 SECONDS_IN_A_DAY = 86400
 '''
 This function should return the amount of sound in a room
@@ -156,7 +155,6 @@ WIP
 def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None,input_date:Optional[str] =None):
     with Session(db.engine) as session:
         if(str(input_date[0])=='0'):
-            
             input_date_string = str(input_date)
         else:
             input_date_string = str(input_date)
@@ -202,6 +200,7 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
 
             start_time = e.Timestamp
 
+        print(f"Length of samples: {len(timestamps)}")
         # remove duplicates by taking averages
         for i, t in enumerate(timestamps):
             dups = [idx+i for idx, t1 in enumerate(timestamps[i+1:]) if t1 == t]
@@ -217,8 +216,10 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
                 del timestamps[dup]
             dbs[i] = sum(db_dups)/len(db_dups)
             pitches[i] = sum(pitch_dups)/len(pitch_dups)
+
         print(len(timestamps), len(dbs), len(pitches))
         timeStringArr = []
+
         for x in timestamps:
             now = str(datetime.fromtimestamp(int(x)))
             timeStringArr.append(now)
@@ -236,9 +237,23 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         
         return rs_series
 
+@app.get("/room/")
+def get_rooms():
+    with Session(db.engine) as session:
+        ret = []
+        rooms = session.exec(select(models.Room)).all()
+        for r in rooms:
+            ret.append({"Name":r.Name, 'Description':r.Description,"ID":r.ID})
+        return ret
 
-
-
+@app.get("/officer/")
+def get_officers():
+    with Session(db.engine) as session:
+        ret = []
+        officers = session.exec(select(models.Officer)).all()
+        for o in officers:
+            ret.append({"Name":o.Name, "ID":o.ID})
+        return ret
 
 '''
 This function should return the amount of sound exposed to a single officer
@@ -306,73 +321,6 @@ def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: O
         rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
         return rs_series
 
-
-        
-'''
-This function should return the amount of sound exposed to a single officer
-Over a specific time period. 
-WIP
-'''
-@app.get("/officer/{officer_id}/")
-def query_officer(officer_id: int, start_time: Optional[int] = None, end_time: Optional[int] = None):
-    with Session(db.engine) as session:
-        if not start_time:
-            start_time = time.time() - 5*60
-        if not end_time:
-            end_time = time.time()
-        Officer = session.exec(select(models.Officer).where(models.Officer.ID == officer_id)).one()
-        MovementEvents = session.exec(select(models.MovementEvent).where(
-            models.MovementEvent.OfficerID == officer_id,
-            start_time < models.MovementEvent.Timestamp,
-            end_time > models.MovementEvent.Timestamp
-            )).all()
-
-        if len(MovementEvents) < 1:
-            return []
-
-        # Calculate intersection of MovementEvents and Samples in that room
-        timestamps = []
-        dbs = []
-        pitches = []
-        e = MovementEvents[0]
-        for e in MovementEvents:
-            # we have changed room, so calculate sound exposure in cur_room
-            # since enter_time til now
-            # get the AVERAGE sound/pitch because there are multiple sensors in the room
-            # assumption - data comes in every second
-            RoomSensors = session.exec(select(models.RoomSensor).where(models.RoomSensor.RoomID == e.RoomID)).all()
-            for rs in RoomSensors:
-                valid_samples = session.exec(select(models.Sample).where(
-                    models.Sample.RoomSensorID == rs.ID,
-                    start_time <= models.Sample.Timestamp,
-                    e.Timestamp >= models.Sample.Timestamp
-                )).all()
-                timestamps.extend([x.Timestamp for x in valid_samples])
-                data = [json.loads(x.MeasurementsJSON) for x in valid_samples]
-                dbs.extend([x['dB'] for x in data])
-                pitches.extend([x['pitch'] for x in data])
-
-            start_time = e.Timestamp
-
-        # remove duplicates by taking averages
-        for i, t in enumerate(timestamps):
-            dups = [idx+i for idx, t1 in enumerate(timestamps[i+1:]) if t1 == t]
-            if not dups:
-                continue
-            db_dups = []
-            pitch_dups = []
-            for dup in dups:
-                db_dups.append(dbs[dup])
-                pitch_dups.append(pitches[dup])
-                del dbs[dup]
-                del pitches[dup]
-                del timestamps[dup]
-            dbs[i] = sum(db_dups)/len(db_dups)
-            pitches[i] = sum(pitch_dups)/len(pitch_dups)
-        print(len(timestamps), len(dbs), len(pitches))
-            
-        rs_series = {"OfficerID": officer_id, "OfficerName":Officer.Name, "CurrentRoom": MovementEvents[-1].RoomID,'x':timestamps, "dB":dbs, "pitches":pitches}
-        return rs_series
 
 @app.post("/set_notifications/")
 async def query_update_nots(request: Request):

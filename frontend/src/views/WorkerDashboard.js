@@ -74,7 +74,7 @@ function WorkerDashboard(props) {
 
         <div>
           {/* pass in what room was clicked?*/}
-
+          
           <FetchWorkerData id={props.match.params.id} date={props.match.params.date} />
 
         </div>
@@ -108,7 +108,7 @@ function WorkerDashboard(props) {
             
               <Card className="card-chart">
                 <CardHeader>
-                  <CardTitle tag="h3"> Room Data Over 24 Hours  </CardTitle>
+                  <CardTitle tag="h3"> Worker Data Over 24 Hours  </CardTitle>
 
                 </CardHeader>
 

@@ -18,7 +18,7 @@ import Chart, {
   Point,
 } from 'devextreme-react/chart';
 
-//if i want to shorten the defualt range
+//if want to shorten the defualt range
 //defaultVisualRange={{ startValue: startTime, endValue: lastTime }}>
 class ScrollLineGraph extends React.Component {
 
@@ -38,9 +38,9 @@ class ScrollLineGraph extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),1500)
+          }.bind(this),600)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 3000);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {zoomingData}}), 16000);
           
       }
      
@@ -140,7 +140,7 @@ class ScrollLineGraph extends React.Component {
         </ConstantLine>
         </ValueAxis>
         <ScrollBar visible={true} />
-        <ZoomAndPan argumentAxis="both" />
+        <ZoomAndPan argumentAxis="both"  />
         <Crosshair
             
             enabled={false}>
@@ -169,4 +169,3 @@ class ScrollLineGraph extends React.Component {
 
 
 export default ScrollLineGraph;
-////

@@ -2,7 +2,7 @@ import React from 'react';
 import { CircularGauge, Scale, Label, RangeContainer, Range, Title, Font, Export ,Tooltip} from 'devextreme-react/circular-gauge';
 import { avgDecibel,maxDecibel,done} from "../FetchData/FetchRoomData";
 
-class AverageWorkGauge extends React.Component {
+class AvgGauge extends React.Component {
 
   
    
@@ -20,9 +20,9 @@ class AverageWorkGauge extends React.Component {
         
           setTimeout(function(){
               this.setState({render:true})
-          }.bind(this),900)
+          }.bind(this),600)
           
-          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 3050);
+          this.interval = setInterval(() => this.setState({ time: Date.now(),data: {avgDecibel}}), 16200);
 
           
       }
@@ -59,7 +59,7 @@ class AverageWorkGauge extends React.Component {
           <Range startValue={112} endValue={160} />
         </RangeContainer>
         <Tooltip enabled={true} />
-        <Title text="Average Decibels For Worker">
+        <Title text="Average Decibels For Room">
           <Font size={20} color="gray" />
         </Title>
         <Export enabled={false} />
@@ -78,4 +78,4 @@ return (
   
 }
 
-export default AverageWorkGauge;
+export default AvgGauge;

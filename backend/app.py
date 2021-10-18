@@ -1,10 +1,10 @@
-from models import MovementEvent
+from .models import MovementEvent
 from typing import Optional
 import json
 import time
 from fastapi import FastAPI, Request
-from db import engine
-import models
+from .db import engine
+from . import models
 from sqlmodel import Field, SQLModel, Session, select, update
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import and_

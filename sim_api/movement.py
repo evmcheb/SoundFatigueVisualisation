@@ -34,7 +34,6 @@ class RoomSprite(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-
 class OfficerSprite(pg.sprite.Sprite):
     def __init__(self, x, y, me):
         super().__init__()
@@ -143,9 +142,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
 
 
 '''

@@ -2,15 +2,15 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.sql.expression import null
 from starlette.status import HTTP_200_OK
+import sys
+sys.path.insert(1, '../')
 import backend
 from backend.app import app
-
 
 @pytest.fixture
 def client():
     with TestClient(app) as c:
         yield c
-
 
 def test_amount_of_sound_in_room_over_specific_time_period(client):
     """return the amount of sound in a room over a specific time period
@@ -27,7 +27,6 @@ def test_amount_of_sound_in_room_over_specific_time_period(client):
     assert isinstance(result[0].get('x'), list)
     assert isinstance(result[0].get('dB'), list)
     assert isinstance(result[0].get('pitch'), list)
-
 
 def test_amount_of_sound_in_room_for_specified_date(client):
     """return the amount of sound in a room for the specified date in a timestring format

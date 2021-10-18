@@ -1,0 +1,71 @@
+{
+  "name": "black-dashboard-react",
+  "version": "1.0.0",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.15.1",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@patternfly/react-charts": "^6.15.32",
+    "@patternfly/react-core": "^4.157.3",
+    "axios": "^0.21.4",
+    "bootstrap": "4.5.3",
+    "chart.js": "2.9.4",
+    "chartjs-plugin-annotation": "^1.0.2",
+    "classnames": "2.2.6",
+    "d3": "^7.0.1",
+    "devextreme": "^21.1.5",
+    "devextreme-react": "^21.1.5",
+    "fusioncharts": "^3.17.0",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "^2.29.1",
+    "node-sass": "4.14.1",
+    "node-sass-package-importer": "5.3.2",
+    "perfect-scrollbar": "1.5.0",
+    "prop-types": "15.7.2",
+    "react": "17.0.1",
+    "react-bootstrap": "^1.6.3",
+    "react-chartjs-2": "2.11.1",
+    "react-datepicker": "^4.2.1",
+    "react-dates": "^21.8.0",
+    "react-dom": "17.0.1",
+    "react-fusioncharts": "^3.1.2",
+    "react-moment": "^1.1.1",
+    "react-native-fusioncharts": "^5.1.0",
+    "react-notification-alert": "0.0.13",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "4.0.1",
+    "reactstrap": "8.7.1",
+    "recharts": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && gulp licenses",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "compile-scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.css",
+    "minify-scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.min.css --output-style compressed",
+    "map-scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.css --source-map true"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "optionalDependencies": {
+    "eslint-plugin-flowtype": "5.2.0",
+    "jquery": "3.5.1",
+    "typescript": "4.1.2"
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.8",
+    "react-test-renderer": "^17.0.2"
+  }
+}

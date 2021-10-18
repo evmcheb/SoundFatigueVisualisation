@@ -17,9 +17,11 @@ from sqlalchemy.orm import sessionmaker
 import sys
 
 if "pytest" in sys.modules:
-    engine = "sqlite:///backend.db"    
+    # we are running from the room folder
+    engine = "sqlite:///backend.db"
 else:
-    engine = "sqlite:///../backend.db"
+    # we are running from uvicorn
+    engine = "sqlite://..//backend.db"
 
 engine = create_engine(engine, connect_args={"check_same_thread":False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

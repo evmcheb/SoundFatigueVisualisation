@@ -21,7 +21,7 @@ if "pytest" in sys.modules:
     engine = "sqlite:///backend.db"
 else:
     # we are running from uvicorn
-    engine = "sqlite://..//backend.db"
+    engine = "sqlite:///../backend.db"
 
 engine = create_engine(engine, connect_args={"check_same_thread":False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

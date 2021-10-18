@@ -14,8 +14,14 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.orm import sessionmaker
+import sys
 
-engine = "sqlite:///../backend.db"
+if "pytest" in sys.modules:
+    # we are running from the room folder
+    engine = "sqlite:///backend.db"
+else:
+    # we are running from uvicorn
+    engine = "sqlite://..//backend.db"
 
 engine = create_engine(engine, connect_args={"check_same_thread":False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -38,23 +38,13 @@ See the quick video and guides below on how to get started with Sound Fatigue Vi
 
 Follow our handy guides to get started on the basics as quickly as possible:
 
-{% content-ref url="installation-guide/how-to-install.md" %}
 [how-to-install.md](installation-guide/how-to-install.md)
-{% endcontent-ref %}
 
-{% content-ref url="user-guide/room-dashboard.md" %}
 [room-dashboard.md](user-guide/room-dashboard.md)
-{% endcontent-ref %}
 
-{% content-ref url="user-guide/worker-dashboard.md" %}
 [worker-dashboard.md](user-guide/worker-dashboard.md)
-{% endcontent-ref %}
 
-{% content-ref url="user-guide/notifications.md" %}
 [notifications.md](user-guide/notifications.md)
-{% endcontent-ref %}
 
-{% content-ref url="user-guide/settings-page.md" %}
 [settings-page.md](user-guide/settings-page.md)
-{% endcontent-ref %}
 
